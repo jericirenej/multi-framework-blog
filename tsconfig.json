@@ -27,6 +27,7 @@
     "noPropertyAccessFromIndexSignature": false,
     "paths": { "@/db/*": ["./db/*"], "@/server": ["./server/hono/*"] }
   },
+
   "files": ["eslint.config.mjs", ".config/kysely.config.ts"],
   "include": ["db/**/*.ts", "server/**/*.ts"]
 }
