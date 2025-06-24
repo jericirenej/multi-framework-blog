@@ -24,10 +24,7 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "paths": { "@/db/*": ["./db/*"], "@/server": ["./server/hono/*"] }
+    "noPropertyAccessFromIndexSignature": false
   },
-
-  "files": ["eslint.config.mjs", ".config/kysely.config.ts"],
-  "include": ["db/**/*.ts", "server/**/*.ts"]
+  "files": ["scripts/check.ts", "eslint.config.base.mjs"]
 }

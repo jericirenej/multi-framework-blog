@@ -3,36 +3,35 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "catalog": {
+      "eslint": "^9.29.0",
+      "@eslint/js": "^9.29.0",
+      "typescript-eslint": "^8.34.0",
+      "@types/bun": "latest",
+      "jose": "^6.0.11",
+      "uuid": "^11.1.0",
+      "zod": "^3.25.67",
+      "typescript": "^5.8.3",
+      "date-fns": "^4.1.0"
+    }
+  },
   "scripts": {
-    "hono": "bun run --hot server/hono/src/index.ts",
-    "seed": "bunx --bun kysely seed run",
-    "migrate:rollback": "bunx --bun kysely migrate:rollback --all",
-    "migrate": "bunx --bun kysely migrate:latest",
-    "postmigrate": "bun run ./db/helpers/infer-types-script.ts",
-    "postmigrate:rollback": "bun run postmigrate",
-    "check": "eslint && tsgo --project tsconfig.json && echo 'Check complete'"
+    "serve": "bun --filter '@/api' serve",
+    "seed": "bun --filter '@/db' seed",
+    "migrate:rollback": "bun --filter '@/db' migrate:rollback",
+    "migrate": "bun --filter '@/db' migrate",
+    "check": "bun run ./scripts/check.ts"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
-    "@types/bun": "latest",
     "@typescript/native-preview": "^7.0.0-dev.20250620.1",
-    "bun-types": "^1.2.16",
-    "eslint": "^9.29.0",
-    "kysely-codegen": "^0.18.5",
-    "kysely-ctl": "^0.13.1",
-    "typescript-eslint": "^8.34.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.8.3"
+    "zx": "^8.6.0"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.7.0",
-    "date-fns": "^4.1.0",
-    "hono": "^4.7.11",
-    "jose": "^6.0.11",
-    "kysely": "^0.28.2",
-    "kysely-bun-sqlite": "^0.4.0",
-    "uuid": "^11.1.0",
-    "zod": "^3.25.67"
+    "@/api": "workspace:*",
+    "@/db": "workspace:*"
   }
 }

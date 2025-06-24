@@ -1,5 +1,5 @@
-import db from "@/db/client-singleton";
-import type { Blog, DB } from "@/db/types";
+import db from "@/db/client-singleton.ts";
+import type { Blog, DB } from "@/db/types.ts";
 import { randomUUIDv7 } from "bun";
 import { HTTPException } from "hono/http-exception";
 import type { Insertable, Kysely, Selectable, Updateable } from "kysely";

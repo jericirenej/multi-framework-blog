@@ -1,0 +1,29 @@
+{
+  "name": "@/api",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "bun  run --hot ./src/index.ts"
+  },
+  "dependencies": {
+    "@/env": "workspace:*",
+    "@/db": "workspace:*",
+    "jose": "catalog:",
+    "uuid": "catalog:",
+    "zod": "catalog:",
+    "typescript": "catalog:",
+    "date-fns": "catalog:",
+    "@hono/zod-validator": "^0.7.0",
+    "hono": "^4.7.11"
+  },
+  "devDependencies": {
+    "eslint": "catalog:",
+    "@eslint/js": "catalog:",
+    "typescript-eslint": "catalog:",
+    "@types/bun": "catalog:"
+  }
+}

@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { JWT_COOKIE } from "../../../constants";
+import { JWT_COOKIE } from "../constants";
 export const jwtCookieSchema = z.object({
   [JWT_COOKIE]: z.string(),
 });

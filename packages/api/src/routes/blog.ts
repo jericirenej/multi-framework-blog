@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import blogService from "../../../services/blog.service";
+import blogService from "../services/blog.service";
 import { authMiddleware, routeValidator } from "../middleware";
 import { createBlogSchema, updateBlogSchema } from "../schemas";
 

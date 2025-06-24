@@ -1,7 +1,7 @@
 import { Hono, type Context } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
-import authService from "../../../services/auth.service";
+import authService from "../services/auth.service";
 import { authMiddleware, routeValidator } from "../middleware";
 import { userSchema } from "../schemas";
 

@@ -1,4 +1,5 @@
-import { UUIDv5 } from "@/db/helpers/v5";
+import db from "@/db/client-singleton.ts";
+import { UUIDv5 } from "@/db/helpers/v5.ts";
 import {
   afterEach,
   beforeAll,
@@ -9,10 +10,9 @@ import {
 } from "bun:test";
 import { add } from "date-fns";
 import { testClient } from "hono/testing";
-import db from "../../../db/client-singleton";
-import { seed } from "../../../db/seed/1750095666293_initial";
-import authService from "../../services/auth.service";
-import blogService from "../../services/blog.service";
+import { seed } from "@/db/seed/1750095666293_initial.ts";
+import authService from "./services/auth.service";
+import blogService from "./services/blog.service";
 import app from "./";
 
 let client: Awaited<ReturnType<typeof beforeAllHook>>;

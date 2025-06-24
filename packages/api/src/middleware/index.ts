@@ -6,7 +6,7 @@ import type { ZodType } from "zod/v4";
 
 import { deleteCookie, getCookie } from "hono/cookie";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
-import authService from "../../../services/auth.service";
+import authService from "../services/auth.service";
 import type { UserToken } from "../schemas/user";
 
 const isNullish = <T>(arg: T): arg is Extract<T, null | undefined> =>

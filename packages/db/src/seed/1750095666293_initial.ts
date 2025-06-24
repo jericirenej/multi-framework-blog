@@ -1,7 +1,5 @@
 import type { Insertable, Kysely } from "kysely";
 
-import { AuthService } from "../../server/services/auth.service";
-import { BlogService } from "../../server/services/blog.service";
 import { UUIDv5 } from "../helpers/v5";
 import type { Blog, DB } from "../types";
 
@@ -28,7 +26,7 @@ const BLOGS = {
     {
       title: "I have to start somewhere!",
       content: "I will write about important things. I guess?",
-      created_at: new Date("2025-06-03T:10:10:00"),
+      created_at: new Date("2025-06-03T10:10:00"),
     },
   ],
 } satisfies Record<
@@ -37,8 +35,6 @@ const BLOGS = {
 >;
 
 export async function seed(db: Kysely<DB>): Promise<void> {
-  const userService = new AuthService(db);
-  const blogService = new BlogService(db);
   await db.deleteFrom("blog").execute();
   await db.deleteFrom("user").execute();
   await db.deleteFrom("invalidated_sessions").execute();
@@ -49,11 +45,14 @@ export async function seed(db: Kysely<DB>): Promise<void> {
 
   await Promise.all(
     USERS.map(async (user) => {
-      await userService.generateUser(user);
       await db
-        .updateTable("user")
-        .set({ id: userV5.generate(user.username) })
-        .where("username", "=", user.username)
+        .insertInto("user")
+        .values({
+          id: userV5.generate(user.username),
+          name: user.name,
+          password: await Bun.password.hash(user.password),
+          username: user.username,
+        })
         .execute();
     })
   );
@@ -62,14 +61,18 @@ export async function seed(db: Kysely<DB>): Promise<void> {
     Object.entries(BLOGS).map(async ([author, blogs]) => {
       return await Promise.all(
         blogs.map(async (blog, i) => {
-          const { id } = await blogService.createBlog({
-            ...blog,
-            author: userV5.generate(author),
-          });
+          const authorId = userV5.generate(author);
+          const created_at = blog.created_at.getTime();
           await db
-            .updateTable("blog")
-            .set({ id: blogV5.generate(userV5.generate(author), i) })
-            .where("id", "=", id)
+            .insertInto("blog")
+            .values({
+              author: authorId,
+              content: blog.content,
+              title: blog.title,
+              id: blogV5.generate(authorId, i),
+              created_at,
+              updated_at: created_at,
+            })
             .execute();
         })
       );

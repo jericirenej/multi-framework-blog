@@ -1,5 +1,5 @@
-import db from "@/db/client-singleton";
-import type { DB, User } from "@/db/types";
+import db from "@/db/client-singleton.ts";
+import type { DB, User } from "@/db/types.ts";
 import { randomUUIDv7 } from "bun";
 import { add } from "date-fns";
 import { HTTPException } from "hono/http-exception";
@@ -7,11 +7,12 @@ import type { Cookie } from "hono/utils/cookie";
 import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import type { Insertable, Kysely } from "kysely";
 import { JWT_COOKIE } from "../constants";
-import { tokenSchema, type UserToken } from "../hono/src/schemas";
+import { tokenSchema, type UserToken } from "../schemas";
+import env from "@/env";
 
 type AuthUser = Record<"username" | "password", string>;
 export class AuthService {
-  protected secret = new TextEncoder().encode(process.env["SERVER_SECRET"]);
+  protected secret = new TextEncoder().encode(env["SERVER_SECRET"]);
   readonly jwtCookie = JWT_COOKIE;
 
   constructor(protected db: Kysely<DB>) {}

@@ -1,0 +1,16 @@
+{
+  "name": "@/env",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "typescript-eslint": "catalog:",
+    "eslint": "catalog:",
+    "@eslint/js": "catalog:",
+    "typescript": "catalog:"
+  }
+}
