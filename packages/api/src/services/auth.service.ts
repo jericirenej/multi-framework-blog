@@ -2,7 +2,7 @@ import db from "@/db/client-singleton";
 import type { DB, User } from "@/db/types";
 import env from "@/env";
 import argon2 from "argon2";
-import { randomUUIDv7 } from "bun";
+import { v7 } from "uuid";
 import { add } from "date-fns";
 import { HTTPException } from "hono/http-exception";
 import type { Cookie } from "hono/utils/cookie";
@@ -13,7 +13,7 @@ import { tokenSchema, type UserToken } from "../schemas";
 
 type AuthUser = Record<"username" | "password", string>;
 export class AuthService {
-  protected secret = new TextEncoder().encode(env["SERVER_SECRET"]);
+  protected secret = new TextEncoder().encode(env["API_SECRET"]);
   readonly jwtCookie = JWT_COOKIE;
 
   constructor(protected db: Kysely<DB>) {}
@@ -104,7 +104,7 @@ export class AuthService {
   }
 
   async logout(token: string) {
-    const jwt_hash = await Bun.password.hash(token);
+    const jwt_hash = await argon2.hash(token);
     await this.cleanInvalidatedSessions();
 
     await db
@@ -137,14 +137,14 @@ export class AuthService {
       .where("username", "=", passedUser.username)
       .executeTakeFirst();
     if (!user) return false;
-    return Bun.password.verify(passedUser.password, user.password);
+    return argon2.verify(user.password, passedUser.password);
   }
 
   async generateUser(data: Omit<Insertable<User>, "id">): Promise<AuthUser> {
     const user = {
-      id: randomUUIDv7(),
+      id: v7(),
       username: data.username,
-      password: Bun.password.hashSync(data.password),
+      password: await argon2.hash(data.password),
       name: data.name,
     };
     await this.db.insertInto("user").values(user).executeTakeFirstOrThrow();

@@ -1,19 +1,12 @@
 import db from "@/db/client-singleton";
 import { UUIDv5 } from "@/db/helpers/v5";
-import {
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  setSystemTime,
-} from "bun:test";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { add } from "date-fns";
 import { testClient } from "hono/testing";
 import { seed } from "@/db/seed/1750095666293_initial";
 import authService from "./services/auth.service";
 import blogService from "./services/blog.service";
-import app from "./";
+import app from "./app";
 
 let client: Awaited<ReturnType<typeof beforeAllHook>>;
 const beforeAllHook = async (runSeed = true) => {
@@ -26,7 +19,7 @@ const beforeAllHook = async (runSeed = true) => {
 };
 
 const afterEachHook = async () => {
-  setSystemTime();
+  vi.useRealTimers();
   authService.clearInvalidatedSessionsCache();
   await db.deleteFrom("invalidated_sessions").execute();
 };
@@ -91,6 +84,8 @@ describe("Authentication", () => {
       );
   });
   it("POST /api/login rejects if already logged in or if token expired or malformed", async () => {
+    const now = new Date();
+    vi.useFakeTimers({ toFake: ["Date"] });
     const res = await client.api.auth.login.$post({ json: credentials });
     expect(res.status).toBe(200);
     await client.api.auth.logout.$delete(undefined, {});
@@ -107,7 +102,7 @@ describe("Authentication", () => {
 
     expect(loggedInResponse).toHaveProperty("status", 400);
 
-    setSystemTime(add(new Date(), { days: 2 }));
+    vi.setSystemTime(add(new Date(), { days: 2 }));
     const expiredTokenResponse = await app.request(url, requestShape);
     expect(expiredTokenResponse.status).toBe(401);
 
@@ -115,7 +110,7 @@ describe("Authentication", () => {
       "app_jwt=; Max-Age=0"
     );
 
-    setSystemTime();
+    vi.setSystemTime(now);
 
     const malformedTokenResponse = await app.request(url, {
       ...requestShape,
@@ -145,6 +140,7 @@ describe("Authentication", () => {
     expect(meWithExpired.status).toBe(401);
   });
   it("DELETE /api/auth/logout performs cleanup of previously invalidated sessions that have expired", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
     const authenticated = await client.api.auth.login.$post({
       json: credentials,
     });
@@ -154,7 +150,7 @@ describe("Authentication", () => {
     });
     expect(logout1.status).toBe(200);
     expect(await getInvalidated()).toHaveLength(1);
-    setSystemTime(add(new Date(), { days: 3 }));
+    vi.setSystemTime(add(new Date(), { days: 3 }));
     const secondAuthentication = await client.api.auth.login.$post({
       json: credentials,
     });
@@ -184,7 +180,9 @@ describe("Blog", () => {
   it("GET /api/blog/id/:postId", async () => {
     const target = await db
       .selectFrom("blog")
-      .selectAll()
+      .innerJoin("user", "user.id", "blog.author_id")
+      .selectAll("blog")
+      .select("user.name as author_name")
       .executeTakeFirstOrThrow();
     const res = await client.api.blog.id[":postId"].$get({
       param: { postId: target.id },
@@ -194,8 +192,10 @@ describe("Blog", () => {
   it("GET /api/blog/author/:username", async () => {
     const targets = await db
       .selectFrom("blog")
-      .selectAll()
-      .where("author", "=", new UUIDv5("user").generate("johnDoe"))
+      .selectAll("blog")
+      .innerJoin("user", "author_id", "user.id")
+      .select("name as author_name")
+      .where("author_id", "=", new UUIDv5("user").generate("johnDoe"))
       .execute();
     const res = await client.api.blog.author[":username"].$get({
       param: { username: "johnDoe" },
@@ -221,7 +221,7 @@ describe("Blog", () => {
   it("PATCH /api/blog/:postId requires authentication", async () => {
     const { id } = await db
       .selectFrom("blog")
-      .selectAll()
+      .select("id")
       .executeTakeFirstOrThrow();
     const response = await client.api.blog[":postId"].$patch({
       param: { postId: id },
@@ -233,8 +233,12 @@ describe("Blog", () => {
     const auth = await client.api.auth.login.$post({ json: credentials });
     const { id } = await db
       .selectFrom("blog")
-      .selectAll()
-      .where("author", "=", new UUIDv5("user").generate(credentials.username))
+      .select("id")
+      .where(
+        "author_id",
+        "=",
+        new UUIDv5("user").generate(credentials.username)
+      )
       .executeTakeFirstOrThrow();
     const response = await client.api.blog[":postId"].$patch(
       {
@@ -269,7 +273,11 @@ describe("Blog", () => {
     const { id } = await db
       .selectFrom("blog")
       .selectAll()
-      .where("author", "=", new UUIDv5("user").generate(credentials.username))
+      .where(
+        "author_id",
+        "=",
+        new UUIDv5("user").generate(credentials.username)
+      )
       .executeTakeFirstOrThrow();
 
     const response = await client.api.blog[":postId"].$delete(

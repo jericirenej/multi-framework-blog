@@ -3,38 +3,29 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "catalog": {
-      "@eslint/js": "^9.29.0",
-      "@types/bun": "latest",
-      "argon2": "^0.43.0",
-      "date-fns": "^4.1.0",
-      "eslint": "^9.29.0",
-      "hono": "^4.7.11",
-      "jose": "^6.0.11",
-      "typescript-eslint": "^8.34.0",
-      "typescript": "^5.8.3",
-      "uuid": "^11.1.0",
-      "zod": "^3.25.67"
-    }
-  },
   "scripts": {
-    "serve": "bun --filter '@/api' serve",
-    "seed": "bun --filter '@/db' seed",
-    "migrate:rollback": "bun --filter '@/db' migrate:rollback",
-    "migrate": "bun --filter '@/db' migrate",
-    "check": "bun run ./scripts/check.ts"
+    "server": "pnpm run --filter '@/api' serve",
+    "seed": "pnpm run --filter '@/db' seed",
+    "migrate:rollback": "pnpm --filter '@/db' migrate:rollback",
+    "migrate": "pnpm --filter '@/db' migrate",
+    "check": "tsx ./scripts/check.ts",
+    "lint": "pnpm --filter '*' run lint",
+    "test": "vitest"
   },
   "devDependencies": {
     "@angular/cli": "^20.0.3",
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
     "@typescript/native-preview": "^7.0.0-dev.20250620.1",
-    "zx": "^8.6.0"
+    "eslint": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "^7.0.0",
+    "vitest": "catalog:",
+    "zx": "catalog:"
   },
   "dependencies": {
     "@/api": "workspace:*",
     "@/db": "workspace:*"
-  }
+  },
+  "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
 }

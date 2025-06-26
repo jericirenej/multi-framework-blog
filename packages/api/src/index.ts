@@ -1,11 +1,6 @@
-import { Hono } from "hono";
-import auth from "./routes/auth";
-import blog from "./routes/blog";
+import { serve } from "@hono/node-server";
+import app from "./app";
 
-const app = new Hono()
-  .basePath("/api")
-  .route("/auth", auth)
-  .route("/blog", blog);
-
-export default app;
-export type App = typeof app;
+serve({ fetch: app.fetch, port: 3000 }, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`);
+});

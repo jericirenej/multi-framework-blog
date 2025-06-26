@@ -24,7 +24,7 @@ const blog = new Hono()
       const { image, ...rest } = ctx.req.valid("form");
       const result = await blogService.createBlog({
         ...rest,
-        author: ctx.get("parsed").sub,
+        author_id: ctx.get("parsed").sub,
       });
       return ctx.json(result, 201);
     }
@@ -39,7 +39,7 @@ const blog = new Hono()
 
       const result = await blogService.updateBlog({
         ...rest,
-        author: ctx.get("parsed").sub,
+        author_id: ctx.get("parsed").sub,
         id: ctx.req.param("postId"),
       });
       return ctx.json(result, 200);

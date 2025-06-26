@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["./src/**/*.ts"],
-  "files": ["eslint.config.mjs"]
+  "files": ["eslint.config.mjs", "vitest.config.ts"]
 }

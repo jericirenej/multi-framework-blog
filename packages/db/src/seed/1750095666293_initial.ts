@@ -67,7 +67,7 @@ export async function seed(db: Kysely<DB>): Promise<void> {
           await db
             .insertInto("blog")
             .values({
-              author: authorId,
+              author_id: authorId,
               content: blog.content,
               title: blog.title,
               id: blogV5.generate(authorId, i),

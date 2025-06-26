@@ -1,32 +1,35 @@
 {
   "name": "@/db",
-  "module": "index.ts",
   "type": "module",
   "exports": {
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "seed": "bunx --bun kysely seed run",
-    "migrate:rollback": "bunx --bun kysely migrate:rollback --all",
-    "migrate": "bunx --bun kysely migrate:latest",
-    "postmigrate": "bun run ./src/helpers/infer-types-script.ts",
+    "lint": "eslint",
+    "seed": "kysely seed run",
+    "migrate:rollback": "kysely migrate:rollback --all",
+    "migrate": "kysely migrate:latest",
+    "postmigrate": "tsx ./src/helpers/infer-types-script.ts",
     "postmigrate:rollback": "bun run postmigrate"
   },
   "private": true,
   "devDependencies": {
-    "@types/bun": "catalog:",
-    "typescript-eslint": "catalog:",
     "@eslint/js": "catalog:",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "catalog:",
     "eslint": "catalog:",
     "kysely-codegen": "^0.18.5",
-    "kysely-ctl": "^0.13.1"
+    "typescript": "catalog:",
+    "kysely-ctl": "^0.13.1",
+    "typescript-eslint": "catalog:",
+    "zx": "catalog:"
   },
   "dependencies": {
     "@/env": "workspace:*",
     "argon2": "catalog:",
-    "typescript": "catalog:",
-    "kysely": "^0.28.2",
-    "kysely-bun-sqlite": "^0.4.0"
+    "better-sqlite3": "^12.1.1",
+    "kysely": "catalog:",
+    "kysely-bun-sqlite": "^0.4.0",
+    "uuid": "catalog:"
   }
 }

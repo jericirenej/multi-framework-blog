@@ -1,16 +1,19 @@
 {
   "name": "@/env",
   "module": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint"
   },
   "devDependencies": {
-    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "@eslint/js": "catalog:",
     "typescript-eslint": "catalog:",
     "eslint": "catalog:",
-    "@eslint/js": "catalog:",
     "typescript": "catalog:"
   }
 }

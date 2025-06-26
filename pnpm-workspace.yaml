@@ -1,0 +1,28 @@
+packages:
+  - packages/*
+
+catalog:
+  "@eslint/js": ^9.29.0
+  "@hono/node-server": ^1.14.4
+  "@types/node": "^24.0.4"
+  argon2: ^0.43.0
+  date-fns: ^4.1.0
+  eslint: ^9.29.0
+  hono: ^4.7.11
+  jose: ^6.0.11
+  kysely: ^0.28.2
+  typescript-eslint: ^8.34.0
+  typescript: ^5.8.3
+  tsx: ^4.20.3
+  uuid: ^11.1.0
+  vitest: ^3.2.4
+  zod: ^3.25.67
+  zx: ^8.6.0
+
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - argon2
+  - better-sqlite3
+  - esbuild
+  - lmdb
+  - msgpackr-extract

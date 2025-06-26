@@ -10,7 +10,7 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   : ColumnType<T, T | undefined, T>;
 
 export interface Blog {
-  author: string;
+  author_id: string;
   content: string;
   created_at: Generated<number>;
   id: string;

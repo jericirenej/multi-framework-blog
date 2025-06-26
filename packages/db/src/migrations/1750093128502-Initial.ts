@@ -1,4 +1,4 @@
-import { Kysely } from "kysely";
+import type { Kysely } from "kysely";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up(db: Kysely<any>) {
@@ -13,7 +13,9 @@ export async function up(db: Kysely<any>) {
   await db.schema
     .createTable("blog")
     .addColumn("id", "text", (col) => col.primaryKey().notNull())
-    .addColumn("author", "text", (col) => col.notNull().references("user.id"))
+    .addColumn("author_id", "text", (col) =>
+      col.notNull().references("user.id")
+    )
     .addColumn("title", "text", (col) => col.notNull())
     .addColumn("content", "text", (col) => col.notNull())
     .addColumn("image", "text")
@@ -34,7 +36,7 @@ export async function up(db: Kysely<any>) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down(db: Kysely<any>) {
-  await db.schema.dropTable("user").execute();
   await db.schema.dropTable("blog").execute();
   await db.schema.dropTable("invalidated_sessions").execute();
+  await db.schema.dropTable("user").execute();
 }
