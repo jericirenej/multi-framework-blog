@@ -1,5 +1,5 @@
-import db from "@/db/client-singleton.ts";
-import { UUIDv5 } from "@/db/helpers/v5.ts";
+import db from "@/db/client-singleton";
+import { UUIDv5 } from "@/db/helpers/v5";
 import {
   afterEach,
   beforeAll,
@@ -10,7 +10,7 @@ import {
 } from "bun:test";
 import { add } from "date-fns";
 import { testClient } from "hono/testing";
-import { seed } from "@/db/seed/1750095666293_initial.ts";
+import { seed } from "@/db/seed/1750095666293_initial";
 import authService from "./services/auth.service";
 import blogService from "./services/blog.service";
 import app from "./";

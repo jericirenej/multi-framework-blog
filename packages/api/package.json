@@ -2,7 +2,7 @@
   "name": "@/api",
   "type": "module",
   "exports": {
-    "./*": "./src/*"
+    "./*": "./src/*.ts"
   },
   "private": true,
   "scripts": {
@@ -17,8 +17,9 @@
     "zod": "catalog:",
     "typescript": "catalog:",
     "date-fns": "catalog:",
+    "argon2": "catalog:",
     "@hono/zod-validator": "^0.7.0",
-    "hono": "^4.7.11"
+    "hono": "catalog:"
   },
   "devDependencies": {
     "eslint": "catalog:",

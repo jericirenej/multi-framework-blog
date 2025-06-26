@@ -1,8 +1,6 @@
 import { $ } from "bun";
 import { resolve } from "path";
-import dotenv from "dotenv";
-dotenv.config({ path: "../../.env" });
-await $`bunx --bun kysely-codegen --dialect kysely-bun-sqlite --out-file="${resolve(
-  import.meta.dirname,
-  "../types.ts"
-)}"`;
+import env from "@/env";
+await $`bunx --bun kysely-codegen --dialect kysely-bun-sqlite --url=${
+  env["DATABASE_URL"]
+} --out-file="${resolve(import.meta.dirname, "../types.ts")}"`;

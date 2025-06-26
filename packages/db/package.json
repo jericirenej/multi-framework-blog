@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "exports": {
-    "./*": "./src/*"
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "lint": "eslint .",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@/env": "workspace:*",
+    "argon2": "catalog:",
     "typescript": "catalog:",
     "kysely": "^0.28.2",
     "kysely-bun-sqlite": "^0.4.0"

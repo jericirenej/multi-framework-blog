@@ -1,5 +1,7 @@
-import db from "@/db/client-singleton.ts";
-import type { DB, User } from "@/db/types.ts";
+import db from "@/db/client-singleton";
+import type { DB, User } from "@/db/types";
+import env from "@/env";
+import argon2 from "argon2";
 import { randomUUIDv7 } from "bun";
 import { add } from "date-fns";
 import { HTTPException } from "hono/http-exception";
@@ -8,7 +10,6 @@ import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import type { Insertable, Kysely } from "kysely";
 import { JWT_COOKIE } from "../constants";
 import { tokenSchema, type UserToken } from "../schemas";
-import env from "@/env";
 
 type AuthUser = Record<"username" | "password", string>;
 export class AuthService {
@@ -65,7 +66,7 @@ export class AuthService {
             .select((eb) =>
               eb.fn.count<number>("jwt_hash").as("is_invalidated")
             )
-            .where("jwt_hash", "=", await Bun.password.hash(jwt))
+            .where("jwt_hash", "=", await argon2.hash(jwt))
             .executeTakeFirstOrThrow()
         ).is_invalidated;
     if (isInvalid) {

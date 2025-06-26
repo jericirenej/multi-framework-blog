@@ -1,4 +1,5 @@
 import type { Insertable, Kysely } from "kysely";
+import argon2 from "argon2";
 
 import { UUIDv5 } from "../helpers/v5";
 import type { Blog, DB } from "../types";
@@ -50,7 +51,7 @@ export async function seed(db: Kysely<DB>): Promise<void> {
         .values({
           id: userV5.generate(user.username),
           name: user.name,
-          password: await Bun.password.hash(user.password),
+          password: await argon2.hash(user.password),
           username: user.username,
         })
         .execute();
