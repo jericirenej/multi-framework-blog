@@ -1,9 +1,9 @@
 import { Hono, type Context } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
-import authService from "../services/auth.service";
 import { authMiddleware, routeValidator } from "../middleware";
 import { userSchema } from "../schemas";
+import authService from "../services/auth.service";
 
 // Allow cookie or header authorization
 const getToken = (ctx: Context) => {
@@ -19,7 +19,7 @@ const auth = new Hono()
       {
         authenticated: await authService.isAuthenticated(token),
       },
-      200
+      200,
     );
   })
   .get("/me", authMiddleware, async (ctx) => {
@@ -54,15 +54,21 @@ const auth = new Hono()
       }
       const expires = authService.expirationTime;
       const signedToken = await authService.sign(user, expires);
+
+      const origin = ctx.req.header("Origin")?.replace(/:\d+/, "");
+      const domains = new Set([ctx.req.header("Host")?.replace(/:\d+/, "")]);
+      if (origin) {
+        domains.add(new URL(origin).host);
+      }
       setCookie(ctx, authService.jwtCookie, signedToken, {
-        domain: "localhost",
+        domain: [...domains].join(","),
         path: "/",
         expires,
         httpOnly: true,
       });
 
-      return ctx.json({ token: signedToken }, 200);
-    }
+      return ctx.text("Success", 200);
+    },
   )
   .delete("/logout", authMiddleware, async (ctx) => {
     await authService.logout(ctx.get("token"));

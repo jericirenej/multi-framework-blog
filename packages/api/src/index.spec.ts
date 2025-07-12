@@ -1,12 +1,13 @@
 import db from "@/db/client-singleton";
 import { UUIDv5 } from "@/db/helpers/v5";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { seed } from "@/db/seed/1750095666293_initial";
 import { add } from "date-fns";
 import { testClient } from "hono/testing";
-import { seed } from "@/db/seed/1750095666293_initial";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import app from "./app";
+import { JWT_COOKIE } from "./constants";
 import authService from "./services/auth.service";
 import blogService from "./services/blog.service";
-import app from "./app";
 
 let client: Awaited<ReturnType<typeof beforeAllHook>>;
 const beforeAllHook = async (runSeed = true) => {
@@ -26,11 +27,13 @@ const afterEachHook = async () => {
 
 const getInvalidated = async () =>
   db.selectFrom("invalidated_sessions").selectAll().execute();
-const createTokenHeader = (obj: { token: string }) => {
-  return { Authorization: obj.token };
-};
 
 const credentials = { username: "johnDoe", password: "johnDoe-password" };
+const addAuthCookie = async (auth = credentials) => {
+  return (await client.api.auth.login.$post({ json: auth })).headers
+    .getSetCookie()
+    .join(",");
+};
 it("Compiles", () => {
   expect(app).toBeDefined();
 });
@@ -44,14 +47,13 @@ describe("Authentication", () => {
   it("GET /api/auth/authenticated", async () => {
     const unauthenticated = await client.api.auth.authenticated.$get();
     expect(await unauthenticated.json()).toEqual({ authenticated: false });
-    const auth = await client.api.auth.login.$post({ json: credentials });
     const authenticated = await client.api.auth.authenticated.$get(undefined, {
-      headers: createTokenHeader(await auth.json()),
+      headers: { Cookie: await addAuthCookie() },
     });
     expect(await authenticated.json()).toEqual({ authenticated: true });
   });
-  it("GET /api/auth/me returns user object for authenticated request", async () => {
-    const auth = await client.api.auth.login.$post({ json: credentials });
+
+  it.only("GET /api/auth/me returns user object for authenticated request", async () => {
     const unauthenticated = await client.api.auth.me.$get();
     expect(unauthenticated.status).toBe(401);
     const user = await authService.getUserByUsername("johnDoe");
@@ -59,18 +61,18 @@ describe("Authentication", () => {
       throw new Error("Use r missing in test -- did you forget to seed?");
     }
     const authenticated = await client.api.auth.me.$get(undefined, {
-      headers: createTokenHeader(await auth.json()),
+      headers: { Cookie: await addAuthCookie() },
     });
     expect(await authenticated.json()).toEqual(user);
   });
-  it("POST /api/auth/login, logs in user and returns jwt", async () => {
+  it("POST /api/auth/login, logs in user", async () => {
     const res = await client.api.auth.login.$post({
       json: credentials,
     });
     expect(res.status).toBe(200);
-    const body = await res.json();
-    expect(body).toHaveProperty("token");
-    expect(res.headers.getSetCookie()[0]).toContain(body.token);
+    expect(
+      res.headers.getSetCookie().find((entry) => entry.includes(JWT_COOKIE)),
+    ).toBeDefined();
   });
   it("POST /api/auth/login, rejects for wrong credentials", async () => {
     for (const json of [
@@ -80,21 +82,18 @@ describe("Authentication", () => {
     ])
       expect(await client.api.auth.login.$post({ json })).toHaveProperty(
         "status",
-        401
+        401,
       );
   });
   it("POST /api/login rejects if already logged in or if token expired or malformed", async () => {
     const now = new Date();
     vi.useFakeTimers({ toFake: ["Date"] });
-    const res = await client.api.auth.login.$post({ json: credentials });
-    expect(res.status).toBe(200);
-    await client.api.auth.logout.$delete(undefined, {});
     const requestShape = {
       method: "POST",
       body: JSON.stringify(credentials),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${(await res.json()).token}`,
+        Cookie: await addAuthCookie(credentials),
       }),
     };
     const url = client.api.auth.login.$url().pathname;
@@ -107,7 +106,7 @@ describe("Authentication", () => {
     expect(expiredTokenResponse.status).toBe(401);
 
     expect(expiredTokenResponse.headers.getSetCookie()[0]).toContain(
-      "app_jwt=; Max-Age=0"
+      "app_jwt=; Max-Age=0",
     );
 
     vi.setSystemTime(now);
@@ -121,42 +120,35 @@ describe("Authentication", () => {
     });
     expect(malformedTokenResponse.status).toBe(401);
     expect(expiredTokenResponse.headers.getSetCookie()[0]).toContain(
-      "app_jwt=; Max-Age=0"
+      "app_jwt=; Max-Age=0",
     );
   });
   it("DELETE /api/auth/logout logs out user and prevents token reuse", async () => {
-    const authenticated = await client.api.auth.login.$post({
-      json: credentials,
-    });
-    const headers = createTokenHeader(await authenticated.json());
+    const Cookie = await addAuthCookie();
     expect(await getInvalidated()).toHaveLength(0);
     const response = await client.api.auth.logout.$delete(undefined, {
-      headers,
+      headers: { Cookie },
     });
     expect(response.status).toBe(200);
     expect(response.headers.getSetCookie()[0]).toContain("app_jwt=; Max-Age=0");
     expect(await getInvalidated()).toHaveLength(1);
-    const meWithExpired = await client.api.auth.me.$get(undefined, { headers });
+    const meWithExpired = await client.api.auth.me.$get(undefined, {
+      headers: { Cookie },
+    });
     expect(meWithExpired.status).toBe(401);
   });
   it("DELETE /api/auth/logout performs cleanup of previously invalidated sessions that have expired", async () => {
     vi.useFakeTimers({ toFake: ["Date"] });
-    const authenticated = await client.api.auth.login.$post({
-      json: credentials,
-    });
-    const res = await authenticated.json();
+    const Cookie = await addAuthCookie();
     const logout1 = await client.api.auth.logout.$delete(undefined, {
-      headers: createTokenHeader(res),
+      headers: { Cookie },
     });
     expect(logout1.status).toBe(200);
     expect(await getInvalidated()).toHaveLength(1);
     vi.setSystemTime(add(new Date(), { days: 3 }));
-    const secondAuthentication = await client.api.auth.login.$post({
-      json: credentials,
-    });
-    const secondToken = await secondAuthentication.json();
+
     const logout2 = await client.api.auth.logout.$delete(undefined, {
-      headers: createTokenHeader(secondToken),
+      headers: { Cookie: await addAuthCookie() },
     });
     expect(logout2.status).toBe(200);
     expect(await getInvalidated()).toHaveLength(1);
@@ -209,10 +201,9 @@ describe("Blog", () => {
     expect(response).toHaveProperty("status", 401);
   });
   it("POST /api/blog", async () => {
-    const auth = await client.api.auth.login.$post({ json: credentials });
     const response = await client.api.blog.$post(
       { form: exampleBlog },
-      { headers: createTokenHeader(await auth.json()) }
+      { headers: { Cookie: await addAuthCookie() } },
     );
     expect(response.status).toBe(201);
     const blog = await response.json();
@@ -230,14 +221,13 @@ describe("Blog", () => {
     expect(response).toHaveProperty("status", 401);
   });
   it("PATCH /api/blog/:postId", async () => {
-    const auth = await client.api.auth.login.$post({ json: credentials });
     const { id } = await db
       .selectFrom("blog")
       .select("id")
       .where(
         "author_id",
         "=",
-        new UUIDv5("user").generate(credentials.username)
+        new UUIDv5("user").generate(credentials.username),
       )
       .executeTakeFirstOrThrow();
     const response = await client.api.blog[":postId"].$patch(
@@ -245,7 +235,7 @@ describe("Blog", () => {
         param: { postId: id },
         form: { content: "Patched content" },
       },
-      { headers: createTokenHeader(await auth.json()) }
+      { headers: { Cookie: await addAuthCookie() } },
     );
 
     expect(response).toHaveProperty("status", 200);
@@ -269,14 +259,13 @@ describe("Blog", () => {
     expect(response).toHaveProperty("status", 401);
   });
   it("DELETE /api/blog/:postId", async () => {
-    const auth = await client.api.auth.login.$post({ json: credentials });
     const { id } = await db
       .selectFrom("blog")
       .selectAll()
       .where(
         "author_id",
         "=",
-        new UUIDv5("user").generate(credentials.username)
+        new UUIDv5("user").generate(credentials.username),
       )
       .executeTakeFirstOrThrow();
 
@@ -284,11 +273,11 @@ describe("Blog", () => {
       {
         param: { postId: id },
       },
-      { headers: createTokenHeader(await auth.json()) }
+      { headers: { Cookie: await addAuthCookie() } },
     );
     expect(response).toHaveProperty("status", 200);
     expect(
-      await db.selectFrom("blog").selectAll().where("id", "=", id).execute()
+      await db.selectFrom("blog").selectAll().where("id", "=", id).execute(),
     ).toHaveLength(0);
   });
 });

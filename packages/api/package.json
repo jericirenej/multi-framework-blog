@@ -9,7 +9,8 @@
     "lint": "eslint",
     "tsc": "tsgo --noEmit --project tsconfig.json",
     "check": "pnpm tsc && pnpm lint",
-    "serve": "tsx --watch ./src/index.ts"
+    "serve": "tsx --watch ./src/index.ts",
+    "test": "vitest"
   },
   "dependencies": {
     "@/env": "workspace:*",
