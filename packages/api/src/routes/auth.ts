@@ -55,19 +55,17 @@ const auth = new Hono()
       const expires = authService.expirationTime;
       const signedToken = await authService.sign(user, expires);
 
+      // Replace any port mappings
       const origin = ctx.req.header("Origin")?.replace(/:\d+/, "");
-      const domains = new Set([ctx.req.header("Host")?.replace(/:\d+/, "")]);
-      if (origin) {
-        domains.add(new URL(origin).host);
-      }
       setCookie(ctx, authService.jwtCookie, signedToken, {
-        domain: [...domains].join(","),
+        domain: origin ? new URL(origin).host : "localhost",
         path: "/",
         expires,
         httpOnly: true,
+        sameSite: "lax",
       });
 
-      return ctx.text("Success", 200);
+      return ctx.json("Success", 200);
     },
   )
   .delete("/logout", authMiddleware, async (ctx) => {

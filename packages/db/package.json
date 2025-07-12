@@ -28,9 +28,9 @@
     "zx": "catalog:"
   },
   "dependencies": {
-    "@/env": "workspace:*",
     "argon2": "catalog:",
     "better-sqlite3": "^12.1.1",
+    "dotenv": "catalog:",
     "kysely": "catalog:",
     "kysely-bun-sqlite": "^0.4.0",
     "uuid": "catalog:"

@@ -53,7 +53,7 @@ describe("Authentication", () => {
     expect(await authenticated.json()).toEqual({ authenticated: true });
   });
 
-  it.only("GET /api/auth/me returns user object for authenticated request", async () => {
+  it("GET /api/auth/me returns user object for authenticated request", async () => {
     const unauthenticated = await client.api.auth.me.$get();
     expect(unauthenticated.status).toBe(401);
     const user = await authService.getUserByUsername("johnDoe");

@@ -1,6 +1,6 @@
 import db from "@/db/client-singleton";
 import type { DB, User } from "@/db/types";
-import env from "@/env";
+
 import argon2 from "argon2";
 import { v7 } from "uuid";
 import { add } from "date-fns";
@@ -16,9 +16,10 @@ import {
   type UserDto,
   type UserToken,
 } from "../schemas";
+import env from "@/env";
 
 export class AuthService {
-  protected secret = new TextEncoder().encode(env["API_SECRET"]);
+  protected secret = new TextEncoder().encode(env().API_SECRET);
   readonly jwtCookie = JWT_COOKIE;
 
   constructor(protected db: Kysely<DB>) {}
@@ -69,7 +70,7 @@ export class AuthService {
           await this.db
             .selectFrom("invalidated_sessions")
             .select((eb) =>
-              eb.fn.count<number>("jwt_hash").as("is_invalidated")
+              eb.fn.count<number>("jwt_hash").as("is_invalidated"),
             )
             .where("jwt_hash", "=", await argon2.hash(jwt))
             .executeTakeFirstOrThrow()
@@ -92,7 +93,7 @@ export class AuthService {
   }
   async sign(
     { username }: UserCredentials,
-    expirationTime: Date
+    expirationTime: Date,
   ): Promise<string> {
     const { id } = await this.db
       .selectFrom("user")
@@ -149,7 +150,7 @@ export class AuthService {
   }
 
   async generateUser(
-    data: Omit<Insertable<User>, "id">
+    data: Omit<Insertable<User>, "id">,
   ): Promise<UserCredentials> {
     const user = {
       id: v7(),
@@ -165,7 +166,7 @@ export class AuthService {
     return userDtoSchema.parse(
       await this.getCompleteUser
         .where("username", "=", username)
-        .executeTakeFirst()
+        .executeTakeFirst(),
     );
   }
 

@@ -1,16 +1,14 @@
-import { readFileSync } from "fs";
-import { resolve } from "path";
+import { config } from "dotenv";
+type ENV = { [key: string]: string | undefined } & Partial<
+  Record<"CORS_ORIGIN" | "DATABASE_URL" | "API_SECRET", string>
+>;
+const env = () => {
+  const processEnv = process.env as Partial<ENV>;
 
-const env = readFileSync(resolve(import.meta.dirname, "./.env"), "utf-8")
-  .trim()
-  .split(/\r?\n/)
-  .reduce<Record<string, string>>((acc, curr) => {
-    const [key, value] = curr.split("=");
-    if (key !== undefined && value !== undefined) {
-      acc[key] = value;
-    }
-
-    return acc;
-  }, {});
-
+  if (process.env.CORS_ORIGIN) {
+    return processEnv;
+  }
+  config({ path: "../../.env", quiet: true });
+  return processEnv;
+};
 export default env;

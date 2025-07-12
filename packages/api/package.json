@@ -13,9 +13,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@/env": "workspace:*",
     "@/db": "workspace:*",
     "@hono/node-server": "catalog:",
+    "dotenv": "catalog:",
     "jose": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",

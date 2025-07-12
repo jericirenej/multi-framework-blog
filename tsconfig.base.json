@@ -27,7 +27,9 @@
     "isolatedModules": true,
 
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    "paths": { "@/env": ["./packages/env/index.ts"] }
   },
   "include": [],
   "files": []

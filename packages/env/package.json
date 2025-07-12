@@ -1,22 +1,10 @@
 {
   "name": "@/env",
-  "module": "index.ts",
-  "exports": {
-    ".": "./index.ts"
-  },
   "type": "module",
-  "private": true,
-  "scripts": {
-    "lint": "eslint",
-    "tsc": "tsgo --noEmit --project tsconfig.json",
-    "check": "pnpm tsc && pnpm lint"
-  },
-  "devDependencies": {
-    "@types/node": "catalog:",
-    "@eslint/js": "catalog:",
-    "@typescript/native-preview": "catalog:",
-    "typescript-eslint": "catalog:",
-    "eslint": "catalog:",
-    "typescript": "catalog:"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "catalog:"
   }
 }
