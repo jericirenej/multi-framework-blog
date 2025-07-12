@@ -28,5 +28,15 @@ export const updateBlogSchema = createBlogSchema
     }
   });
 
+export const blogDtoSchema = createBlogSchema.omit({ image: true }).extend({
+  id: z.string(),
+  created_at: z.number(),
+  updated_at: z.number(),
+  author_id: z.string(),
+  author_name: z.string(),
+  image: z.string().nullable(),
+});
+
 export type CreateBlogDto = z.infer<typeof createBlogSchema>;
 export type UpdateBlogDto = z.infer<typeof updateBlogSchema>;
+export type BlogDto = z.infer<typeof blogDtoSchema>;

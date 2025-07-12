@@ -9,9 +9,14 @@ import type { Cookie } from "hono/utils/cookie";
 import { decodeJwt, jwtVerify, SignJWT } from "jose";
 import type { Insertable, Kysely } from "kysely";
 import { JWT_COOKIE } from "../constants";
-import { tokenSchema, type UserToken } from "../schemas";
+import {
+  tokenSchema,
+  userDtoSchema,
+  type UserCredentials,
+  type UserDto,
+  type UserToken,
+} from "../schemas";
 
-type AuthUser = Record<"username" | "password", string>;
 export class AuthService {
   protected secret = new TextEncoder().encode(env["API_SECRET"]);
   readonly jwtCookie = JWT_COOKIE;
@@ -23,7 +28,7 @@ export class AuthService {
     this.invalidatedSessions.clear();
   }
 
-  async authenticate(user: AuthUser): Promise<boolean> {
+  async authenticate(user: UserCredentials): Promise<boolean> {
     return this.verifyPassword(user);
   }
 
@@ -85,7 +90,10 @@ export class AuthService {
     }
     return validated;
   }
-  async sign({ username }: AuthUser, expirationTime: Date): Promise<string> {
+  async sign(
+    { username }: UserCredentials,
+    expirationTime: Date
+  ): Promise<string> {
     const { id } = await this.db
       .selectFrom("user")
       .select("id")
@@ -130,7 +138,7 @@ export class AuthService {
     });
   }
 
-  async verifyPassword(passedUser: AuthUser): Promise<boolean> {
+  async verifyPassword(passedUser: UserCredentials): Promise<boolean> {
     const user = await this.db
       .selectFrom("user")
       .select("password")
@@ -140,7 +148,9 @@ export class AuthService {
     return argon2.verify(user.password, passedUser.password);
   }
 
-  async generateUser(data: Omit<Insertable<User>, "id">): Promise<AuthUser> {
+  async generateUser(
+    data: Omit<Insertable<User>, "id">
+  ): Promise<UserCredentials> {
     const user = {
       id: v7(),
       username: data.username,
@@ -151,12 +161,12 @@ export class AuthService {
     return user;
   }
 
-  async getUserByUsername(
-    username: string
-  ): Promise<Omit<User, "password"> | undefined> {
-    return this.getCompleteUser
-      .where("username", "=", username)
-      .executeTakeFirst();
+  async getUserByUsername(username: string): Promise<UserDto | undefined> {
+    return userDtoSchema.parse(
+      await this.getCompleteUser
+        .where("username", "=", username)
+        .executeTakeFirst()
+    );
   }
 
   async getUserById(id: string): Promise<Omit<User, "password">> {

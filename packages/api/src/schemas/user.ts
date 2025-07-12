@@ -13,4 +13,12 @@ export const tokenSchema = z.object({
   exp: z.number(),
   username: z.string(),
 });
+
+export const userDtoSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  username: z.string(),
+});
 export type UserToken = z.infer<typeof tokenSchema>;
+export type UserCredentials = z.infer<typeof userSchema>;
+export type UserDto = z.infer<typeof userDtoSchema>;

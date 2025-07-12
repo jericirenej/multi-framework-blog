@@ -1,15 +1,14 @@
 import db from "@/db/client-singleton";
 import type { Blog, DB } from "@/db/types";
-import { v7 } from "uuid";
 import { HTTPException } from "hono/http-exception";
-import type { Insertable, Kysely, Selectable, Updateable } from "kysely";
+import type { Insertable, Kysely, Updateable } from "kysely";
+import { v7 } from "uuid";
+import type { BlogDto } from "../schemas";
 
 type EvaluateBlogArgs = { postId: string } & (
   | { onlyAuthors: true; author: string }
   | { onlyAuthors?: false }
 );
-
-type BlogDto = Selectable<Blog> & { author_name: string };
 
 export class BlogService {
   constructor(protected db: Kysely<DB>) {}
