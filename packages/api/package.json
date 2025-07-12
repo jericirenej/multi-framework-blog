@@ -7,6 +7,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint",
+    "tsc": "tsgo --noEmit --project tsconfig.json",
+    "check": "pnpm tsc && pnpm lint",
     "serve": "tsx --watch ./src/index.ts"
   },
   "dependencies": {
@@ -16,7 +18,6 @@
     "jose": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",
-    "typescript": "catalog:",
     "date-fns": "catalog:",
     "argon2": "catalog:",
     "@hono/zod-validator": "^0.7.0",
@@ -24,9 +25,11 @@
     "kysely": "catalog:"
   },
   "devDependencies": {
+    "@typescript/native-preview": "catalog:",
     "@eslint/js": "catalog:",
     "eslint": "catalog:",
     "vitest": "catalog:",
+    "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "tsx": "catalog:"
   }

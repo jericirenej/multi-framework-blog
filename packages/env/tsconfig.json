@@ -1,4 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "noEmit": true },
   "files": ["eslint.config.mjs", "index.ts"]
 }

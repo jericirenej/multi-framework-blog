@@ -7,11 +7,14 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint",
+    "tsc": "tsgo --noEmit --project tsconfig.json",
+    "check": "pnpm tsc && pnpm lint"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "@eslint/js": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "typescript-eslint": "catalog:",
     "eslint": "catalog:",
     "typescript": "catalog:"

@@ -1,5 +1,7 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "outDir": "dist" },
   "include": ["./src/**/*.ts"],
+  "exclude": ["dist"],
   "files": ["eslint.config.mjs", ".config/kysely.config.ts"]
 }

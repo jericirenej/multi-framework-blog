@@ -6,6 +6,8 @@
   },
   "scripts": {
     "lint": "eslint",
+    "tsc": "tsgo --noEmit --project tsconfig.json",
+    "check": "pnpm tsc && pnpm lint",
     "seed": "kysely seed run",
     "migrate:rollback": "kysely migrate:rollback --all",
     "migrate": "kysely migrate:latest",
@@ -17,6 +19,7 @@
     "@eslint/js": "catalog:",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "eslint": "catalog:",
     "kysely-codegen": "^0.18.5",
     "typescript": "catalog:",

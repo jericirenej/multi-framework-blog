@@ -1,4 +1,5 @@
+// @ts-check
 import tseslint from "typescript-eslint";
-import baseEslint from "../../eslint.config.base.mjs";
+import baseEslint from "../../eslint.base.config.mjs";
 
-export default tseslint.config({ extends: baseEslint() });
+export default tseslint.config({ extends: baseEslint });
