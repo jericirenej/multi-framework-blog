@@ -1,0 +1,19 @@
+<app-form-wrapper
+  [successLabel]="successLabel()"
+  [submitLabel]="submitLabel()"
+  [formGroup]="form"
+  (ngSubmit)="formService.submit()"
+  [resultStatus]="resultStatus()"
+  (goBack)="goBack.emit()"
+>
+  <app-form-input
+    class="title block w-full"
+    [control]="formService.title"
+    label="Title"
+  />
+  <app-form-input
+    [control]="formService.content"
+    label="Content"
+    type="textarea"
+  />
+</app-form-wrapper>

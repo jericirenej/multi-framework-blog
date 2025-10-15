@@ -1,0 +1,15 @@
+<app-form-wrapper
+  successLabel="Login successful!"
+  submitLabel="Login"
+  [formGroup]="form"
+  (ngSubmit)="formService.submit()"
+  [resultStatus]="resultStatus()"
+  (goBack)="goBack.emit()"
+>
+  <app-form-input [control]="formService.username" label="Username" />
+  <app-form-input
+    [control]="formService.password"
+    label="Password"
+    type="password"
+  />
+</app-form-wrapper>

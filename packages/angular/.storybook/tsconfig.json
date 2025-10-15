@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "composite": true,
+    "jsx": "preserve"
+  },
+  "exclude": [
+    "../src/**/*.spec.ts",
+    "../src/*.ts",
+    "../src/app/*.ts",
+    "../src/environments"
+  ],
+  "files": ["../src/app/app.routes.ts"],
+  "include": ["../src/**/*.ts", "./preview.ts", "./main.ts"]
+}

@@ -1,0 +1,32 @@
+import { Component, input } from "@angular/core";
+
+@Component({
+  selector: "app-arrow",
+  template: `
+    <!-- Stash Iconsby Pingback LLC -->
+    @if (direction() === "right") {
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M14.989 4.638a.5.5 0 0 1 .706.017l6.667 7a.5.5 0 0 1 0 .69l-6.667 7a.5.5 0 1 1-.724-.69l5.862-6.155H2a.5.5 0 0 1 0-1h18.833l-5.862-6.155a.5.5 0 0 1 .018-.707"
+        />
+      </svg>
+    } @else {
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M9.011 4.638a.5.5 0 0 1 .018.707L3.167 11.5H22a.5.5 0 0 1 0 1H3.167l5.862 6.155a.5.5 0 1 1-.724.69l-6.667-7a.5.5 0 0 1 0-.69l6.667-7a.5.5 0 0 1 .706-.017"
+        />
+      </svg>
+    }
+  `,
+  styleUrl: "../AbstractIconStyles/styles.css",
+})
+export class ArrowIconComponent {
+  readonly direction = input.required<"left" | "right">();
+}

@@ -1,0 +1,6 @@
+<div class="relative">
+  <ng-content />
+  <div class="absolute left-0 top-[100%]" [id]="idService.id">
+    <app-error [errors]="control() | parseError | async" />
+  </div>
+</div>

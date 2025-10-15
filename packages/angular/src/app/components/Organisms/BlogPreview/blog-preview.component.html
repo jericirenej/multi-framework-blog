@@ -1,0 +1,46 @@
+@let isOwnPost = data() | isAuthor | async;
+<div class="max-w-prose min-w-[50ch] text-neutral-700">
+  <app-box>
+    <div
+      [ngClass]="{
+        flex: true,
+        'items-center': true,
+        'h-[22px]': true,
+        'justify-between': isOwnPost,
+      }"
+    >
+      <div class="flex justify-end">
+        <span class="text-xs" title="Created date">{{
+          data().created_at | date
+        }}</span>
+      </div>
+      @if (isOwnPost) {
+        <div class="flex h-[inherit] gap-3">
+          <a [routerLink]="`/blog/edit/${data().id}`" title="Update post">
+            <app-edit-icon class="text-cyan-800" />
+          </a>
+          <button
+            (click)="show.set(true)"
+            title="Delete post"
+            class="cursor-pointer"
+          >
+            <app-delete-icon class="text-red-700 saturate-75" />
+          </button>
+        </div>
+      }
+    </div>
+    <a [routerLink]="`/blog/${data().id}`">
+      <div class="mb-5 flex flex-col items-center">
+        <h2 class="text-2xl font-light text-amber-900">
+          {{ data().title }}
+        </h2>
+        <span class="text-sm" title="Author">{{ data().author_name }}</span>
+      </div>
+      <div class="text-wrapper relative mb-3 line-clamp-3 text-left text-black">
+        <p>{{ data().summary }}</p>
+      </div>
+    </a>
+  </app-box>
+</div>
+
+<app-delete-blog-dialog [(show)]="show" (confirmDelete)="deleteAction.emit()" />

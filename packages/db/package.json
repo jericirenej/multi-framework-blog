@@ -20,6 +20,7 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "catalog:",
     "@typescript/native-preview": "catalog:",
+    "date-fns": "catalog:",
     "eslint": "catalog:",
     "kysely-codegen": "^0.18.5",
     "typescript": "catalog:",
@@ -28,6 +29,7 @@
     "zx": "catalog:"
   },
   "dependencies": {
+    "@/env": "workspace:",
     "argon2": "catalog:",
     "better-sqlite3": "^12.1.1",
     "dotenv": "catalog:",

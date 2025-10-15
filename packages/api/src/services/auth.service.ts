@@ -12,9 +12,11 @@ import { JWT_COOKIE } from "../constants";
 import {
   tokenSchema,
   userDtoSchema,
+  userWithExpirationDtoSchema,
   type UserCredentials,
   type UserDto,
   type UserToken,
+  type UserWithExpirationDto,
 } from "../schemas";
 import env from "@/env";
 
@@ -41,7 +43,7 @@ export class AuthService {
     try {
       if (!jwt)
         throw new HTTPException(401, {
-          message: "Cannot logout if not logged in",
+          message: "JWT missing",
         });
       await jwtVerify(jwt, this.secret);
     } catch (err) {
@@ -170,8 +172,20 @@ export class AuthService {
     );
   }
 
-  async getUserById(id: string): Promise<Omit<User, "password">> {
-    return this.getCompleteUser.where("id", "=", id).executeTakeFirstOrThrow();
+  async getUserById(id: string): Promise<UserDto> {
+    return userDtoSchema.parse(
+      await this.getCompleteUser.where("id", "=", id).executeTakeFirstOrThrow(),
+    );
+  }
+
+  async getUserWithExpiration({
+    sub,
+    exp,
+  }: UserToken): Promise<UserWithExpirationDto> {
+    return userWithExpirationDtoSchema.parse({
+      ...(await this.getUserById(sub)),
+      exp,
+    });
   }
 
   protected get getCompleteUser() {

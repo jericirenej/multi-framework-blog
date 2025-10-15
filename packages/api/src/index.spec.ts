@@ -1,16 +1,40 @@
 import db from "@/db/client-singleton";
 import { UUIDv5 } from "@/db/helpers/v5";
-import { seed } from "@/db/seed/1750095666293_initial";
+import { lorem, seed, USERS } from "@/db/seed/1750095666293_initial";
 import { add } from "date-fns";
 import { testClient } from "hono/testing";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { resolve } from "path";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
+import { $ } from "zx";
 import app from "./app";
 import { JWT_COOKIE } from "./constants";
+import { blogSummaryDtoSchema } from "./schemas";
 import authService from "./services/auth.service";
 import blogService from "./services/blog.service";
 
 let client: Awaited<ReturnType<typeof beforeAllHook>>;
+const migrateFn = async (type: "latest" | "rollback" = "latest") => {
+  const cwd = resolve(import.meta.dirname, "../../db");
+  if (type === "latest") {
+    await $({
+      cwd,
+    })`pnpm kysely migrate:latest`;
+    return;
+  }
+  await $({
+    cwd,
+  })`pnpm kysely migrate:rollback --all`;
+};
 const beforeAllHook = async (runSeed = true) => {
+  await migrateFn("latest");
   if (runSeed) {
     await seed(db);
   }
@@ -25,15 +49,22 @@ const afterEachHook = async () => {
   await db.deleteFrom("invalidated_sessions").execute();
 };
 
+const afterAllHook = async () => {
+  await migrateFn("rollback");
+};
 const getInvalidated = async () =>
   db.selectFrom("invalidated_sessions").selectAll().execute();
 
-const credentials = { username: "johnDoe", password: "johnDoe-password" };
+const credentials = {
+  username: USERS[0].username,
+  password: USERS[0].password,
+};
 const addAuthCookie = async (auth = credentials) => {
   return (await client.api.auth.login.$post({ json: auth })).headers
     .getSetCookie()
     .join(",");
 };
+
 it("Compiles", () => {
   expect(app).toBeDefined();
 });
@@ -43,6 +74,9 @@ describe("Authentication", () => {
   });
   afterEach(async () => {
     await afterEachHook();
+  });
+  afterAll(async () => {
+    await afterAllHook();
   });
   it("GET /api/auth/authenticated", async () => {
     const unauthenticated = await client.api.auth.authenticated.$get();
@@ -58,12 +92,20 @@ describe("Authentication", () => {
     expect(unauthenticated.status).toBe(401);
     const user = await authService.getUserByUsername("johnDoe");
     if (!user) {
-      throw new Error("Use r missing in test -- did you forget to seed?");
+      throw new Error("User missing in test -- did you forget to seed?");
     }
     const authenticated = await client.api.auth.me.$get(undefined, {
       headers: { Cookie: await addAuthCookie() },
     });
-    expect(await authenticated.json()).toEqual(user);
+
+    const { exp, ...rest } = await authenticated.json();
+    expect(rest).toEqual(user);
+    const expectedExpiration = Math.floor(
+      authService.expirationTime.getTime() / 1000,
+    );
+    // While tests are executing time drift can occur, so let's allow for
+    // a 2 second difference
+    expect(Math.abs(exp - expectedExpiration)).toBeLessThanOrEqual(2);
   });
   it("POST /api/auth/login, logs in user", async () => {
     const res = await client.api.auth.login.$post({
@@ -156,7 +198,7 @@ describe("Authentication", () => {
 });
 describe("Blog", () => {
   const exampleBlog = {
-    content: "Some content",
+    content: lorem,
     title: "Some title",
   };
   beforeAll(async () => {
@@ -165,9 +207,41 @@ describe("Blog", () => {
   afterEach(async () => {
     await afterEachHook();
   });
+  afterAll(async () => {
+    await afterAllHook();
+  });
   it("GET /api/blog/all", async () => {
     const res = await client.api.blog.all.$get();
-    expect(await res.json()).toEqual(await blogService.getBlogs());
+    const result = await res.json();
+    expect(result).toEqual(await blogService.getBlogs());
+    const parsed = result.map((r) => blogSummaryDtoSchema.safeParse(r));
+    expect(parsed.every((p) => p.success)).toBeTruthy();
+  });
+  [
+    { limit: 2, offset: undefined },
+    { limit: 2, offset: 3 },
+  ].forEach(({ limit, offset }) => {
+    it(`GET /api/blog/all?limit=${limit}${offset ? `&offset=${offset}` : ""}`, async () => {
+      const res = await client.api.blog.all.$get({
+        query: { limit: limit.toString(), offset: offset?.toString() },
+      });
+      const result = await res.json();
+      const targets = await db
+        .selectFrom("blog")
+        .select("id")
+        .orderBy("created_at", "desc")
+        .limit(limit)
+        .offset(offset ?? 0)
+        .execute();
+      expect(result.map(({ id }) => id)).toEqual(targets.map(({ id }) => id));
+      expect(result).toEqual(await blogService.getBlogs(limit, offset));
+    });
+  });
+  it("GET /api/blog/all/ids", async () => {
+    const res = await client.api.blog.all.ids.$get();
+    expect(await res.json()).toEqual(
+      await db.selectFrom("blog").select("id").execute(),
+    );
   });
   it("GET /api/blog/id/:postId", async () => {
     const target = await db
@@ -182,17 +256,40 @@ describe("Blog", () => {
     expect(await res.json()).toEqual(target);
   });
   it("GET /api/blog/author/:username", async () => {
-    const targets = await db
-      .selectFrom("blog")
-      .selectAll("blog")
-      .innerJoin("user", "author_id", "user.id")
-      .select("name as author_name")
-      .where("author_id", "=", new UUIDv5("user").generate("johnDoe"))
-      .execute();
+    const targets = await blogService.getBlogsByUser("johnDoe");
     const res = await client.api.blog.author[":username"].$get({
       param: { username: "johnDoe" },
     });
-    expect(await res.json()).toEqual(targets);
+    const result = await res.json();
+    expect(result).toEqual(targets);
+    const parsed = result.map((r) => blogSummaryDtoSchema.safeParse(r));
+    expect(parsed.every((p) => p.success)).toBeTruthy();
+  });
+  [{ limit: 2 }, { limit: 2, offset: 3 }].forEach(({ limit, offset }) => {
+    it(`GET /api/blog/author/:username?limit=${limit}${offset ? `&offset=${offset}` : ""}`, async () => {
+      const targets = await blogService.getBlogsByUser(
+        "johnDoe",
+        limit,
+        offset,
+      );
+      const res = await (
+        await client.api.blog.author[":username"].$get({
+          param: { username: "johnDoe" },
+          query: { limit: limit.toString(), offset: offset?.toString() },
+        })
+      ).json();
+      const target = await db
+        .selectFrom("blog")
+        .select("blog.id")
+        .where("author_id", "=", new UUIDv5("user").generate("johnDoe"))
+        .orderBy("created_at", "desc")
+        .limit(limit)
+        .offset(offset ?? 0)
+        .execute();
+
+      expect(res).toEqual(targets);
+      expect(res.map((r) => r.id)).toEqual(target.map((r) => r.id));
+    });
   });
   it("POST /api/blog requires authentication", async () => {
     const response = await client.api.blog.$post({

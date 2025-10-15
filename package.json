@@ -10,17 +10,16 @@
     "migrate": "pnpm --filter '@/db' migrate",
     "check": "pnpm --filter '*' run check",
     "lint": "pnpm --filter '*' run lint",
-    "test": "vitest"
+    "test": "pnpm --filter '*' run test"
   },
   "devDependencies": {
-    "@angular/cli": "^20.0.3",
     "@eslint/js": "catalog:",
     "@types/node": "catalog:",
     "@typescript/native-preview": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.5",
-    "prettier": "3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.13",
+    "prettier": "catalog:",
+    "prettier-plugin-tailwindcss": "catalog:",
     "typescript-eslint": "catalog:",
     "vite": "^7.0.0",
     "vitest": "catalog:",
@@ -30,5 +29,5 @@
     "@/api": "workspace:*",
     "@/db": "workspace:*"
   },
-  "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
+  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d"
 }

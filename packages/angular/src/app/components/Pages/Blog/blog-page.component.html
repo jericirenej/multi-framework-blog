@@ -1,0 +1,8 @@
+@if (blog | async; as data) {
+  <app-page-wrapper
+    [pageTitle]="data.title"
+    [subtitle]="`Author: ${data.author_name}`"
+  >
+    <app-blog [blog]="data" />
+  </app-page-wrapper>
+}

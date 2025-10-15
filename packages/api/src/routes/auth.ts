@@ -23,7 +23,7 @@ const auth = new Hono()
     );
   })
   .get("/me", authMiddleware, async (ctx) => {
-    return ctx.json(await authService.getUserById(ctx.get("parsed").sub));
+    return ctx.json(await authService.getUserWithExpiration(ctx.get("parsed")));
   })
   .post(
     "/login",

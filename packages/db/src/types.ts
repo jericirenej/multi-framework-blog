@@ -15,6 +15,7 @@ export interface Blog {
   created_at: Generated<number>;
   id: string;
   image: string | null;
+  summary: string;
   title: string;
   updated_at: Generated<number>;
 }

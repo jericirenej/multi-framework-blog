@@ -14,16 +14,17 @@ export async function up(db: Kysely<any>) {
     .createTable("blog")
     .addColumn("id", "text", (col) => col.primaryKey().notNull())
     .addColumn("author_id", "text", (col) =>
-      col.notNull().references("user.id")
+      col.notNull().references("user.id"),
     )
     .addColumn("title", "text", (col) => col.notNull())
     .addColumn("content", "text", (col) => col.notNull())
+    .addColumn("summary", "text", (col) => col.notNull())
     .addColumn("image", "text")
     .addColumn("created_at", "integer", (col) =>
-      col.notNull().defaultTo("unixepoch()")
+      col.notNull().defaultTo("unixepoch()"),
     )
     .addColumn("updated_at", "integer", (col) =>
-      col.notNull().defaultTo("unixepoch()")
+      col.notNull().defaultTo("unixepoch()"),
     )
     .execute();
 

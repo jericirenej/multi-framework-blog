@@ -1,0 +1,9 @@
+<div class="flex min-w-[50ch] flex-col items-center gap-5 text-neutral-700">
+  <div
+    class="relative flex w-full max-w-prose flex-col gap-5 text-left text-black"
+  >
+    @for (paragraph of paragraphs(); track $index) {
+      <p>{{ paragraph }}</p>
+    }
+  </div>
+</div>

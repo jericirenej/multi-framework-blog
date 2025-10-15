@@ -1,0 +1,21 @@
+<app-page-wrapper-with-loading
+  [pageTitle]="blogPreviewService.pageTitle"
+  (intersectionEvent)="loadMore$.next()"
+>
+  <div class="flex justify-center">
+    @if (blogs().length) {
+      <ul class="flex list-none flex-col gap-5">
+        @for (blog of blogs(); track blog.id) {
+          <li>
+            <app-blog-preview
+              [data]="blog"
+              (deleteAction)="handleDelete(blog.id)"
+            />
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>No blogs published yet</p>
+    }
+  </div>
+</app-page-wrapper-with-loading>

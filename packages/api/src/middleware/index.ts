@@ -2,27 +2,27 @@ import { zValidator } from "@hono/zod-validator";
 import type { ValidationTargets } from "hono";
 import { createMiddleware } from "hono/factory";
 import { HTTPException } from "hono/http-exception";
-import type { ZodType } from "zod/v4";
+import { z, type ZodType } from "zod/v4";
 
 import { deleteCookie, getCookie } from "hono/cookie";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
-import authService from "../services/auth.service";
+import { stringToNumberSchema } from "../schemas";
 import type { UserToken } from "../schemas/user";
+import authService from "../services/auth.service";
 
 const isNullish = <T>(arg: T): arg is Extract<T, null | undefined> =>
   arg === undefined && arg === null;
 
 export const routeValidator = <
   Schema extends ZodType,
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-  Target extends keyof ValidationTargets
+  Target extends keyof ValidationTargets,
 >(
   target: Target,
   schema: Schema,
   {
     statusCode,
     message,
-  }: { statusCode?: ContentfulStatusCode; message?: string } = {}
+  }: { statusCode?: ContentfulStatusCode; message?: string } = {},
 ) => {
   return zValidator(target, schema, (result) => {
     if (!result.success) {
@@ -61,3 +61,11 @@ export const authMiddleware = createMiddleware<{
     throw err;
   }
 });
+
+export const limitOffsetParamsValidator = routeValidator(
+  "query",
+  z
+    .object({ limit: stringToNumberSchema, offset: stringToNumberSchema })
+    .partial()
+    .nullish(),
+);

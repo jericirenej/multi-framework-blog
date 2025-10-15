@@ -1,15 +1,20 @@
-# multi-framework-blog
+# Blog app in multiple frameworks
 
-To install dependencies:
+The goal is to recreate the same simple blog application within multiple frameworks. All app instances will communicate with the same base API based on Hono and Kysely (SQLite)
 
-```bash
-bun install
-```
+## Setup
 
-To run:
+- Create `.env` file, based on the `.env-example` file
+- Install dependencies: `pnpm install`
+- Prepare database: `pnpm run migrate`
+- Create base dataset: `pnpm run seed`
 
-```bash
-bun run index.ts
-```
+- Run API server: `pnpm run server`
 
-This project was created using `bun init` in bun v1.2.17. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+## Existing examples
+
+- [Angular](./packages/angular/README.md)
+
+## Other
+
+Lint, test, and check (a combination of lint and test) scripts can be run for all projects via the `pnpm run [lint|test|check]` commands.

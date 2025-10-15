@@ -8,20 +8,19 @@
   "scripts": {
     "lint": "eslint",
     "tsc": "tsgo --noEmit --project tsconfig.json",
-    "check": "pnpm tsc && pnpm lint",
+    "check": "pnpm tsc && pnpm lint && pnpm test",
     "serve": "tsx --watch ./src/index.ts",
     "test": "vitest"
   },
   "dependencies": {
     "@/db": "workspace:*",
     "@hono/node-server": "catalog:",
-    "dotenv": "catalog:",
+    "@hono/zod-validator": "^0.7.0",
     "jose": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",
     "date-fns": "catalog:",
     "argon2": "catalog:",
-    "@hono/zod-validator": "^0.7.0",
     "hono": "catalog:",
     "kysely": "catalog:"
   },

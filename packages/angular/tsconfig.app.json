@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": ["../env/index.ts"],
+  "include": ["src/**/*.ts", "src/**/*.html"],
+  "exclude": ["src/**/*.stories.ts", "src/**/*.spec.ts"],
+  "references": [{ "path": "../api/tsconfig.json" }]
+}

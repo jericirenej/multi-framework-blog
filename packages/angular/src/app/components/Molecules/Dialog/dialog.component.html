@@ -1,0 +1,12 @@
+<dialog
+  #ref
+  class="max-w-prose scale-75 rounded-lg p-3 px-8 opacity-50 shadow-lg backdrop-blur-md transition-[scale] [&.open]:mx-auto [&.open]:mt-[30vh] [&.open]:scale-100 [&.open]:opacity-100 [&.open]:backdrop:backdrop-blur-[6px]"
+  [ngClass]="{ open: show() }"
+  (close)="show.set(false)"
+>
+  <h1 class="my-4 text-center text-3xl font-light">{{ title() }}</h1>
+
+  <div class="mb-5">
+    <ng-content />
+  </div>
+</dialog>

@@ -19,6 +19,15 @@ export const userDtoSchema = z.object({
   name: z.string(),
   username: z.string(),
 });
+
+export const userWithExpirationDtoSchema = userDtoSchema.extend({
+  exp: z.number(),
+});
+
+export const authenticatedDtoSchema = z.object({ authenticated: z.boolean() });
+
 export type UserToken = z.infer<typeof tokenSchema>;
 export type UserCredentials = z.infer<typeof userSchema>;
 export type UserDto = z.infer<typeof userDtoSchema>;
+export type UserWithExpirationDto = z.infer<typeof userWithExpirationDtoSchema>;
+export type AuthenticatedDto = z.infer<typeof authenticatedDtoSchema>;
