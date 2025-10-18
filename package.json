@@ -10,7 +10,8 @@
     "migrate": "pnpm --filter '@/db' migrate",
     "check": "pnpm --filter '*' run check",
     "lint": "pnpm --filter '*' run lint",
-    "test": "pnpm --filter '*' run test"
+    "test": "pnpm --filter '*' run test",
+    "storybook:angular": "pnpm --filter 'angular' run storybook"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

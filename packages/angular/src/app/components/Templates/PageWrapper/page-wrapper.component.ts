@@ -1,3 +1,4 @@
+import style from "@/styles/components/Templates/pageWrapper";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,6 +23,7 @@ import { NavbarComponent } from "../../Organisms/NavBar/navbar.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageWrapperComponent {
+  protected readonly style = style;
   protected readonly authService = inject(AuthenticationService);
   readonly authenticated = this.authService.authenticated;
   readonly pageTitle = input.required<string>();

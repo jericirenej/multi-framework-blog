@@ -7,7 +7,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "lib": ["ESNext", "DOM"],
-    "paths": { "@/api/*": ["../api/src/*"], "@/env": ["../env/index.ts"] }
+    "paths": {
+      "@/api/*": ["../api/src/*"],
+      "@/env": ["../env/index.ts"],
+      "@/styles/*": ["../styles/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

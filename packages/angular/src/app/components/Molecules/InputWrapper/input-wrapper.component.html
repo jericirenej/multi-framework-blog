@@ -1,6 +1,6 @@
-<div class="relative">
+<div [class]="styles.wrapper">
   <ng-content />
-  <div class="absolute left-0 top-[100%]" [id]="idService.id">
+  <div [class]="styles.errorWrapper" [id]="idService.id">
     <app-error [errors]="control() | parseError | async" />
   </div>
 </div>

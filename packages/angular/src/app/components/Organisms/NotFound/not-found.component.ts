@@ -1,3 +1,4 @@
+import style from "@/styles/components/Organisms/notFound";
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -18,27 +19,26 @@ import { interval, takeWhile, tap } from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
   template: `
-    <div>
-      <div class="wrapper">
-        <div class="flex items-center justify-center">
-          <h1 class="p-2 text-6xl font-light text-cyan-800 uppercase">404</h1>
-        </div>
-        <div class="h-full w-[2px] bg-neutral-400"></div>
-        <div class="flex flex-col gap-2">
-          <p class="text-xl text-cyan-800 uppercase">
-            This is not the page you are looking for
-          </p>
-          <p>
-            Redirecting to <a routerLink="/" class="underline">Homepage</a> in
-            <span>{{ countdown() }}</span>
-          </p>
-        </div>
+    <div [class]="style.wrapper">
+      <div [class]="style.heading.wrapper">
+        <h1 [class]="style.heading.errorCode">404</h1>
+      </div>
+      <div [class]="style.separator"></div>
+      <div [class]="style.info.wrapper">
+        <p [class]="style.info.text">
+          This is not the page you are looking for
+        </p>
+        <p>
+          Redirecting to
+          <a routerLink="/" [class]="style.info.link">Homepage</a> in
+          <span>{{ countdown() }}</span>
+        </p>
       </div>
     </div>
   `,
-  styleUrl: "./not-found.component.css",
 })
 export class NotFoundComponent {
+  protected readonly style = style;
   readonly navigateEvent = output();
   protected readonly timeLimit = signal(5);
   protected readonly countdown = computed(() => `${this.timeLimit()}s`);

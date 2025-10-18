@@ -1,3 +1,4 @@
+import styles from "@/styles/components/Molecules/inputWrapper";
 import { AsyncPipe } from "@angular/common";
 import {
   ChangeDetectionStrategy,
@@ -19,6 +20,7 @@ import { ErrorComponent } from "../../Atoms/Error/error.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputWrapperComponent {
+  protected readonly styles = styles;
   readonly errId = v4();
   readonly control = input.required<AbstractControl>();
   protected readonly idService = inject(IdService);

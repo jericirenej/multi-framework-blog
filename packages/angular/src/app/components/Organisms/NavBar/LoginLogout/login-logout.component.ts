@@ -17,7 +17,9 @@ import { NavbarLinkComponent } from "../NavbarLink/navbar-link.component";
         [label]="label()"
       />
     } @else {
-      <button class="cursor-pointer" (click)="logout.emit()">Logout</button>
+      <button [class]="style.logoutButton" (click)="logout.emit()">
+        Logout
+      </button>
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1205,7 +1205,7 @@
         },
         {
             "name": "BlogPreviewServiceToken",
-            "id": "injectable-BlogPreviewServiceToken-ee698a1b890842cfa6af545faeada685688497a3a7a369fb679939582b871a4aabd1a33d0090e373e6724178cf91aa2874d0f77e3eb0f04b8dbea32c886e52ef",
+            "id": "injectable-BlogPreviewServiceToken-f32f0640f12553fa8e5997d0cd4517ff582e20f84170b24d2b87d1fb725083dab1ba9b36c8f172ebcb3e8a353a0d470c02d98fd9726d80d84fa040e230b49148",
             "file": "src/app/services/blog-preview.service.ts",
             "properties": [
                 {
@@ -1232,7 +1232,8 @@
                     "description": "",
                     "line": 9,
                     "modifierKind": [
-                        128
+                        128,
+                        148
                     ]
                 }
             ],
@@ -1273,7 +1274,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport { inject, Injectable } from \"@angular/core\";\nimport type { Observable } from \"rxjs\";\nimport { ApiService, type WindowedRequest } from \"./api.service\";\n\n@Injectable()\nexport abstract class BlogPreviewServiceToken {\n  protected apiService = inject(ApiService);\n  abstract pageTitle: string;\n  abstract getBlogs(params: WindowedRequest): Observable<BlogSummaryDto[]>;\n}\n",
+            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport { inject, Injectable } from \"@angular/core\";\nimport type { Observable } from \"rxjs\";\nimport { ApiService, type WindowedRequest } from \"./api.service\";\n\n@Injectable()\nexport abstract class BlogPreviewServiceToken {\n  protected apiService = inject(ApiService);\n  abstract readonly pageTitle: string;\n  abstract getBlogs(params: WindowedRequest): Observable<BlogSummaryDto[]>;\n}\n",
             "extends": [],
             "type": "injectable"
         },
@@ -2402,7 +2403,7 @@
         },
         {
             "name": "UserBlogsPreviewService",
-            "id": "injectable-UserBlogsPreviewService-84bcfe9a27585bf7836adbd991e4ac9669b7736f5722cb1c04d8e033dd2895f00a4f5a5573ab6a8d14b8d774c834206d7cda4c8d3bca9f870380eb89c20d0837",
+            "id": "injectable-UserBlogsPreviewService-3f4426b3172e02ec2c27fc95aa74508d335e186b1b0c872d53f5176613b5d208ada19e285b7fa73fad3d4cee6c23e716e9bea05f460ae6d8c8f1e17c56d86119",
             "file": "src/app/components/Pages/UserBlogs/user-blogs.service.ts",
             "properties": [
                 {
@@ -2422,10 +2423,10 @@
                 },
                 {
                     "name": "pageTitle",
-                    "defaultValue": "[this.authService.me()?.name, \"Blogs\"]\n    .filter(Boolean)\n    .join(\" - \")",
+                    "defaultValue": "\"My writings\"",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "string",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
@@ -2469,7 +2470,7 @@
                     "optional": false,
                     "returnType": "Observable<BlogSummaryDto[]>",
                     "typeParameters": [],
-                    "line": 15,
+                    "line": 13,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2495,7 +2496,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport { inject, Injectable } from \"@angular/core\";\nimport { of, type Observable } from \"rxjs\";\nimport { type WindowedRequest } from \"../../../services/api.service\";\nimport { BlogPreviewServiceToken } from \"../../../services/blog-preview.service\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\n\n@Injectable()\nexport class UserBlogsPreviewService extends BlogPreviewServiceToken {\n  protected readonly authService = inject(AuthenticationService);\n  readonly pageTitle = [this.authService.me()?.name, \"Blogs\"]\n    .filter(Boolean)\n    .join(\" - \");\n\n  override getBlogs(params: WindowedRequest): Observable<BlogSummaryDto[]> {\n    const user = this.authService.me();\n    if (!user) return of([]);\n    return this.apiService.getUserBlogs({\n      ...params,\n      user: user.username,\n    });\n  }\n}\n",
+            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport { inject, Injectable } from \"@angular/core\";\nimport { of, type Observable } from \"rxjs\";\nimport { type WindowedRequest } from \"../../../services/api.service\";\nimport { BlogPreviewServiceToken } from \"../../../services/blog-preview.service\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\n\n@Injectable()\nexport class UserBlogsPreviewService extends BlogPreviewServiceToken {\n  protected readonly authService = inject(AuthenticationService);\n  readonly pageTitle = \"My writings\";\n\n  override getBlogs(params: WindowedRequest): Observable<BlogSummaryDto[]> {\n    const user = this.authService.me();\n    if (!user) return of([]);\n    return this.apiService.getUserBlogs({\n      ...params,\n      user: user.username,\n    });\n  }\n}\n",
             "extends": [
                 "BlogPreviewServiceToken"
             ],
@@ -2836,7 +2837,7 @@
     "components": [
         {
             "name": "AbstractButtonComponent",
-            "id": "component-AbstractButtonComponent-eb618b2312974ebe03b841b52e49d35e2052b9040f582d6881907dd37154f9af318a601a008d5c0465aa6df32f63af46c0ed620626d5e8e48d129137429dfc89",
+            "id": "component-AbstractButtonComponent-17973c88d28fe4aef33e2ee8c4d6bab306aff6feb0ca2308da6ca491caf2933d389c5aaf98c0967653be5206ba5d35bb83e41734d547c162778e2827a834fdbd",
             "file": "src/app/components/Atoms/Button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2860,7 +2861,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -2876,7 +2877,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -2892,7 +2893,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -2907,7 +2908,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -2922,7 +2923,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ]
@@ -2936,7 +2937,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ]
@@ -2950,7 +2951,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 20,
                     "modifierKind": [
                         148
                     ]
@@ -2966,7 +2967,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\nconst variantClasses = {\n  confirm:\n    \"border-green-700 bg-green-50 text-green-700 decoration-green-700 shadow-green-600/20\",\n  warning:\n    \"border-red-700 bg-red-100 text-red-700 decoration-red-700 shadow-red-600/20\",\n  cancel:\n    \"border-neutral-700 bg-neutral-100 text-neutral-700 decoration-neutral-700 shadow-neutral-600/20\",\n  info: \"border-violet-700 bg-violet-100 text-violet-700 decoration-violet-700 shadow-violet-600/20\",\n};\n\nconst sizeClasses = {\n  sm: \"text-sm px-3 py-2 \",\n  md: \"text-md px-3 py-2\",\n  lg: \"text-[18px] px-3 py-3\",\n};\n\nconst activeClasses =\n  \"active:scale-96 [.active]:scale-96 disabled:[.active]:scale-100 disabled:[.active]:shadow-none active:shadow-xs [.active]:shadow-xs disabled:active:scale-100 disabled:active:shadow-none\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    const variant = variantClasses[this.variant()];\n    const size = sizeClasses[this.size()];\n    return clsx(\n      \"min-w-[7ch] border-1 outline-hidden cursor-pointer rounded-md no-underline decoration-1 underline-offset-4 outline-offset-2 outline-transparent transition-all duration-50 focus-visible:underline focus-visible:outline-2 focus-visible:shadow-xs disabled:opacity-75 disabled:cursor-not-allowed \",\n      activeClasses,\n      variant,\n      size,\n    );\n  });\n}\n",
+            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3025,7 +3026,7 @@
         },
         {
             "name": "BackLinkComponent",
-            "id": "component-BackLinkComponent-f6cc33b1586b23d900a96014ac19972656b6b7b94e72974d3a787712ce881b083a10ea162afbbad616eaf25b2751d3999a1dceeb9aa7fc1e1ff54ec4564e4bc0",
+            "id": "component-BackLinkComponent-021b1a1656fe66609ca97a29a302a9547c8a66061bde34bc3c98b98b24dc2ed98663f97d691fd105372ba292fbf4340f91896b039c29be04b6ccb9f1e19f5545",
             "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3035,7 +3036,7 @@
             "selector": "app-back-link",
             "styleUrls": [],
             "styles": [],
-            "template": "<a\n  class=\"inline-block h-full w-full rounded-lg p-1 leading-0 text-cyan-800 hover:bg-cyan-800/10\"\n  [routerLink]=\"backLink().href\"\n  [title]=\"backLink().label\"\n  ><app-arrow direction=\"left\"\n/></a>\n",
+            "template": "<a [class]=\"style\" [routerLink]=\"backLink().href\" [title]=\"backLink().label\"\n  ><app-arrow direction=\"left\"\n/></a>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -3048,7 +3049,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -3065,11 +3066,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
                     "required": true
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 }
             ],
             "methodsClass": [],
@@ -3090,7 +3106,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, input } from \"@angular/core\";\nimport { ArrowIconComponent } from \"../../Atoms/Arrow/arrow.component\";\nimport { RouterLink } from \"@angular/router\";\n\nexport type BackLinkInput = Record<\"href\" | \"label\", string>;\nexport const TO_HOMEPAGE: BackLinkInput = {\n  href: \"/\",\n  label: \"Back to homepage\",\n};\n\n@Component({\n  selector: \"app-back-link\",\n  imports: [ArrowIconComponent, RouterLink],\n  template: `\n    <a\n      class=\"inline-block h-full w-full rounded-lg p-1 leading-0 text-cyan-800 hover:bg-cyan-800/10\"\n      [routerLink]=\"backLink().href\"\n      [title]=\"backLink().label\"\n      ><app-arrow direction=\"left\"\n    /></a>\n  `,\n})\nexport class BackLinkComponent {\n  readonly backLink = input.required<BackLinkInput>();\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Molecules/backLink\";\nimport { Component, input } from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\nimport { ArrowIconComponent } from \"../../Atoms/Arrow/arrow.component\";\n\nexport type BackLinkInput = Record<\"href\" | \"label\", string>;\nexport const TO_HOMEPAGE: BackLinkInput = {\n  href: \"/\",\n  label: \"Back to homepage\",\n};\n\n@Component({\n  selector: \"app-back-link\",\n  imports: [ArrowIconComponent, RouterLink],\n  template: `\n    <a [class]=\"style\" [routerLink]=\"backLink().href\" [title]=\"backLink().label\"\n      ><app-arrow direction=\"left\"\n    /></a>\n  `,\n})\nexport class BackLinkComponent {\n  protected readonly style = style;\n  readonly backLink = input.required<BackLinkInput>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3098,7 +3114,7 @@
         },
         {
             "name": "BlogComponent",
-            "id": "component-BlogComponent-90989ff2bc811057a71a55c47eec1b77c377ce039b1121a7bf5fdcee0127ad17dacc741c2b52403257ccf5fd46d6f7e8f725374806b36f53cb1d1def8ea532a2",
+            "id": "component-BlogComponent-11c19ca1890dd88786be5a499abec76a94a670c1ec33e4246bc40c3084776a2e2fe6af9f20115332920b9e012a5a6c38b82e230a6a2964bfc65378e1d541e977",
             "file": "src/app/components/Molecules/Blog/blog.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3123,7 +3139,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -3140,7 +3156,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -3149,6 +3165,21 @@
                 {
                     "name": "paragraphs",
                     "defaultValue": "computed(() =>\n    this.blog()\n      .content.replaceAll(/\\n{2,}/g, \"\\n\")\n      .split(\"\\n\"),\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -3172,16 +3203,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { BlogDto } from \"@/api/schemas\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  input,\n} from \"@angular/core\";\n\n@Component({\n  selector: \"app-blog\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog.component.html\",\n})\nexport class BlogComponent {\n  readonly blog = input.required<BlogDto>();\n  protected readonly paragraphs = computed(() =>\n    this.blog()\n      .content.replaceAll(/\\n{2,}/g, \"\\n\")\n      .split(\"\\n\"),\n  );\n}\n",
+            "sourceCode": "import type { BlogDto } from \"@/api/schemas\";\nimport styles from \"@/styles/components/Molecules/blog\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  input,\n} from \"@angular/core\";\n\n@Component({\n  selector: \"app-blog\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog.component.html\",\n})\nexport class BlogComponent {\n  protected readonly styles = styles;\n  readonly blog = input.required<BlogDto>();\n  protected readonly paragraphs = computed(() =>\n    this.blog()\n      .content.replaceAll(/\\n{2,}/g, \"\\n\")\n      .split(\"\\n\"),\n  );\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"flex min-w-[50ch] flex-col items-center gap-5 text-neutral-700\">\n  <div\n    class=\"relative flex w-full max-w-prose flex-col gap-5 text-left text-black\"\n  >\n    @for (paragraph of paragraphs(); track $index) {\n      <p>{{ paragraph }}</p>\n    }\n  </div>\n</div>\n"
+            "templateData": "<div [class]=\"styles.box\">\n  <div [class]=\"styles.paragraphsWrapper\">\n    @for (paragraph of paragraphs(); track $index) {\n      <p>{{ paragraph }}</p>\n    }\n  </div>\n</div>\n"
         },
         {
             "name": "BlogFormComponent",
-            "id": "component-BlogFormComponent-31e5331f791ee5a6d992f6cc2fbe3c525a32e10c67df8e4dc6db873cf0228c15271808fdf64be06fffb08a4ab805a6414a602cfd195801aca72a30bffa359a7c",
+            "id": "component-BlogFormComponent-3a7e4475e74f0b2752783beb036836909e1de8d6d55884dd44fcb4041a6975cc1005e50589ac44a04bfc3b9d1566f02c27715e72591eccb34fbff3532b7df147",
             "file": "src/app/components/Organisms/BlogForm/blog-form.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3192,7 +3223,7 @@
             "selector": "app-blog-form",
             "styleUrls": [],
             "styles": [
-                "\n    .title {\n      display: block;\n      width: 100%;\n    }\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  "
+                "\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  "
             ],
             "templateUrl": [
                 "./blog-form.component.html"
@@ -3208,7 +3239,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 34,
                     "modifierKind": [
                         148
                     ],
@@ -3222,7 +3253,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 33,
                     "modifierKind": [
                         148
                     ],
@@ -3236,7 +3267,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 36,
+                    "line": 32,
                     "modifierKind": [
                         148
                     ],
@@ -3250,7 +3281,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -3266,7 +3297,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 49,
+                    "line": 45,
                     "modifierKind": [
                         148
                     ],
@@ -3282,7 +3313,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 34,
                     "modifierKind": [
                         148
                     ],
@@ -3296,7 +3327,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 33,
                     "modifierKind": [
                         148
                     ],
@@ -3311,7 +3342,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Actual page should provide the concrete create/update blog form service handler</p>\n",
-                    "line": 40,
+                    "line": 36,
                     "rawdescription": "\nActual page should provide the concrete create/update blog form service handler",
                     "modifierKind": [
                         124,
@@ -3326,7 +3357,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 49,
+                    "line": 45,
                     "modifierKind": [
                         148
                     ],
@@ -3341,7 +3372,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 45,
+                    "line": 41,
                     "modifierKind": [
                         124,
                         148
@@ -3356,7 +3387,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 47,
+                    "line": 43,
                     "modifierKind": [
                         148
                     ]
@@ -3369,7 +3400,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 36,
+                    "line": 32,
                     "modifierKind": [
                         148
                     ],
@@ -3383,7 +3414,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -3397,7 +3428,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3424,10 +3455,10 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n  output,\n  type OnInit,\n} from \"@angular/core\";\nimport { outputFromObservable, toObservable } from \"@angular/core/rxjs-interop\";\nimport { ReactiveFormsModule } from \"@angular/forms\";\nimport { FormWrapperComponent } from \"../../Molecules/FormWrapper/form-wrapper.component\";\nimport { FormInputComponent } from \"../FormInput/form-input.component\";\nimport { AbstractBlogFormService, type BlogValues } from \"./blog-form.service\";\n\n@Component({\n  selector: \"app-blog-form\",\n  imports: [FormWrapperComponent, ReactiveFormsModule, FormInputComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog-form.component.html\",\n  styles: `\n    .title {\n      display: block;\n      width: 100%;\n    }\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  `,\n})\nexport class BlogFormComponent implements OnInit {\n  readonly successLabel = input.required<string>();\n  readonly submitLabel = input.required<string>();\n  readonly defaultErrorMessage = input<string>();\n  readonly data = input<BlogValues>();\n  /** Actual page should provide the concrete create/update blog form service handler  */\n  protected readonly formService = inject(AbstractBlogFormService);\n\n  protected get form() {\n    return this.formService.form;\n  }\n  protected readonly resultStatus = this.formService.resultStatus;\n\n  readonly status = outputFromObservable(toObservable(this.resultStatus));\n\n  readonly goBack = output();\n  ngOnInit(): void {\n    this.formService.initialFormValue = this.data();\n    this.formService.defaultErrorMessage =\n      this.defaultErrorMessage() ?? this.formService.defaultErrorMessage;\n  }\n}\n",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n  output,\n  type OnInit,\n} from \"@angular/core\";\nimport { outputFromObservable, toObservable } from \"@angular/core/rxjs-interop\";\nimport { ReactiveFormsModule } from \"@angular/forms\";\nimport { FormWrapperComponent } from \"../../Molecules/FormWrapper/form-wrapper.component\";\nimport { FormInputComponent } from \"../FormInput/form-input.component\";\nimport { AbstractBlogFormService, type BlogValues } from \"./blog-form.service\";\n\n@Component({\n  selector: \"app-blog-form\",\n  imports: [FormWrapperComponent, ReactiveFormsModule, FormInputComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog-form.component.html\",\n  styles: `\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  `,\n})\nexport class BlogFormComponent implements OnInit {\n  readonly successLabel = input.required<string>();\n  readonly submitLabel = input.required<string>();\n  readonly defaultErrorMessage = input<string>();\n  readonly data = input<BlogValues>();\n  /** Actual page should provide the concrete create/update blog form service handler  */\n  protected readonly formService = inject(AbstractBlogFormService);\n\n  protected get form() {\n    return this.formService.form;\n  }\n  protected readonly resultStatus = this.formService.resultStatus;\n\n  readonly status = outputFromObservable(toObservable(this.resultStatus));\n\n  readonly goBack = output();\n  ngOnInit(): void {\n    this.formService.initialFormValue = this.data();\n    this.formService.defaultErrorMessage =\n      this.defaultErrorMessage() ?? this.formService.defaultErrorMessage;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
-            "stylesData": "\n    .title {\n      display: block;\n      width: 100%;\n    }\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  \n",
+            "stylesData": "\n    ::ng-deep .title app-input {\n      display: block;\n    }\n    ::ng-deep .title app-input input {\n      display: block;\n      width: 100%;\n    }\n  \n",
             "extends": [],
             "implements": [
                 "OnInit"
@@ -3439,7 +3470,7 @@
                         "name": "form",
                         "type": "",
                         "returnType": "",
-                        "line": 42
+                        "line": 38
                     }
                 }
             },
@@ -3643,7 +3674,7 @@
         },
         {
             "name": "BlogPreviewComponent",
-            "id": "component-BlogPreviewComponent-4b004bee4a6ef18c06ddda90ce49625a8a1e4ac6cfd28309c7b531003d2998f9e4a44519626e3c81bb089ee02e8b05ebb8ccfa0804645324a15a3723e541facd",
+            "id": "component-BlogPreviewComponent-f2c6af886af3378ad9d136a768db969e5dc7074c203653c1715076e3862aa1bc1deed46cff392f5b2ea1404451e408d3fff0a68362d97893cb37c1d7b67ccf75",
             "file": "src/app/components/Organisms/BlogPreview/blog-preview.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3668,7 +3699,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 36,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
@@ -3684,7 +3715,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 42,
                     "modifierKind": [
                         148
                     ],
@@ -3698,7 +3729,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 43,
                     "modifierKind": [
                         148
                     ],
@@ -3714,7 +3745,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 42,
                     "modifierKind": [
                         148
                     ],
@@ -3728,7 +3759,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 36,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
@@ -3742,7 +3773,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 43,
                     "modifierKind": [
                         148
                     ],
@@ -3757,7 +3788,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 38,
                     "modifierKind": [
                         124
                     ]
@@ -3771,9 +3802,24 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 39,
+                    "line": 40,
                     "modifierKind": [
                         124
+                    ]
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36,
+                    "modifierKind": [
+                        124,
+                        148
                     ]
                 }
             ],
@@ -3784,9 +3830,6 @@
             "hostListeners": [],
             "standalone": false,
             "imports": [
-                {
-                    "name": "NgClass"
-                },
                 {
                     "name": "BoxComponent",
                     "type": "component"
@@ -3822,12 +3865,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas/blog\";\nimport { AsyncPipe, DatePipe, NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n} from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\nimport { IsAuthorPipe } from \"../../../pipes/is-author.pipe\";\nimport { BoxComponent } from \"../../Atoms/Box/box.component\";\nimport { DeleteIconComponent } from \"../../Atoms/DeleteIcon/delete-icon.component\";\nimport { EditIconComponent } from \"../../Atoms/EditIcon/edit-icon.component\";\nimport { DeleteBlogDialogComponent } from \"../../Molecules/DeleteBlogConfirm/delete-blog-dialog.component\";\n\n@Component({\n  selector: \"app-blog-preview\",\n  imports: [\n    NgClass,\n    BoxComponent,\n    DatePipe,\n    IsAuthorPipe,\n    DeleteIconComponent,\n    EditIconComponent,\n    AsyncPipe,\n    RouterLink,\n    DeleteBlogDialogComponent,\n  ],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog-preview.component.html\",\n})\nexport class BlogPreviewComponent {\n  readonly data = input.required<BlogSummaryDto>();\n  protected elementRef = inject(ElementRef) as ElementRef<HTMLElement>;\n\n  protected show = signal(false);\n\n  readonly clicked = output<string>();\n  readonly deleteAction = output();\n}\n",
+            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas/blog\";\nimport style from \"@/styles/components/Organisms/blogPreview\";\nimport { AsyncPipe, DatePipe } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n} from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\nimport { IsAuthorPipe } from \"../../../pipes/is-author.pipe\";\nimport { BoxComponent } from \"../../Atoms/Box/box.component\";\nimport { DeleteIconComponent } from \"../../Atoms/DeleteIcon/delete-icon.component\";\nimport { EditIconComponent } from \"../../Atoms/EditIcon/edit-icon.component\";\nimport { DeleteBlogDialogComponent } from \"../../Molecules/DeleteBlogConfirm/delete-blog-dialog.component\";\n\n@Component({\n  selector: \"app-blog-preview\",\n  imports: [\n    BoxComponent,\n    DatePipe,\n    IsAuthorPipe,\n    DeleteIconComponent,\n    EditIconComponent,\n    AsyncPipe,\n    RouterLink,\n    DeleteBlogDialogComponent,\n  ],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./blog-preview.component.html\",\n})\nexport class BlogPreviewComponent {\n  protected readonly style = style;\n  readonly data = input.required<BlogSummaryDto>();\n  protected elementRef = inject(ElementRef) as ElementRef<HTMLElement>;\n\n  protected show = signal(false);\n\n  readonly clicked = output<string>();\n  readonly deleteAction = output();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "@let isOwnPost = data() | isAuthor | async;\n<div class=\"max-w-prose min-w-[50ch] text-neutral-700\">\n  <app-box>\n    <div\n      [ngClass]=\"{\n        flex: true,\n        'items-center': true,\n        'h-[22px]': true,\n        'justify-end': !isOwnPost,\n        'justify-between': isOwnPost,\n      }\"\n    >\n      <div class=\"flex justify-end\">\n        <span class=\"text-xs\" title=\"Created date\">{{\n          data().created_at | date\n        }}</span>\n      </div>\n      @if (isOwnPost) {\n        <div class=\"flex h-[inherit] gap-3\">\n          <a [routerLink]=\"`/blog/edit/${data().id}`\" title=\"Update post\">\n            <app-edit-icon class=\"text-cyan-800\" />\n          </a>\n          <button\n            (click)=\"show.set(true)\"\n            title=\"Delete post\"\n            class=\"cursor-pointer\"\n          >\n            <app-delete-icon class=\"text-red-700 saturate-75\" />\n          </button>\n        </div>\n      }\n    </div>\n    <a [routerLink]=\"`/blog/${data().id}`\">\n      <div class=\"mb-5 flex flex-col items-center\">\n        <h2 class=\"text-2xl font-light text-amber-900\">\n          {{ data().title }}\n        </h2>\n        <span class=\"text-sm\" title=\"Author\">{{ data().author_name }}</span>\n      </div>\n      <div class=\"text-wrapper relative mb-3 line-clamp-3 text-left text-black\">\n        <p>{{ data().summary }}</p>\n      </div>\n    </a>\n  </app-box>\n</div>\n\n<app-delete-blog-dialog [(show)]=\"show\" (confirmDelete)=\"deleteAction.emit()\" />\n"
+            "templateData": "@let isOwnPost = data() | isAuthor | async;\n<div [class]=\"style.outerWrapper\">\n  <app-box>\n    <div [class]=\"isOwnPost ? style.innerWrapperOwnPost : style.innerWrapper\">\n      <div [class]=\"style.date.wrapper\">\n        <span [class]=\"style.date.span\" title=\"Created date\">{{\n          data().created_at | date\n        }}</span>\n      </div>\n      @if (isOwnPost) {\n        <div [class]=\"style.actions.wrapper\">\n          <a [routerLink]=\"`/blog/edit/${data().id}`\" title=\"Update post\">\n            <app-edit-icon [class]=\"style.actions.editIcon\" />\n          </a>\n          <button\n            (click)=\"show.set(true)\"\n            title=\"Delete post\"\n            [class]=\"style.actions.deleteButton\"\n          >\n            <app-delete-icon />\n          </button>\n        </div>\n      }\n    </div>\n    <a [routerLink]=\"`/blog/${data().id}`\">\n      <div [class]=\"style.post.wrapper\">\n        <h2 [class]=\"style.post.heading\">\n          {{ data().title }}\n        </h2>\n        <span [class]=\"style.post.author\" title=\"Author\">{{\n          data().author_name\n        }}</span>\n      </div>\n      <div [class]=\"style.post.content\">\n        <p>{{ data().summary }}</p>\n      </div>\n    </a>\n  </app-box>\n</div>\n\n<app-delete-blog-dialog [(show)]=\"show\" (confirmDelete)=\"deleteAction.emit()\" />\n"
         },
         {
             "name": "BlogPreviewTemplate",
@@ -4032,7 +4075,7 @@
         },
         {
             "name": "BoxComponent",
-            "id": "component-BoxComponent-60549f93dc8a2cbe9e29bd1ff9afa8efb1155dd27d14c22de3fa661fb4f2e1b39aaf08e6c12bdd9ae7ac9cf80f8502ab67a14e68b90f3c2e58db75a0d21eac90",
+            "id": "component-BoxComponent-f558fb41b461fb82302cc8975e3dda6389e289e7256ef04d039e007e98211f636bfd486934d4659f49b7bc05917281be55f576a2dbd27929650c6d156cbd95ae",
             "file": "src/app/components/Atoms/Box/box.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4042,13 +4085,29 @@
             "selector": "app-box",
             "styleUrls": [],
             "styles": [],
-            "template": "<div   class=\"border-1 shadow-xs rounded-xl border-neutral-400 p-3 shadow-neutral-400\"\n >\n   <ng-content />\n </div>",
+            "template": "<div [class]=\"style\">   <ng-content />\n </div>",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                }
+            ],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -4059,7 +4118,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-box\",\n  template: ` <div\n    class=\"border-1 shadow-xs rounded-xl border-neutral-400 p-3 shadow-neutral-400\"\n  >\n    <ng-content />\n  </div>`,\n})\nexport class BoxComponent {}\n",
+            "sourceCode": "import style from \"@/styles/components/Atoms/box\";\nimport { Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-box\",\n  template: ` <div [class]=\"style\">\n    <ng-content />\n  </div>`,\n})\nexport class BoxComponent {\n  protected readonly style = style;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4067,7 +4126,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-eb618b2312974ebe03b841b52e49d35e2052b9040f582d6881907dd37154f9af318a601a008d5c0465aa6df32f63af46c0ed620626d5e8e48d129137429dfc89",
+            "id": "component-ButtonComponent-17973c88d28fe4aef33e2ee8c4d6bab306aff6feb0ca2308da6ca491caf2933d389c5aaf98c0967653be5206ba5d35bb83e41734d547c162778e2827a834fdbd",
             "file": "src/app/components/Atoms/Button/button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4092,7 +4151,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -4111,7 +4170,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -4131,7 +4190,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 69,
+                    "line": 51,
                     "modifierKind": [
                         124,
                         148
@@ -4146,7 +4205,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 64,
+                    "line": 46,
                     "modifierKind": [
                         124
                     ]
@@ -4160,7 +4219,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 66,
+                    "line": 48,
                     "modifierKind": [
                         124,
                         148
@@ -4168,14 +4227,14 @@
                 },
                 {
                     "name": "styles",
-                    "defaultValue": "computed(() => {\n    const variant = variantClasses[this.variant()];\n    const size = sizeClasses[this.size()];\n    return clsx(\n      \"min-w-[7ch] border-1 outline-hidden cursor-pointer rounded-md no-underline decoration-1 underline-offset-4 outline-offset-2 outline-transparent transition-all duration-50 focus-visible:underline focus-visible:outline-2 focus-visible:shadow-xs disabled:opacity-75 disabled:cursor-not-allowed \",\n      activeClasses,\n      variant,\n      size,\n    );\n  })",
+                    "defaultValue": "computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 84,
+                    "line": 66,
                     "modifierKind": [
                         124,
                         148
@@ -4189,7 +4248,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -4207,7 +4266,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -4225,7 +4284,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -4242,7 +4301,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -4259,7 +4318,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 20,
                     "modifierKind": [
                         148
                     ],
@@ -4275,7 +4334,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4292,7 +4351,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4324,7 +4383,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\nconst variantClasses = {\n  confirm:\n    \"border-green-700 bg-green-50 text-green-700 decoration-green-700 shadow-green-600/20\",\n  warning:\n    \"border-red-700 bg-red-100 text-red-700 decoration-red-700 shadow-red-600/20\",\n  cancel:\n    \"border-neutral-700 bg-neutral-100 text-neutral-700 decoration-neutral-700 shadow-neutral-600/20\",\n  info: \"border-violet-700 bg-violet-100 text-violet-700 decoration-violet-700 shadow-violet-600/20\",\n};\n\nconst sizeClasses = {\n  sm: \"text-sm px-3 py-2 \",\n  md: \"text-md px-3 py-2\",\n  lg: \"text-[18px] px-3 py-3\",\n};\n\nconst activeClasses =\n  \"active:scale-96 [.active]:scale-96 disabled:[.active]:scale-100 disabled:[.active]:shadow-none active:shadow-xs [.active]:shadow-xs disabled:active:scale-100 disabled:active:shadow-none\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    const variant = variantClasses[this.variant()];\n    const size = sizeClasses[this.size()];\n    return clsx(\n      \"min-w-[7ch] border-1 outline-hidden cursor-pointer rounded-md no-underline decoration-1 underline-offset-4 outline-offset-2 outline-transparent transition-all duration-50 focus-visible:underline focus-visible:outline-2 focus-visible:shadow-xs disabled:opacity-75 disabled:cursor-not-allowed \",\n      activeClasses,\n      variant,\n      size,\n    );\n  });\n}\n",
+            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4359,7 +4418,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -4378,7 +4437,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -4412,7 +4471,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 69,
+                    "line": 51,
                     "modifierKind": [
                         124,
                         148
@@ -4430,7 +4489,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 64,
+                    "line": 46,
                     "modifierKind": [
                         124
                     ],
@@ -4447,7 +4506,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 66,
+                    "line": 48,
                     "modifierKind": [
                         124,
                         148
@@ -4458,14 +4517,14 @@
                 },
                 {
                     "name": "styles",
-                    "defaultValue": "computed(() => {\n    const variant = variantClasses[this.variant()];\n    const size = sizeClasses[this.size()];\n    return clsx(\n      \"min-w-[7ch] border-1 outline-hidden cursor-pointer rounded-md no-underline decoration-1 underline-offset-4 outline-offset-2 outline-transparent transition-all duration-50 focus-visible:underline focus-visible:outline-2 focus-visible:shadow-xs disabled:opacity-75 disabled:cursor-not-allowed \",\n      activeClasses,\n      variant,\n      size,\n    );\n  })",
+                    "defaultValue": "computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 84,
+                    "line": 66,
                     "modifierKind": [
                         124,
                         148
@@ -4482,7 +4541,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -4500,7 +4559,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -4518,7 +4577,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -4535,7 +4594,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -4552,7 +4611,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 20,
                     "modifierKind": [
                         148
                     ],
@@ -4568,7 +4627,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4588,7 +4647,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4935,7 +4994,7 @@
         },
         {
             "name": "DeleteBlogDialogComponent",
-            "id": "component-DeleteBlogDialogComponent-f401c7d042a9df99024d532d09bb125c8c17254e2af98e3f15d024a38eb89dbf522c887a9e85568853756ff41751252cba05bc8bc2bb2ff044ea31b5b908853e",
+            "id": "component-DeleteBlogDialogComponent-39ab827fa862f18fe60929117a84619bec5ca3fd94ef9bbea02c3dfd878f243b347406af617817306fda838be06ff3eb323206dd28ceb8c495d1589e05388fbc",
             "file": "src/app/components/Molecules/DeleteBlogConfirm/delete-blog-dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4945,7 +5004,7 @@
             "selector": "app-delete-blog-dialog",
             "styleUrls": [],
             "styles": [],
-            "template": "<app-dialog [(show)]=\"show\" [title]=\"title\"\n  ><p>{{ content }}</p>\n  <div class=\"mt-7 flex justify-center gap-4\">\n    <app-button (clicked)=\"show.set(false)\" variant=\"cancel\">No</app-button>\n    <app-button variant=\"warning\" (clicked)=\"handleConfirmDelete()\"\n      >Yes</app-button\n    >\n  </div>\n</app-dialog>\n",
+            "template": "<app-dialog [(show)]=\"show\" [title]=\"title\"\n  ><p>{{ content }}</p>\n  <div [class]=\"styles.wrapper\">\n    <app-button (clicked)=\"show.set(false)\" variant=\"cancel\">No</app-button>\n    <app-button variant=\"warning\" (clicked)=\"handleConfirmDelete()\"\n      >Yes</app-button\n    >\n  </div>\n</app-dialog>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -4959,7 +5018,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -4975,7 +5034,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -4991,7 +5050,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -5006,7 +5065,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ]
@@ -5020,11 +5079,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
                     "required": false
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "title",
@@ -5035,7 +5109,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ]
@@ -5048,7 +5122,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -5074,7 +5148,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, model, output } from \"@angular/core\";\nimport { ButtonComponent } from \"../../Atoms/Button/button.component\";\nimport { DialogComponent } from \"../Dialog/dialog.component\";\n\n@Component({\n  selector: \"app-delete-blog-dialog\",\n  imports: [ButtonComponent, DialogComponent],\n  template: `\n    <app-dialog [(show)]=\"show\" [title]=\"title\"\n      ><p>{{ content }}</p>\n      <div class=\"mt-7 flex justify-center gap-4\">\n        <app-button (clicked)=\"show.set(false)\" variant=\"cancel\">No</app-button>\n        <app-button variant=\"warning\" (clicked)=\"handleConfirmDelete()\"\n          >Yes</app-button\n        >\n      </div>\n    </app-dialog>\n  `,\n})\nexport class DeleteBlogDialogComponent {\n  readonly confirmDelete = output();\n  readonly show = model<boolean>(false);\n  readonly title = \"Delete this post?\";\n  readonly content =\n    \"Deleting the post is permanent. This action cannot be undone!\";\n\n  protected handleConfirmDelete() {\n    this.confirmDelete.emit();\n    this.show.set(false);\n  }\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/deleteBlogConfirm\";\nimport { Component, model, output } from \"@angular/core\";\nimport { ButtonComponent } from \"../../Atoms/Button/button.component\";\nimport { DialogComponent } from \"../Dialog/dialog.component\";\n\n@Component({\n  selector: \"app-delete-blog-dialog\",\n  imports: [ButtonComponent, DialogComponent],\n  template: `\n    <app-dialog [(show)]=\"show\" [title]=\"title\"\n      ><p>{{ content }}</p>\n      <div [class]=\"styles.wrapper\">\n        <app-button (clicked)=\"show.set(false)\" variant=\"cancel\">No</app-button>\n        <app-button variant=\"warning\" (clicked)=\"handleConfirmDelete()\"\n          >Yes</app-button\n        >\n      </div>\n    </app-dialog>\n  `,\n})\nexport class DeleteBlogDialogComponent {\n  protected readonly styles = styles;\n  readonly confirmDelete = output();\n  readonly show = model<boolean>(false);\n  readonly title = \"Delete this post?\";\n  readonly content =\n    \"Deleting the post is permanent. This action cannot be undone!\";\n\n  protected handleConfirmDelete() {\n    this.confirmDelete.emit();\n    this.show.set(false);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5209,7 +5283,7 @@
         },
         {
             "name": "DialogComponent",
-            "id": "component-DialogComponent-dadf472f2036f95ce87c5e390ec975ca767309a56b5a2dd0e23a096a6e77ed3284f61e04f9238777571bfacb2b8a53f94315ab1a542d366df2d262045921830c",
+            "id": "component-DialogComponent-df05a62b63f5f5e978d820152296334f34b62b8da01e89d315fc4d4f61468055cde6850713ee7a38076001efef443e848c2a699cdce1519359c9333b2f5e7bf3",
             "file": "src/app/components/Molecules/Dialog/dialog.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5235,7 +5309,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 22,
                     "modifierKind": [
                         148
                     ],
@@ -5249,7 +5323,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 21,
                     "modifierKind": [
                         148
                     ],
@@ -5267,7 +5341,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 24,
                     "modifierKind": [
                         124,
                         148
@@ -5282,11 +5356,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 22,
                     "modifierKind": [
                         148
                     ],
                     "required": false
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "title",
@@ -5296,7 +5385,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 21,
                     "modifierKind": [
                         148
                     ],
@@ -5317,7 +5406,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -5349,7 +5438,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  effect,\n  type ElementRef,\n  input,\n  model,\n  viewChild,\n} from \"@angular/core\";\n\n@Component({\n  selector: \"app-dialog\",\n  imports: [NgClass],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./dialog.component.html\",\n})\nexport class DialogComponent {\n  readonly title = input<string>();\n  readonly show = model(true);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLDialogElement>>(\"ref\");\n\n  protected handleModal(show: boolean) {\n    const ref = this.ref();\n    if (show && !ref.nativeElement.open) {\n      ref.nativeElement.showModal();\n    }\n    if (!show && ref.nativeElement.open) {\n      ref.nativeElement.close();\n    }\n  }\n  constructor() {\n    effect(() => {\n      this.handleModal(this.show());\n    });\n  }\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/dialog\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  effect,\n  type ElementRef,\n  input,\n  model,\n  viewChild,\n} from \"@angular/core\";\n\n@Component({\n  selector: \"app-dialog\",\n  imports: [NgClass],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./dialog.component.html\",\n})\nexport class DialogComponent {\n  protected readonly styles = styles;\n  readonly title = input<string>();\n  readonly show = model(true);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLDialogElement>>(\"ref\");\n\n  protected handleModal(show: boolean) {\n    const ref = this.ref();\n    if (show && !ref.nativeElement.open) {\n      ref.nativeElement.showModal();\n    }\n    if (!show && ref.nativeElement.open) {\n      ref.nativeElement.close();\n    }\n  }\n  constructor() {\n    effect(() => {\n      this.handleModal(this.show());\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5359,10 +5448,10 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 33
+                "line": 35
             },
             "extends": [],
-            "templateData": "<dialog\n  #ref\n  class=\"max-w-prose scale-75 rounded-lg p-3 px-8 opacity-50 shadow-lg backdrop-blur-md transition-[scale] [&.open]:mx-auto [&.open]:mt-[30vh] [&.open]:scale-100 [&.open]:opacity-100 [&.open]:backdrop:backdrop-blur-[6px]\"\n  [ngClass]=\"{ open: show() }\"\n  (close)=\"show.set(false)\"\n>\n  <h1 class=\"my-4 text-center text-3xl font-light\">{{ title() }}</h1>\n\n  <div class=\"mb-5\">\n    <ng-content />\n  </div>\n</dialog>\n"
+            "templateData": "<dialog\n  #ref\n  [class]=\"styles.dialog\"\n  [ngClass]=\"{ open: show() }\"\n  (close)=\"show.set(false)\"\n>\n  <h1 [class]=\"styles.heading\">{{ title() }}</h1>\n\n  <div [class]=\"styles.contentWrapper\">\n    <ng-content />\n  </div>\n</dialog>\n"
         },
         {
             "name": "DialogComponentWrapper",
@@ -5482,7 +5571,7 @@
         },
         {
             "name": "ErrorComponent",
-            "id": "component-ErrorComponent-f9b7d0d213af72e9275f56a62fc82228d211476f89d7972504e8952f100989b756cf8e3934c807cdd04c13ebd714a081d56fa3eea0de6d3cf48a3be216e95e06",
+            "id": "component-ErrorComponent-15e5d06611d11a0e14415741f07cb53482d2820346c3828e5901270c9b3d351ffca58abdacd6461750106994925dd0ae39e33fa117e1b4f969be434c799623c2",
             "file": "src/app/components/Atoms/Error/error.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5493,7 +5582,7 @@
             "selector": "app-error",
             "styleUrls": [],
             "styles": [],
-            "template": "@if (errors()) {\n  <small\n    [title]=\"errors()\"\n    class=\"block cursor-default truncate text-red-600\"\n  >\n    {{ errors() }}\n  </small>\n}\n",
+            "template": "@if (errors()) {\n  <small [title]=\"errors()\" [class]=\"style\">\n    {{ errors() }}\n  </small>\n}\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -5509,8 +5598,23 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 17,
                     "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        124,
                         148
                     ]
                 }
@@ -5525,7 +5629,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\n\n@Component({\n  selector: \"app-error\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @if (errors()) {\n      <small\n        [title]=\"errors()\"\n        class=\"block cursor-default truncate text-red-600\"\n      >\n        {{ errors() }}\n      </small>\n    }\n  `,\n})\nexport class ErrorComponent {\n  readonly errors = input<string | undefined | null>();\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Atoms/error\";\nimport { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\n\n@Component({\n  selector: \"app-error\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @if (errors()) {\n      <small [title]=\"errors()\" [class]=\"style\">\n        {{ errors() }}\n      </small>\n    }\n  `,\n})\nexport class ErrorComponent {\n  protected readonly style = style;\n  readonly errors = input<string | undefined | null>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5770,7 +5874,7 @@
         },
         {
             "name": "FormWrapperComponent",
-            "id": "component-FormWrapperComponent-3ed35a872c1c9a8dba690edff864bf5ea5aee00f58a344886e15b4193787fb7e5336e70a92fb8167a5d5aee16618f5577d9d4b667ba076215aa8087dc0c3a018",
+            "id": "component-FormWrapperComponent-237e21953726f890c19d6bfd4964311360b652c84b9ee777533e46346079f79001ba9eb4aaea1cea125a9accc678ed1d6335a59efce962207c4a42aa63862940",
             "file": "src/app/components/Molecules/FormWrapper/form-wrapper.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5796,7 +5900,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Should the first available input be focused when the component loads?\nDefaults to <code>true</code>.</p>\n",
-                    "line": 38,
+                    "line": 40,
                     "rawdescription": "\nShould the first available input be focused when the component loads?\nDefaults to `true`.",
                     "modifierKind": [
                         148
@@ -5811,7 +5915,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 32,
+                    "line": 34,
                     "modifierKind": [
                         148
                     ],
@@ -5825,7 +5929,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 35,
                     "modifierKind": [
                         148
                     ],
@@ -5840,7 +5944,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 34,
+                    "line": 36,
                     "modifierKind": [
                         148
                     ],
@@ -5854,7 +5958,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
                     "modifierKind": [
                         148
                     ],
@@ -5868,7 +5972,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
@@ -5884,7 +5988,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 43,
                     "modifierKind": [
                         148
                     ],
@@ -5898,7 +6002,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 40,
+                    "line": 42,
                     "modifierKind": [
                         148
                     ],
@@ -5915,7 +6019,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Should the first available input be focused when the component loads?\nDefaults to <code>true</code>.</p>\n",
-                    "line": 38,
+                    "line": 40,
                     "rawdescription": "\nShould the first available input be focused when the component loads?\nDefaults to `true`.",
                     "modifierKind": [
                         148
@@ -5930,7 +6034,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 32,
+                    "line": 34,
                     "modifierKind": [
                         148
                     ],
@@ -5945,7 +6049,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 45,
                     "modifierKind": [
                         124,
                         148
@@ -5960,7 +6064,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 45,
+                    "line": 47,
                     "modifierKind": [
                         124,
                         148
@@ -5974,7 +6078,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 43,
                     "modifierKind": [
                         148
                     ],
@@ -5988,7 +6092,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 35,
                     "modifierKind": [
                         148
                     ],
@@ -6003,11 +6107,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 34,
+                    "line": 36,
                     "modifierKind": [
                         148
                     ],
                     "required": false
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "submitAction",
@@ -6017,7 +6136,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 40,
+                    "line": 42,
                     "modifierKind": [
                         148
                     ],
@@ -6031,7 +6150,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
                     "modifierKind": [
                         148
                     ],
@@ -6045,7 +6164,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
@@ -6059,7 +6178,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -6069,7 +6188,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -6100,7 +6219,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  type ElementRef,\n  inject,\n  input,\n  type OnDestroy,\n  output,\n  viewChild,\n} from \"@angular/core\";\nimport { type FormGroup, ReactiveFormsModule } from \"@angular/forms\";\nimport { FormRegisterService } from \"../../../services/form-register.service\";\nimport type { ResultStatus } from \"../../../services/form.service\";\nimport { ButtonComponent } from \"../../Atoms/Button/button.component\";\nimport { SubmitButtonComponent } from \"../SubmitButton/submit-button.component\";\nimport { ResultStatusComponent } from \"./ResultStatus/result-status.component\";\n\n@Component({\n  selector: \"app-form-wrapper\",\n  imports: [\n    ReactiveFormsModule,\n    ButtonComponent,\n    SubmitButtonComponent,\n    ResultStatusComponent,\n  ],\n  templateUrl: \"./form-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class FormWrapperComponent implements OnDestroy {\n  readonly submitLabel = input.required<string>();\n  readonly formGroup = input.required<FormGroup>();\n  readonly resultStatus = input.required<ResultStatus>();\n  readonly showGoBack = input<boolean>(true);\n  readonly successLabel = input.required<string>();\n  /** Should the first available input be focused when the component loads?\n   * Defaults to `true`. */\n  readonly focusOnRender = input<boolean>(true);\n\n  readonly submitAction = output();\n  readonly goBack = output();\n\n  protected readonly formRef =\n    viewChild.required<ElementRef<HTMLFormElement>>(\"ref\");\n  protected readonly formRegisterService = inject(FormRegisterService);\n\n  constructor() {\n    afterNextRender(() => {\n      this.formRegisterService.ref = this.formRef();\n      if (this.focusOnRender()) {\n        this.formRef()\n          .nativeElement.querySelector<HTMLElement>(\".ng-pristine\")\n          ?.focus();\n      }\n    });\n  }\n  ngOnDestroy(): void {\n    this.formRegisterService.ref = null;\n  }\n\n  onSubmit() {\n    this.submitAction.emit();\n  }\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/formWrapper\";\nimport {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  type ElementRef,\n  inject,\n  input,\n  type OnDestroy,\n  output,\n  viewChild,\n} from \"@angular/core\";\nimport { type FormGroup, ReactiveFormsModule } from \"@angular/forms\";\nimport { FormRegisterService } from \"../../../services/form-register.service\";\nimport type { ResultStatus } from \"../../../services/form.service\";\nimport { ButtonComponent } from \"../../Atoms/Button/button.component\";\nimport { SubmitButtonComponent } from \"../SubmitButton/submit-button.component\";\nimport { ResultStatusComponent } from \"./ResultStatus/result-status.component\";\n\n@Component({\n  selector: \"app-form-wrapper\",\n  imports: [\n    ReactiveFormsModule,\n    ButtonComponent,\n    SubmitButtonComponent,\n    ResultStatusComponent,\n  ],\n  templateUrl: \"./form-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class FormWrapperComponent implements OnDestroy {\n  protected readonly styles = styles;\n  readonly submitLabel = input.required<string>();\n  readonly formGroup = input.required<FormGroup>();\n  readonly resultStatus = input.required<ResultStatus>();\n  readonly showGoBack = input<boolean>(true);\n  readonly successLabel = input.required<string>();\n  /** Should the first available input be focused when the component loads?\n   * Defaults to `true`. */\n  readonly focusOnRender = input<boolean>(true);\n\n  readonly submitAction = output();\n  readonly goBack = output();\n\n  protected readonly formRef =\n    viewChild.required<ElementRef<HTMLFormElement>>(\"ref\");\n  protected readonly formRegisterService = inject(FormRegisterService);\n\n  constructor() {\n    afterNextRender(() => {\n      this.formRegisterService.ref = this.formRef();\n      if (this.focusOnRender()) {\n        this.formRef()\n          .nativeElement.querySelector<HTMLElement>(\".ng-pristine\")\n          ?.focus();\n      }\n    });\n  }\n  ngOnDestroy(): void {\n    this.formRegisterService.ref = null;\n  }\n\n  onSubmit() {\n    this.submitAction.emit();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -6110,13 +6229,13 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 45
+                "line": 47
             },
             "extends": [],
             "implements": [
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"flex w-fit flex-col items-center gap-3\">\n  <form\n    [formGroup]=\"formGroup()\"\n    (keydown.control.enter)=\"onSubmit()\"\n    #ref\n    class=\"flex flex-col items-center gap-5\"\n  >\n    <ng-content />\n    <div class=\"flex gap-4\">\n      @if (showGoBack()) {\n        <app-button type=\"button\" variant=\"cancel\" (clicked)=\"goBack.emit()\"\n          >Back</app-button\n        >\n      }\n      <app-submit-button\n        [label]=\"submitLabel()\"\n        [isSubmitting]=\"resultStatus().status === 'submitting'\"\n        [disabled]=\"formGroup().pristine\"\n      />\n    </div>\n  </form>\n  <div class=\"mt-2 flex justify-center\">\n    <app-form-result-status\n      [successLabel]=\"successLabel()\"\n      [resultStatus]=\"resultStatus()\"\n    />\n  </div>\n</div>\n"
+            "templateData": "<div [class]=\"styles.wrapper\">\n  <form\n    [formGroup]=\"formGroup()\"\n    (keydown.control.enter)=\"onSubmit()\"\n    #ref\n    [class]=\"styles.form\"\n  >\n    <ng-content />\n    <div [class]=\"styles.formActionWrapper\">\n      @if (showGoBack()) {\n        <app-button type=\"button\" variant=\"cancel\" (clicked)=\"goBack.emit()\"\n          >Back</app-button\n        >\n      }\n      <app-submit-button\n        [label]=\"submitLabel()\"\n        [isSubmitting]=\"resultStatus().status === 'submitting'\"\n        [disabled]=\"formGroup().pristine\"\n      />\n    </div>\n  </form>\n  <div [class]=\"styles.status.wrapper\">\n    <app-form-result-status\n      [successLabel]=\"successLabel()\"\n      [resultStatus]=\"resultStatus()\"\n    />\n  </div>\n</div>\n"
         },
         {
             "name": "HomepageComponent",
@@ -6577,7 +6696,7 @@
         },
         {
             "name": "InputComponent",
-            "id": "component-InputComponent-412f9e21dc6a124bbfe78aa005a4bafd6b6906b80a471922aa7de9a9a2552d0d9f2bca1cb9db8814820fc2b2f3a0c8677444be6de078891949e2cbb9266b96c7",
+            "id": "component-InputComponent-877709d551bc017f9a5900d5a00e411e6cef10a92ba943fac8abe3932e436f0e891fe21f1b1bba91e7125aa500306d2cc6c8eaf1f64ed87657377a7e9c5afa91",
             "file": "src/app/components/Molecules/Input/input.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -6594,7 +6713,7 @@
             "selector": "app-input",
             "styleUrls": [],
             "styles": [
-                "\n    :host {\n      display: inline-block;\n    }\n    [aria-invalid=\"true\"] {\n      outline: 2px solid red;\n    }\n  "
+                "\n    :host {\n      display: inline-block;\n    }\n  "
             ],
             "templateUrl": [
                 "./input.component.html"
@@ -6610,7 +6729,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Optional errId identifier. If input is empty, the component will check if <code>IdService</code>\nis provided to the host element and use it&#39;s <code>id</code> to mark the error id component.</p>\n",
-                    "line": 58,
+                    "line": 56,
                     "rawdescription": "\nOptional errId identifier. If input is empty, the component will check if `IdService`\nis provided to the host element and use it's `id` to mark the error id component.",
                     "modifierKind": [
                         148
@@ -6625,7 +6744,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 54,
+                    "line": 52,
                     "modifierKind": [
                         148
                     ],
@@ -6639,7 +6758,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 59,
+                    "line": 57,
                     "modifierKind": [
                         148
                     ],
@@ -6657,7 +6776,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 90,
+                    "line": 84,
                     "modifierKind": [
                         124
                     ]
@@ -6671,22 +6790,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 80,
-                    "modifierKind": [
-                        124,
-                        148
-                    ]
-                },
-                {
-                    "name": "controlClass",
-                    "defaultValue": "clsx(\n    this.inputClass,\n    \"input-element border-1 peer inline-block rounded border-neutral-400 p-1.5 placeholder-transparent transition-colors disabled:cursor-not-allowed disabled:opacity-75\",\n  )",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 85,
+                    "line": 78,
                     "modifierKind": [
                         124,
                         148
@@ -6701,7 +6805,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 83,
+                    "line": 81,
                     "modifierKind": [
                         124
                     ]
@@ -6715,7 +6819,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 60,
+                    "line": 58,
                     "modifierKind": [
                         124
                     ]
@@ -6728,7 +6832,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Optional errId identifier. If input is empty, the component will check if <code>IdService</code>\nis provided to the host element and use it&#39;s <code>id</code> to mark the error id component.</p>\n",
-                    "line": 58,
+                    "line": 56,
                     "rawdescription": "\nOptional errId identifier. If input is empty, the component will check if `IdService`\nis provided to the host element and use it's `id` to mark the error id component.",
                     "modifierKind": [
                         148
@@ -6744,22 +6848,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 61,
-                    "modifierKind": [
-                        124,
-                        148
-                    ]
-                },
-                {
-                    "name": "inputClass",
-                    "defaultValue": "\"input-element\"",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 84,
+                    "line": 59,
                     "modifierKind": [
                         124,
                         148
@@ -6774,7 +6863,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 89,
+                    "line": 83,
                     "modifierKind": [
                         124
                     ]
@@ -6788,7 +6877,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 79,
+                    "line": 77,
                     "modifierKind": [
                         124,
                         148
@@ -6802,7 +6891,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 54,
+                    "line": 52,
                     "modifierKind": [
                         148
                     ],
@@ -6816,7 +6905,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 59,
+                    "line": 57,
                     "modifierKind": [
                         148
                     ],
@@ -6831,7 +6920,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 66,
+                    "line": 64,
                     "modifierKind": [
                         124
                     ]
@@ -6845,9 +6934,24 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 67,
+                    "line": 65,
                     "modifierKind": [
                         124
+                    ]
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "modifierKind": [
+                        124,
+                        148
                     ]
                 },
                 {
@@ -6859,7 +6963,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 55,
+                    "line": 53,
                     "modifierKind": [
                         148
                     ]
@@ -6873,7 +6977,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 78,
+                    "line": 76,
                     "modifierKind": [
                         124,
                         148
@@ -6887,7 +6991,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 106,
+                    "line": 100,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -6904,7 +7008,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 110,
+                    "line": 104,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6932,7 +7036,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 133,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6960,7 +7064,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 124,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6988,7 +7092,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 136,
+                    "line": 130,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7016,7 +7120,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 140,
+                    "line": 134,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -7047,7 +7151,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 125,
+                    "line": 119,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -7072,17 +7176,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  ElementRef,\n  forwardRef,\n  inject,\n  input,\n  signal,\n} from \"@angular/core\";\nimport { NG_VALUE_ACCESSOR } from \"@angular/forms\";\nimport clsx from \"clsx\";\nimport { asapScheduler } from \"rxjs\";\nimport { v4 } from \"uuid\";\nimport { IdService } from \"../../../services/id.service\";\n\ntype FunctionType = (...args: unknown[]) => unknown;\n\nexport type SimpleInputType =\n  | \"number\"\n  | \"date\"\n  | \"email\"\n  | \"password\"\n  | \"text\"\n  | \"textarea\";\n\n@Component({\n  selector: \"app-input\",\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => InputComponent),\n      multi: true,\n    },\n  ],\n  host: {\n    \"[attr.tabindex]\": \"-1\",\n    /** Focusing the host means focusing the input */\n    \"(focus)\": \"focus()\",\n  },\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./input.component.html\",\n  styles: `\n    :host {\n      display: inline-block;\n    }\n    [aria-invalid=\"true\"] {\n      outline: 2px solid red;\n    }\n  `,\n})\nexport class InputComponent {\n  readonly label = input.required<string>();\n  readonly type = input<SimpleInputType>(\"text\");\n  /** Optional errId identifier. If input is empty, the component will check if `IdService`\n   * is provided to the host element and use it's `id` to mark the error id component. */\n  readonly errId = input<string>();\n  readonly name = input<string>();\n  protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);\n  protected readonly idService = inject(IdService, {\n    host: true,\n    optional: true,\n  });\n\n  protected onChange: FunctionType = () => {};\n  protected onTouch: FunctionType = () => {};\n\n  constructor() {\n    /** Prevent transitions from firing on initial render. */\n    afterNextRender(() => {\n      asapScheduler.schedule(() => {\n        this.canLabelTransition.set(true);\n      });\n    });\n  }\n\n  protected readonly value = signal<string>(\"\");\n  protected readonly isInvalid = signal<boolean>(false);\n  protected readonly computedErrId = computed(\n    () => this.errId() ?? this.idService?.id,\n  );\n  protected disabled = signal(false);\n  protected readonly inputClass = \"input-element\";\n  protected readonly controlClass = clsx(\n    this.inputClass,\n    \"input-element border-1 peer inline-block rounded border-neutral-400 p-1.5 placeholder-transparent transition-colors disabled:cursor-not-allowed disabled:opacity-75\",\n  );\n  protected inputId = v4();\n  protected canLabelTransition = signal(false);\n\n  /** Errors are recognized for dirty elements with an ng-invalid class */\n  get hasErrors() {\n    return (\n      this.elementRef.nativeElement.classList.contains(\"ng-invalid\") &&\n      !this.elementRef.nativeElement.classList.contains(\"ng-pristine\")\n    );\n  }\n\n  get inputEl() {\n    return this.elementRef.nativeElement.querySelector<\n      HTMLInputElement | HTMLTextAreaElement\n    >(`.${this.inputClass}`);\n  }\n\n  focus() {\n    this.inputEl?.focus();\n  }\n\n  input(ev: Event) {\n    const type = this.type();\n    const value = (ev.currentTarget as HTMLInputElement | HTMLTextAreaElement)\n      .value;\n    const parsed =\n      type === \"number\"\n        ? Number(value)\n        : type === \"date\"\n          ? new Date(value)\n          : value;\n\n    this.value.set(value);\n    this.onChange(parsed);\n  }\n\n  writeValue(val: unknown): void {\n    const transformed = this.transformToString(val);\n    if (this.value() !== transformed) this.value.set(transformed);\n  }\n\n  registerOnTouched(fn: FunctionType): void {\n    this.onTouch = fn;\n  }\n  registerOnChange(fn: FunctionType): void {\n    this.onChange = fn;\n  }\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  protected transformToString(val: unknown): string {\n    if (val === null || val === undefined) return \"\";\n    if (typeof val === \"string\") return val;\n    if (val instanceof Date) {\n      const isoDate = val.toISOString();\n      return isoDate.split(\"T\")[0] as string;\n    }\n    if (val instanceof Number) {\n      return val.toString();\n    }\n    return \"\";\n  }\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/input\";\nimport {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  ElementRef,\n  forwardRef,\n  inject,\n  input,\n  signal,\n} from \"@angular/core\";\nimport { NG_VALUE_ACCESSOR } from \"@angular/forms\";\nimport { asapScheduler } from \"rxjs\";\nimport { v4 } from \"uuid\";\nimport { IdService } from \"../../../services/id.service\";\n\ntype FunctionType = (...args: unknown[]) => unknown;\n\nexport type SimpleInputType =\n  | \"number\"\n  | \"date\"\n  | \"email\"\n  | \"password\"\n  | \"text\"\n  | \"textarea\";\n\n@Component({\n  selector: \"app-input\",\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => InputComponent),\n      multi: true,\n    },\n  ],\n  host: {\n    \"[attr.tabindex]\": \"-1\",\n    /** Focusing the host means focusing the input */\n    \"(focus)\": \"focus()\",\n  },\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./input.component.html\",\n  styles: `\n    :host {\n      display: inline-block;\n    }\n  `,\n})\nexport class InputComponent {\n  protected readonly styles = styles;\n  readonly label = input.required<string>();\n  readonly type = input<SimpleInputType>(\"text\");\n  /** Optional errId identifier. If input is empty, the component will check if `IdService`\n   * is provided to the host element and use it's `id` to mark the error id component. */\n  readonly errId = input<string>();\n  readonly name = input<string>();\n  protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);\n  protected readonly idService = inject(IdService, {\n    host: true,\n    optional: true,\n  });\n\n  protected onChange: FunctionType = () => {};\n  protected onTouch: FunctionType = () => {};\n\n  constructor() {\n    /** Prevent transitions from firing on initial render. */\n    afterNextRender(() => {\n      asapScheduler.schedule(() => {\n        this.canLabelTransition.set(true);\n      });\n    });\n  }\n\n  protected readonly value = signal<string>(\"\");\n  protected readonly isInvalid = signal<boolean>(false);\n  protected readonly computedErrId = computed(\n    () => this.errId() ?? this.idService?.id,\n  );\n  protected disabled = signal(false);\n\n  protected inputId = v4();\n  protected canLabelTransition = signal(false);\n\n  /** Errors are recognized for dirty elements with an ng-invalid class */\n  get hasErrors() {\n    return (\n      this.elementRef.nativeElement.classList.contains(\"ng-invalid\") &&\n      !this.elementRef.nativeElement.classList.contains(\"ng-pristine\")\n    );\n  }\n\n  get inputEl() {\n    return this.elementRef.nativeElement.querySelector<\n      HTMLInputElement | HTMLTextAreaElement\n    >(`.${this.styles.inputElementClass}`);\n  }\n\n  focus() {\n    this.inputEl?.focus();\n  }\n\n  input(ev: Event) {\n    const type = this.type();\n    const value = (ev.currentTarget as HTMLInputElement | HTMLTextAreaElement)\n      .value;\n    const parsed =\n      type === \"number\"\n        ? Number(value)\n        : type === \"date\"\n          ? new Date(value)\n          : value;\n\n    this.value.set(value);\n    this.onChange(parsed);\n  }\n\n  writeValue(val: unknown): void {\n    const transformed = this.transformToString(val);\n    if (this.value() !== transformed) this.value.set(transformed);\n  }\n\n  registerOnTouched(fn: FunctionType): void {\n    this.onTouch = fn;\n  }\n  registerOnChange(fn: FunctionType): void {\n    this.onChange = fn;\n  }\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled.set(isDisabled);\n  }\n\n  protected transformToString(val: unknown): string {\n    if (val === null || val === undefined) return \"\";\n    if (typeof val === \"string\") return val;\n    if (val instanceof Date) {\n      const isoDate = val.toISOString();\n      return isoDate.split(\"T\")[0] as string;\n    }\n    if (val instanceof Number) {\n      return val.toString();\n    }\n    return \"\";\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
-            "stylesData": "\n    :host {\n      display: inline-block;\n    }\n    [aria-invalid=\"true\"] {\n      outline: 2px solid red;\n    }\n  \n",
+            "stylesData": "\n    :host {\n      display: inline-block;\n    }\n  \n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 67
+                "line": 65
             },
             "extends": [],
             "accessors": {
@@ -7092,7 +7196,7 @@
                         "name": "hasErrors",
                         "type": "",
                         "returnType": "",
-                        "line": 93,
+                        "line": 87,
                         "rawdescription": "\nErrors are recognized for dirty elements with an ng-invalid class",
                         "description": "<p>Errors are recognized for dirty elements with an ng-invalid class</p>\n"
                     }
@@ -7103,11 +7207,11 @@
                         "name": "inputEl",
                         "type": "",
                         "returnType": "",
-                        "line": 100
+                        "line": 94
                     }
                 }
             },
-            "templateData": "<div class=\"relative mt-2 bg-inherit\">\n  @if (type() !== \"textarea\") {\n    <input\n      [class]=\"controlClass\"\n      [id]=\"inputId\"\n      [attr.name]=\"name() ?? null\"\n      [disabled]=\"disabled()\"\n      [placeholder]=\"label()\"\n      [value]=\"value()\"\n      (input)=\"input($event)\"\n      [type]=\"type()\"\n      [attr.aria-invalid]=\"hasErrors\"\n      [attr.aria-errormessage]=\"computedErrId()\"\n    />\n  } @else {\n    <textarea\n      [class]=\"controlClass\"\n      [id]=\"inputId\"\n      [attr.name]=\"name() ?? null\"\n      rows=\"10\"\n      cols=\"60\"\n      [disabled]=\"disabled()\"\n      [placeholder]=\"label()\"\n      [value]=\"value()\"\n      (input)=\"input($event)\"\n      [attr.aria-invalid]=\"hasErrors\"\n      [attr.aria-errormessage]=\"computedErrId()\"\n    ></textarea>\n  }\n  <label\n    [class.transition-all]=\"canLabelTransition()\"\n    class=\"absolute -top-2 left-2.5 z-10 inline-block cursor-text bg-white text-xs text-neutral-700 peer-placeholder-shown:top-[8.5px] peer-placeholder-shown:text-sm peer-focus-visible:-top-2 peer-focus-visible:text-xs peer-disabled:select-none\"\n    [for]=\"inputId\"\n    [id]=\"`${inputId}-label`\"\n    >{{ label() }}\n  </label>\n</div>\n"
+            "templateData": "<div [class]=\"styles.wrapper\">\n  @if (type() !== \"textarea\") {\n    <input\n      [class]=\"styles.input\"\n      [id]=\"inputId\"\n      [attr.name]=\"name() ?? null\"\n      [disabled]=\"disabled()\"\n      [placeholder]=\"label()\"\n      [value]=\"value()\"\n      (input)=\"input($event)\"\n      [type]=\"type()\"\n      [attr.aria-invalid]=\"hasErrors\"\n      [attr.aria-errormessage]=\"computedErrId()\"\n    />\n  } @else {\n    <textarea\n      [class]=\"styles.input\"\n      [id]=\"inputId\"\n      [attr.name]=\"name() ?? null\"\n      rows=\"10\"\n      cols=\"60\"\n      [disabled]=\"disabled()\"\n      [placeholder]=\"label()\"\n      [value]=\"value()\"\n      (input)=\"input($event)\"\n      [attr.aria-invalid]=\"hasErrors\"\n      [attr.aria-errormessage]=\"computedErrId()\"\n    ></textarea>\n  }\n  <label\n    [class.transition-all]=\"canLabelTransition()\"\n    [class]=\"styles.label\"\n    [for]=\"inputId\"\n    [id]=\"`${inputId}-label`\"\n    >{{ label() }}\n  </label>\n</div>\n"
         },
         {
             "name": "InputWrapperComponent",
@@ -7333,7 +7437,7 @@
         },
         {
             "name": "InputWrapperComponent",
-            "id": "component-InputWrapperComponent-7e8b7063914a7ba5639aba0398906598eeff7105e4967710ccb1f7e576a89e7f5e6e783aa412026765be23225a468bcc11a7cd9d6d01840cc9bf5dc434884d74-1",
+            "id": "component-InputWrapperComponent-dbd5bcccf18dc2cbab178aa9ccd1bf68aecd227fd8dc62989a63807a6e5359d2bc69c8afb95a2b1b537e9061e421471ffd305422c398422680bb038250d31b5b-1",
             "file": "src/app/components/Molecules/InputWrapper/input-wrapper.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -7363,7 +7467,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -7380,7 +7484,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -7395,7 +7499,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 22,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ]
@@ -7409,7 +7513,22 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
                     "modifierKind": [
                         124,
                         148
@@ -7439,7 +7558,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { AsyncPipe } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport type { AbstractControl } from \"@angular/forms\";\nimport { v4 } from \"uuid\";\nimport { ParseErrorPipe } from \"../../../pipes/parse-error.pipe\";\nimport { IdService } from \"../../../services/id.service\";\nimport { ErrorComponent } from \"../../Atoms/Error/error.component\";\n\n@Component({\n  selector: \"app-input-wrapper\",\n  templateUrl: \"./input-wrapper.component.html\",\n  imports: [ErrorComponent, ParseErrorPipe, AsyncPipe],\n  providers: [IdService],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class InputWrapperComponent {\n  readonly errId = v4();\n  readonly control = input.required<AbstractControl>();\n  protected readonly idService = inject(IdService);\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/inputWrapper\";\nimport { AsyncPipe } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport type { AbstractControl } from \"@angular/forms\";\nimport { v4 } from \"uuid\";\nimport { ParseErrorPipe } from \"../../../pipes/parse-error.pipe\";\nimport { IdService } from \"../../../services/id.service\";\nimport { ErrorComponent } from \"../../Atoms/Error/error.component\";\n\n@Component({\n  selector: \"app-input-wrapper\",\n  templateUrl: \"./input-wrapper.component.html\",\n  imports: [ErrorComponent, ParseErrorPipe, AsyncPipe],\n  providers: [IdService],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class InputWrapperComponent {\n  protected readonly styles = styles;\n  readonly errId = v4();\n  readonly control = input.required<AbstractControl>();\n  protected readonly idService = inject(IdService);\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -7447,7 +7566,7 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "InputWrapperComponent-1",
-            "templateData": "<div class=\"relative\">\n  <ng-content />\n  <div class=\"absolute left-0 top-[100%]\" [id]=\"idService.id\">\n    <app-error [errors]=\"control() | parseError | async\" />\n  </div>\n</div>\n"
+            "templateData": "<div [class]=\"styles.wrapper\">\n  <ng-content />\n  <div [class]=\"styles.errorWrapper\" [id]=\"idService.id\">\n    <app-error [errors]=\"control() | parseError | async\" />\n  </div>\n</div>\n"
         },
         {
             "name": "InputWrapperStoryComponent",
@@ -7908,7 +8027,7 @@
         },
         {
             "name": "LoginLogoutComponent",
-            "id": "component-LoginLogoutComponent-976bd41b8f883ad27d3bd7d74757e378481e4a8196c46fd33e9e1121e12beaa4deff69a8142d74b6edc9f45275a061a87905f4baaea3d14e1d8d2fc09ea53afe",
+            "id": "component-LoginLogoutComponent-0c26bb956536b3c6ba149e7efe31d54e560486d8c3a7f8f3f61ecd477b140f3e2f49c234ef72756e0ec4ded4a6cf4d5f73856087466f1210a3ed28777d46d3db",
             "file": "src/app/components/Organisms/NavBar/LoginLogout/login-logout.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -7919,7 +8038,7 @@
             "selector": "app-login-logout",
             "styleUrls": [],
             "styles": [],
-            "template": "@if (!authenticated()) {\n  <app-navbar-link\n    [currentUrl]=\"currentUrl()\"\n    [href]=\"href()\"\n    [label]=\"label()\"\n  />\n} @else {\n  <button class=\"cursor-pointer\" (click)=\"logout.emit()\">Logout</button>\n}\n",
+            "template": "@if (!authenticated()) {\n  <app-navbar-link\n    [currentUrl]=\"currentUrl()\"\n    [href]=\"href()\"\n    [label]=\"label()\"\n  />\n} @else {\n  <button [class]=\"style.logoutButton\" (click)=\"logout.emit()\">\n    Logout\n  </button>\n}\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -7932,7 +8051,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         148
                     ],
@@ -7946,7 +8065,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -7963,7 +8082,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -7980,7 +8099,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 18,
                     "modifierKind": [
                         148
                     ],
@@ -7999,7 +8118,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -8015,7 +8134,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         148
                     ],
@@ -8029,7 +8148,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -8043,7 +8162,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -8060,7 +8179,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -8077,11 +8196,29 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 18,
                     "modifierKind": [
                         148
                     ],
                     "required": true,
+                    "inheritance": {
+                        "file": "NavbarLinkComponent"
+                    }
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        124,
+                        148
+                    ],
                     "inheritance": {
                         "file": "NavbarLinkComponent"
                     }
@@ -8102,7 +8239,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  input,\n  output,\n} from \"@angular/core\";\nimport { NavbarLinkComponent } from \"../NavbarLink/navbar-link.component\";\n\n@Component({\n  selector: \"app-login-logout\",\n  imports: [NavbarLinkComponent],\n  template: `\n    @if (!authenticated()) {\n      <app-navbar-link\n        [currentUrl]=\"currentUrl()\"\n        [href]=\"href()\"\n        [label]=\"label()\"\n      />\n    } @else {\n      <button class=\"cursor-pointer\" (click)=\"logout.emit()\">Logout</button>\n    }\n  `,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class LoginLogoutComponent extends NavbarLinkComponent {\n  readonly authenticated = input.required<boolean>();\n  readonly logout = output();\n}\n",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  input,\n  output,\n} from \"@angular/core\";\nimport { NavbarLinkComponent } from \"../NavbarLink/navbar-link.component\";\n\n@Component({\n  selector: \"app-login-logout\",\n  imports: [NavbarLinkComponent],\n  template: `\n    @if (!authenticated()) {\n      <app-navbar-link\n        [currentUrl]=\"currentUrl()\"\n        [href]=\"href()\"\n        [label]=\"label()\"\n      />\n    } @else {\n      <button [class]=\"style.logoutButton\" (click)=\"logout.emit()\">\n        Logout\n      </button>\n    }\n  `,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class LoginLogoutComponent extends NavbarLinkComponent {\n  readonly authenticated = input.required<boolean>();\n  readonly logout = output();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -8215,7 +8352,7 @@
         },
         {
             "name": "NavbarComponent",
-            "id": "component-NavbarComponent-01a648f8ec247950c1d30fb0b5006de5d19317b57bc4a5a0a1df73b7a9948d8a2fb092528391fcc1c2e47f03aec8ec57dae71469e5dedb194ffd1f2ec4e41ffb",
+            "id": "component-NavbarComponent-563f0c51b845037a878017c4f9ef534f6e1d178167f9b0df0d6592c49de0fd79467e36f7c07a5fe61c79bfdecf772db1e25d2fe621a8ed11c5b050d0ea09e28b",
             "file": "src/app/components/Organisms/NavBar/navbar.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -8240,7 +8377,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -8254,7 +8391,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -8270,7 +8407,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -8286,7 +8423,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -8300,7 +8437,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -8314,7 +8451,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -8329,7 +8466,22 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
                     "modifierKind": [
                         124,
                         148
@@ -8343,7 +8495,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -8373,16 +8525,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { KeyValuePipe } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  input,\n  output,\n} from \"@angular/core\";\nimport { LoginLogoutComponent } from \"./LoginLogout/login-logout.component\";\nimport { NavbarLinkComponent } from \"./NavbarLink/navbar-link.component\";\n\nexport const NAVBAR_ROUTES = {\n  Homepage: \"/\",\n  Login: \"/login\",\n} satisfies Record<string, string>;\nexport const AUTHENTICATED_ROUTES = { Create: \"/blog/create\" } satisfies Record<\n  string,\n  string\n>;\n\n@Component({\n  selector: \"app-navbar\",\n  imports: [KeyValuePipe, NavbarLinkComponent, LoginLogoutComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./navbar.component.html\",\n})\nexport class NavbarComponent {\n  readonly authenticated = input.required<boolean>();\n  readonly currentUrl = input.required<string>();\n  readonly logout = output();\n\n  protected readonly routes = {\n    Homepage: { href: \"/\", protected: false },\n    Create: { href: \"/blog/create\", protected: true },\n    \"My blogs\": { href: \"/blog/personal\", protected: true },\n    Login: { href: \"/login\", protected: false },\n  };\n\n  protected preserverOrder() {\n    return 0;\n  }\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Organisms/navbar\";\nimport { KeyValuePipe } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  input,\n  output,\n} from \"@angular/core\";\nimport { LoginLogoutComponent } from \"./LoginLogout/login-logout.component\";\nimport { NavbarLinkComponent } from \"./NavbarLink/navbar-link.component\";\n\nexport const NAVBAR_ROUTES = {\n  Homepage: \"/\",\n  Login: \"/login\",\n} satisfies Record<string, string>;\nexport const AUTHENTICATED_ROUTES = { Create: \"/blog/create\" } satisfies Record<\n  string,\n  string\n>;\n\n@Component({\n  selector: \"app-navbar\",\n  imports: [KeyValuePipe, NavbarLinkComponent, LoginLogoutComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  templateUrl: \"./navbar.component.html\",\n})\nexport class NavbarComponent {\n  protected readonly style = style;\n  readonly authenticated = input.required<boolean>();\n  readonly currentUrl = input.required<string>();\n  readonly logout = output();\n\n  protected readonly routes = {\n    Homepage: { href: \"/\", protected: false },\n    Create: { href: \"/blog/create\", protected: true },\n    \"My blogs\": { href: \"/blog/personal\", protected: true },\n    Login: { href: \"/login\", protected: false },\n  };\n\n  protected preserverOrder() {\n    return 0;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<nav class=\"sticky top-0 z-10 bg-white p-2 text-sm text-cyan-800\">\n  <ul class=\"flex list-none justify-end gap-2.5\">\n    @for (route of routes | keyvalue: preserverOrder; track route.key) {\n      @let href = route.value.href;\n      @let protected = route.value.protected;\n      @let label = route.key;\n      @if (!protected || authenticated()) {\n        <li class=\"px-2\">\n          @if (label !== \"Login\") {\n            <app-navbar-link\n              [currentUrl]=\"currentUrl()\"\n              [href]=\"href\"\n              [label]=\"label\"\n            />\n          } @else {\n            <app-login-logout\n              [currentUrl]=\"currentUrl()\"\n              [href]=\"href\"\n              [label]=\"label\"\n              [authenticated]=\"authenticated()\"\n              (logout)=\"logout.emit()\"\n            />\n          }\n        </li>\n      }\n    }\n  </ul>\n</nav>\n"
+            "templateData": "<nav [class]=\"style.nav\">\n  <ul [class]=\"style.list\">\n    @for (route of routes | keyvalue: preserverOrder; track route.key) {\n      @let href = route.value.href;\n      @let protected = route.value.protected;\n      @let label = route.key;\n      @if (!protected || authenticated()) {\n        <li [class]=\"style.listItem\">\n          @if (label !== \"Login\") {\n            <app-navbar-link\n              [currentUrl]=\"currentUrl()\"\n              [href]=\"href\"\n              [label]=\"label\"\n            />\n          } @else {\n            <app-login-logout\n              [currentUrl]=\"currentUrl()\"\n              [href]=\"href\"\n              [label]=\"label\"\n              [authenticated]=\"authenticated()\"\n              (logout)=\"logout.emit()\"\n            />\n          }\n        </li>\n      }\n    }\n  </ul>\n</nav>\n"
         },
         {
             "name": "NavbarLinkComponent",
-            "id": "component-NavbarLinkComponent-0c9bb791070903a63d4be3ce0b19914645727ae84938c5d772e23ecd371cfeb85b967fb00f51a65aee2b3b6564922f27fa1a0528219127842c814df729552e16",
+            "id": "component-NavbarLinkComponent-1ac0082e30738d717e5895d23ed38cc04259f8ebe588b4b1a47cbfb75e72e4df7055720f0210df4b45473087cbdadbd9cc517c3823ea3ced6150611f706727aa",
             "file": "src/app/components/Organisms/NavBar/NavbarLink/navbar-link.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -8393,7 +8545,7 @@
             "selector": "app-navbar-link",
             "styleUrls": [],
             "styles": [],
-            "template": "<a   [class.active]=\"currentUrl() === href()\"\n   class=\"underline-offset-7 [&.active]:pointer-events-none [&.active]:cursor-default [&.active]:underline\"\n   [routerLink]=\"href()\"\n   >{{ label() }}</a\n >",
+            "template": "<a   [class]=\"style.navlink(currentUrl() === href())\"\n   [routerLink]=\"href()\"\n   >{{ label() }}</a\n >",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -8406,7 +8558,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -8420,7 +8572,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -8434,7 +8586,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 18,
                     "modifierKind": [
                         148
                     ],
@@ -8451,7 +8603,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 19,
                     "modifierKind": [
                         148
                     ],
@@ -8465,7 +8617,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         148
                     ],
@@ -8479,11 +8631,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 18,
                     "modifierKind": [
                         148
                     ],
                     "required": true
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 }
             ],
             "methodsClass": [],
@@ -8500,7 +8667,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\n\n@Component({\n  selector: \"app-navbar-link\",\n  imports: [RouterLink],\n  template: ` <a\n    [class.active]=\"currentUrl() === href()\"\n    class=\"underline-offset-7 [&.active]:pointer-events-none [&.active]:cursor-default [&.active]:underline\"\n    [routerLink]=\"href()\"\n    >{{ label() }}</a\n  >`,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NavbarLinkComponent {\n  readonly href = input.required<string>();\n  readonly label = input.required<string>();\n  readonly currentUrl = input.required<string>();\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Organisms/navbar\";\nimport { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\n\n@Component({\n  selector: \"app-navbar-link\",\n  imports: [RouterLink],\n  template: ` <a\n    [class]=\"style.navlink(currentUrl() === href())\"\n    [routerLink]=\"href()\"\n    >{{ label() }}</a\n  >`,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NavbarLinkComponent {\n  protected readonly style = style;\n  readonly href = input.required<string>();\n  readonly label = input.required<string>();\n  readonly currentUrl = input.required<string>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -8701,7 +8868,7 @@
         },
         {
             "name": "PageTitleComponent",
-            "id": "component-PageTitleComponent-760f5446815f7de33bdfb4680b56327f5ffaeeccaa059503c740e5421384ee86faa6a691e2d65049e7d80f4779e7e68cf25519a4c60afb4f4b380d3507bdbeb3",
+            "id": "component-PageTitleComponent-9eb72dfb3c6e8acf3d2b58854729e7eeaf107de58ad6d301ae5134f34eab78287dbedc729c707402b115b0f8400a60a19ab0e41674d947c50e92ad469ca5d734",
             "file": "src/app/components/Atoms/PageTitle/page-title.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -8712,13 +8879,29 @@
             "selector": "app-page-title",
             "styleUrls": [],
             "styles": [],
-            "template": "<h1   class=\"text-center text-3xl font-light uppercase text-cyan-800\"\n >\n   <ng-content />\n </h1>",
+            "template": "<h1 [class]=\"style\">   <ng-content />\n </h1>",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                }
+            ],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -8729,7 +8912,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-page-title\",\n  template: ` <h1\n    class=\"text-center text-3xl font-light uppercase text-cyan-800\"\n  >\n    <ng-content />\n  </h1>`,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageTitleComponent {}\n",
+            "sourceCode": "import style from \"@/styles/components/Atoms/pageTitle\";\nimport { ChangeDetectionStrategy, Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-page-title\",\n  template: ` <h1 [class]=\"style\">\n    <ng-content />\n  </h1>`,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageTitleComponent {\n  protected readonly style = style;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -9494,7 +9677,7 @@
         },
         {
             "name": "ResultStatusComponent",
-            "id": "component-ResultStatusComponent-95286cb544c0dd363d29b16ec62433a2de7030650a0af110a982cb092e7e3d245f28b9e7bf8e7a4e6862a941bb81c319ba83f703d113cd59f0b0b02a37dbc11e",
+            "id": "component-ResultStatusComponent-1db793790d03dd60faa6a987af9b42b56f051fa2df338aa113266f26236d03efbfa77c38c1381920da396ba590aa4d3caa02638801b03d342528d11ce43cedc0",
             "file": "src/app/components/Molecules/FormWrapper/ResultStatus/result-status.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -9505,7 +9688,7 @@
             "selector": "app-form-result-status",
             "styleUrls": [],
             "styles": [],
-            "template": "@let result = resultStatus();\n@switch (result.status) {\n  @case (\"success\") {\n    <p class=\"text-xs text-green-600\">\n      {{ successLabel() }}\n    </p>\n  }\n  @case (\"error\") {\n    <p class=\"text-xs text-red-600\">\n      {{ result.message }}\n    </p>\n  }\n}\n",
+            "template": "@let result = resultStatus();\n@switch (result.status) {\n  @case (\"success\") {\n    <p [class]=\"styles.successText\">\n      {{ successLabel() }}\n    </p>\n  }\n  @case (\"error\") {\n    <p [class]=\"styles.errorText\">\n      {{ result.message }}\n    </p>\n  }\n}\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -9518,7 +9701,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
@@ -9532,7 +9715,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         148
                     ],
@@ -9549,11 +9732,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
                     "required": true
+                },
+                {
+                    "name": "styles",
+                    "defaultValue": "styles.status",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "successLabel",
@@ -9563,7 +9761,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         148
                     ],
@@ -9580,7 +9778,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\nimport type { ResultStatus } from \"../../../../services/form.service\";\n\n@Component({\n  selector: \"app-form-result-status\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @let result = resultStatus();\n    @switch (result.status) {\n      @case (\"success\") {\n        <p class=\"text-xs text-green-600\">\n          {{ successLabel() }}\n        </p>\n      }\n      @case (\"error\") {\n        <p class=\"text-xs text-red-600\">\n          {{ result.message }}\n        </p>\n      }\n    }\n  `,\n})\nexport class ResultStatusComponent {\n  readonly resultStatus = input.required<ResultStatus>();\n  readonly successLabel = input.required<string>();\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/formWrapper\";\nimport { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\nimport type { ResultStatus } from \"../../../../services/form.service\";\n\n@Component({\n  selector: \"app-form-result-status\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @let result = resultStatus();\n    @switch (result.status) {\n      @case (\"success\") {\n        <p [class]=\"styles.successText\">\n          {{ successLabel() }}\n        </p>\n      }\n      @case (\"error\") {\n        <p [class]=\"styles.errorText\">\n          {{ result.message }}\n        </p>\n      }\n    }\n  `,\n})\nexport class ResultStatusComponent {\n  protected readonly styles = styles.status;\n  readonly resultStatus = input.required<ResultStatus>();\n  readonly successLabel = input.required<string>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -9657,7 +9855,7 @@
         },
         {
             "name": "SubmitButtonComponent",
-            "id": "component-SubmitButtonComponent-7e86a5f4d7b53b9e5f3a2e1940d5c232db566a1dd57fc3a431482fae2753be476f6d4395637a5acf77a5faf39fa73f545f37ff7dd0b06f3ba7e71f7150147c40",
+            "id": "component-SubmitButtonComponent-3063e1d841ce29430023ae4987c43c700c60e9d2c5b8822419298f78dd52d40586b8cd668f8456ae8b365d118f7927f7f621c25b90a5eac70a6f7bd1c0c2c93f",
             "file": "src/app/components/Molecules/SubmitButton/submit-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -9666,10 +9864,8 @@
             "providers": [],
             "selector": "app-submit-button",
             "styleUrls": [],
-            "styles": [
-                "\n    app-spinner {\n      opacity: 1;\n      width: auto;\n      padding-left: 1rem;\n      transform: scaleX(1);\n      transition: all 0.3s ease;\n      @starting-style {\n        opacity: 0;\n        transform: scaleX(0);\n        padding-left: 0;\n      }\n    }\n  "
-            ],
-            "template": "<app-button\n  [type]=\"type()\"\n  [variant]=\"variant()\"\n  (click)=\"clicked.emit()\"\n  [disabled]=\"isDisabled()\"\n  [title]=\"\n    isDisabled()\n      ? 'Please make changes to the form in order to be able to submit'\n      : null\n  \"\n>\n  <div class=\"flex\">\n    <span>{{ label() }}</span>\n    @if (isSubmitting()) {\n      @defer (on timer(400ms)) {\n        <app-spinner />\n      }\n    }\n  </div>\n</app-button>\n",
+            "styles": [],
+            "template": "<app-button\n  [type]=\"type()\"\n  [variant]=\"variant()\"\n  (click)=\"clicked.emit()\"\n  [disabled]=\"isDisabled()\"\n  [title]=\"\n    isDisabled()\n      ? 'Please make changes to the form in order to be able to submit'\n      : null\n  \"\n>\n  <div [class]=\"style.contentWrapper\">\n    <span>{{ label() }}</span>\n    @if (isSubmitting()) {\n      @defer (on timer(400ms)) {\n        <app-spinner [class]=\"style.spinnerTransition\" />\n      }\n    }\n  </div>\n</app-button>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -9682,7 +9878,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 50,
+                    "line": 38,
                     "modifierKind": [
                         148
                     ],
@@ -9696,7 +9892,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 49,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
@@ -9711,7 +9907,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -9730,7 +9926,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9750,7 +9946,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 52,
+                    "line": 40,
                     "modifierKind": [
                         124
                     ]
@@ -9763,7 +9959,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 50,
+                    "line": 38,
                     "modifierKind": [
                         148
                     ],
@@ -9777,11 +9973,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 49,
+                    "line": 37,
                     "modifierKind": [
                         148
                     ],
                     "required": true
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "styles",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "type",
@@ -9792,7 +10003,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 51,
+                    "line": 39,
                     "modifierKind": [
                         164,
                         148
@@ -9809,7 +10020,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9827,7 +10038,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -9845,7 +10056,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 23,
                     "modifierKind": [
                         148
                     ],
@@ -9862,7 +10073,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 20,
                     "modifierKind": [
                         148
                     ],
@@ -9890,10 +10101,10 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, computed, input } from \"@angular/core\";\nimport {\n  AbstractButtonComponent,\n  ButtonComponent,\n} from \"../../Atoms/Button/button.component\";\nimport { SpinnerComponent } from \"../../Atoms/Spinner/spinner.component\";\n\n@Component({\n  selector: \"app-submit-button\",\n  imports: [ButtonComponent, SpinnerComponent],\n  styles: `\n    app-spinner {\n      opacity: 1;\n      width: auto;\n      padding-left: 1rem;\n      transform: scaleX(1);\n      transition: all 0.3s ease;\n      @starting-style {\n        opacity: 0;\n        transform: scaleX(0);\n        padding-left: 0;\n      }\n    }\n  `,\n  template: `\n    <app-button\n      [type]=\"type()\"\n      [variant]=\"variant()\"\n      (click)=\"clicked.emit()\"\n      [disabled]=\"isDisabled()\"\n      [title]=\"\n        isDisabled()\n          ? 'Please make changes to the form in order to be able to submit'\n          : null\n      \"\n    >\n      <div class=\"flex\">\n        <span>{{ label() }}</span>\n        @if (isSubmitting()) {\n          @defer (on timer(400ms)) {\n            <app-spinner />\n          }\n        }\n      </div>\n    </app-button>\n  `,\n})\nexport class SubmitButtonComponent extends AbstractButtonComponent {\n  readonly label = input.required<string>();\n  readonly isSubmitting = input.required<boolean>();\n  override readonly type = input<\"button\" | \"submit\" | \"reset\">(\"submit\");\n  protected isDisabled = computed(() => this.disabled() || this.isSubmitting());\n}\n",
+            "sourceCode": "import styles from \"@/styles/components/Molecules/submitButton\";\nimport { Component, computed, input } from \"@angular/core\";\nimport {\n  AbstractButtonComponent,\n  ButtonComponent,\n} from \"../../Atoms/Button/button.component\";\nimport { SpinnerComponent } from \"../../Atoms/Spinner/spinner.component\";\n\n@Component({\n  selector: \"app-submit-button\",\n  imports: [ButtonComponent, SpinnerComponent],\n  template: `\n    <app-button\n      [type]=\"type()\"\n      [variant]=\"variant()\"\n      (click)=\"clicked.emit()\"\n      [disabled]=\"isDisabled()\"\n      [title]=\"\n        isDisabled()\n          ? 'Please make changes to the form in order to be able to submit'\n          : null\n      \"\n    >\n      <div [class]=\"style.contentWrapper\">\n        <span>{{ label() }}</span>\n        @if (isSubmitting()) {\n          @defer (on timer(400ms)) {\n            <app-spinner [class]=\"style.spinnerTransition\" />\n          }\n        }\n      </div>\n    </app-button>\n  `,\n})\nexport class SubmitButtonComponent extends AbstractButtonComponent {\n  protected readonly style = styles;\n  readonly label = input.required<string>();\n  readonly isSubmitting = input.required<boolean>();\n  override readonly type = input<\"button\" | \"submit\" | \"reset\">(\"submit\");\n  protected isDisabled = computed(() => this.disabled() || this.isSubmitting());\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
-            "stylesData": "\n    app-spinner {\n      opacity: 1;\n      width: auto;\n      padding-left: 1rem;\n      transform: scaleX(1);\n      transition: all 0.3s ease;\n      @starting-style {\n        opacity: 0;\n        transform: scaleX(0);\n        padding-left: 0;\n      }\n    }\n  \n",
+            "stylesData": "",
             "extends": [
                 "AbstractButtonComponent"
             ]
@@ -9902,16 +10113,6 @@
     "modules": [],
     "miscellaneous": {
         "variables": [
-            {
-                "name": "activeClasses",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Atoms/Button/button.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "\"active:scale-96 [.active]:scale-96 disabled:[.active]:scale-100 disabled:[.active]:shadow-none active:shadow-xs [.active]:shadow-xs disabled:active:scale-100 disabled:active:shadow-none\""
-            },
             {
                 "name": "ArrowIcon",
                 "ctype": "miscellaneous",
@@ -10432,7 +10633,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content:\n        \"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente veniam ut quam ducimus repellendus. Vitae quas maxime quibusdam atque magnam suscipit eligendi mollitia quisquam? Quia minima reiciendis provident dignissimos pariatur!\\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla perspiciatis ab sit? Voluptates suscipit placeat eligendi minus corporis, est reiciendis aliquid iste dolorem quae, a, temporibus maiores unde ut aut?\\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, eum sit minima unde ullam, magnam aspernatur perspiciatis, velit voluptatem corporis mollitia. Animi natus nisi culpa rem. Tempore dolores magni cumque!\",\n      summary: z.string().max(SUMMARY_LENGTH_LIMIT).parse(content),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
+                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
             },
             {
                 "name": "meta",
@@ -10443,36 +10644,6 @@
                 "deprecationMessage": "",
                 "type": "Meta<SubmitButtonComponent>",
                 "defaultValue": "{\n  title: \"Molecules/SubmitButton\",\n  component: SubmitButtonComponent,\n  argTypes: {\n    ...buttonMeta.argTypes,\n    isSubmitting: { control: \"boolean\" },\n    label: { control: \"text\" },\n  },\n  args: {\n    ...buttonMeta.args,\n    type: \"submit\",\n    isSubmitting: false,\n    label: \"Submit\",\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Pages/Blog/blog-page.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Pages/BlogPage\",\n  component: BlogPageWrapperComponent,\n  args: { id },\n} satisfies Meta<BlogPageWrapperComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Pages/LoginPage/login-page.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Pages/LoginPage\",\n  component: LoginPageComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        {\n          provide: AuthenticationService,\n          useClass: MockAuthenticationService,\n        },\n        provideRouter([]),\n      ],\n    }),\n  ],\n} satisfies Meta<LoginPageComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
             },
             {
                 "name": "meta",
@@ -10523,6 +10694,36 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "{\n  title: \"Organisms/NotFound\",\n  component: NotFoundComponent,\n  argTypes: { navigateEvent: { action: \"Navigate action\" } },\n  decorators: [applicationConfig({ providers: [provideRouter([])] })],\n} satisfies Meta<NotFoundComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Pages/Blog/blog-page.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Pages/BlogPage\",\n  component: BlogPageWrapperComponent,\n  args: { id },\n} satisfies Meta<BlogPageWrapperComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Pages/LoginPage/login-page.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Pages/LoginPage\",\n  component: LoginPageComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        {\n          provide: AuthenticationService,\n          useClass: MockAuthenticationService,\n        },\n        provideRouter([]),\n      ],\n    }),\n  ],\n} satisfies Meta<LoginPageComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
             },
             {
                 "name": "mockApiService",
@@ -10655,16 +10856,6 @@
                 "defaultValue": "<Validator extends ZodType, Result>(value: Observable<Result>, validator: Validator):Observable<ParsedResult<Validator, Result>> => {\n    return value.pipe(map(result => {\n        if(!Array.isArray(result)) {\n            return validator.parse(result) as ParsedResult<Validator, Result>\n        }\n        return result.map(value => validator.parse(value)) as ParsedResult<Validator, Result>\n    }))\n}"
             },
             {
-                "name": "sizeClasses",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Atoms/Button/button.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  sm: \"text-sm px-3 py-2 \",\n  md: \"text-md px-3 py-2\",\n  lg: \"text-[18px] px-3 py-3\",\n}"
-            },
-            {
                 "name": "SpinnerStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -10723,16 +10914,6 @@
                 "deprecationMessage": "",
                 "type": "BackLinkInput",
                 "defaultValue": "{\n  href: \"/\",\n  label: \"Back to homepage\",\n}"
-            },
-            {
-                "name": "variantClasses",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Atoms/Button/button.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  confirm:\n    \"border-green-700 bg-green-50 text-green-700 decoration-green-700 shadow-green-600/20\",\n  warning:\n    \"border-red-700 bg-red-100 text-red-700 decoration-red-700 shadow-red-600/20\",\n  cancel:\n    \"border-neutral-700 bg-neutral-100 text-neutral-700 decoration-neutral-700 shadow-neutral-600/20\",\n  info: \"border-violet-700 bg-violet-100 text-violet-700 decoration-violet-700 shadow-violet-600/20\",\n}"
             }
         ],
         "functions": [
@@ -10935,38 +11116,6 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/Atoms/Button/button.component.ts": [
-                {
-                    "name": "activeClasses",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/Button/button.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "\"active:scale-96 [.active]:scale-96 disabled:[.active]:scale-100 disabled:[.active]:shadow-none active:shadow-xs [.active]:shadow-xs disabled:active:scale-100 disabled:active:shadow-none\""
-                },
-                {
-                    "name": "sizeClasses",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/Button/button.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  sm: \"text-sm px-3 py-2 \",\n  md: \"text-md px-3 py-2\",\n  lg: \"text-[18px] px-3 py-3\",\n}"
-                },
-                {
-                    "name": "variantClasses",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/Button/button.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  confirm:\n    \"border-green-700 bg-green-50 text-green-700 decoration-green-700 shadow-green-600/20\",\n  warning:\n    \"border-red-700 bg-red-100 text-red-700 decoration-red-700 shadow-red-600/20\",\n  cancel:\n    \"border-neutral-700 bg-neutral-100 text-neutral-700 decoration-neutral-700 shadow-neutral-600/20\",\n  info: \"border-violet-700 bg-violet-100 text-violet-700 decoration-violet-700 shadow-violet-600/20\",\n}"
-                }
-            ],
             "src/app/components/Atoms/Arrow/arrow.component.stories.ts": [
                 {
                     "name": "ArrowIcon",
@@ -11128,7 +11277,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content:\n        \"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente veniam ut quam ducimus repellendus. Vitae quas maxime quibusdam atque magnam suscipit eligendi mollitia quisquam? Quia minima reiciendis provident dignissimos pariatur!\\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla perspiciatis ab sit? Voluptates suscipit placeat eligendi minus corporis, est reiciendis aliquid iste dolorem quae, a, temporibus maiores unde ut aut?\\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, eum sit minima unde ullam, magnam aspernatur perspiciatis, velit voluptatem corporis mollitia. Animi natus nisi culpa rem. Tempore dolores magni cumque!\",\n      summary: z.string().max(SUMMARY_LENGTH_LIMIT).parse(content),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
+                    "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
                 }
             ],
             "src/app/components/Organisms/BlogForm/blog-form.component.stories.ts": [
@@ -11717,28 +11866,6 @@
                     "defaultValue": "{\n  name: \"SubmitButton\",\n}"
                 }
             ],
-            "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
-                },
-                {
-                    "name": "PageWrapperStory",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<PageWrapperWrapperComponent>",
-                    "defaultValue": "{\n  name: \"PageWrapper\",\n}"
-                }
-            ],
             "src/app/components/Organisms/NavBar/navbar.component.stories.ts": [
                 {
                     "name": "meta",
@@ -11781,6 +11908,28 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<NotFoundComponent>",
                     "defaultValue": "{}"
+                }
+            ],
+            "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
+                },
+                {
+                    "name": "PageWrapperStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<PageWrapperWrapperComponent>",
+                    "defaultValue": "{\n  name: \"PageWrapper\",\n}"
                 }
             ],
             "src/app/components/Organisms/BlogForm/blog-form.service.ts": [
@@ -12146,7 +12295,7 @@
                 "linktype": "component",
                 "name": "BoxComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -12204,36 +12353,6 @@
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/14",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Button/button.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "activeClasses",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Button/button.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "sizeClasses",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Button/button.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "variantClasses",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -12329,7 +12448,7 @@
                 "linktype": "component",
                 "name": "ErrorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -12405,7 +12524,7 @@
                 "linktype": "component",
                 "name": "PageTitleComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -12443,7 +12562,7 @@
                 "linktype": "component",
                 "name": "BackLinkComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -12512,7 +12631,7 @@
                 "linktype": "component",
                 "name": "BlogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -12521,7 +12640,7 @@
                 "linktype": "component",
                 "name": "DeleteBlogDialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -12588,7 +12707,7 @@
                 "linktype": "component",
                 "name": "DialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -12597,7 +12716,7 @@
                 "linktype": "component",
                 "name": "ResultStatusComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -12605,8 +12724,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "FormWrapperComponent",
-                "coveragePercent": 9,
-                "coverageCount": "2/22",
+                "coveragePercent": 8,
+                "coverageCount": "2/23",
                 "status": "low"
             },
             {
@@ -12644,7 +12763,7 @@
                 "linktype": "component",
                 "name": "InputComponent",
                 "coveragePercent": 7,
-                "coverageCount": "2/28",
+                "coverageCount": "2/27",
                 "status": "low"
             },
             {
@@ -12702,7 +12821,7 @@
                 "linktype": "component",
                 "name": "InputWrapperComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -12731,7 +12850,7 @@
                 "linktype": "component",
                 "name": "SubmitButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
@@ -12906,7 +13025,7 @@
                 "linktype": "component",
                 "name": "BlogPreviewComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -13042,7 +13161,7 @@
                 "linktype": "component",
                 "name": "LoginLogoutComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -13051,7 +13170,7 @@
                 "linktype": "component",
                 "name": "NavbarLinkComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -13080,7 +13199,7 @@
                 "linktype": "component",
                 "name": "NavbarComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {

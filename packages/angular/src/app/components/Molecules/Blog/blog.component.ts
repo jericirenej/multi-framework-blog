@@ -1,4 +1,5 @@
 import type { BlogDto } from "@/api/schemas";
+import styles from "@/styles/components/Molecules/blog";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,6 +13,7 @@ import {
   templateUrl: "./blog.component.html",
 })
 export class BlogComponent {
+  protected readonly styles = styles;
   readonly blog = input.required<BlogDto>();
   protected readonly paragraphs = computed(() =>
     this.blog()

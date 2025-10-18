@@ -1,3 +1,4 @@
+import styles from "@/styles/components/Molecules/dialog";
 import { NgClass } from "@angular/common";
 import {
   ChangeDetectionStrategy,
@@ -16,6 +17,7 @@ import {
   templateUrl: "./dialog.component.html",
 })
 export class DialogComponent {
+  protected readonly styles = styles;
   readonly title = input<string>();
   readonly show = model(true);
 

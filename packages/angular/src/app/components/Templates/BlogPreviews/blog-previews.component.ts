@@ -1,4 +1,5 @@
 import type { BlogSummaryDto } from "@/api/schemas";
+import style from "@/styles/components/Templates/blogPreviews";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,6 +21,7 @@ import { PageWrapperWithLoadingComponent } from "../PageWrapperWithLoading/page-
   imports: [BlogPreviewComponent, PageWrapperWithLoadingComponent],
 })
 export abstract class BlogPreviewTemplate {
+  protected readonly style = style;
   protected readonly blogPreviewService = inject(BlogPreviewServiceToken);
   protected readonly limit = 20;
   readonly authenticated = inject(AuthenticationService).authenticated;
