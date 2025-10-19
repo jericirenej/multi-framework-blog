@@ -1,7 +1,7 @@
 @let isOwnPost = data() | isAuthor | async;
 <div [class]="style.outerWrapper">
   <app-box>
-    <div [class]="isOwnPost ? style.innerWrapperOwnPost : style.innerWrapper">
+    <div [class]="style.innerWrapper(isOwnPost)">
       <div [class]="style.date.wrapper">
         <span [class]="style.date.span" title="Created date">{{
           data().created_at | date

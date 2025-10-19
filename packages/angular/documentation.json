@@ -3870,11 +3870,11 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "@let isOwnPost = data() | isAuthor | async;\n<div [class]=\"style.outerWrapper\">\n  <app-box>\n    <div [class]=\"isOwnPost ? style.innerWrapperOwnPost : style.innerWrapper\">\n      <div [class]=\"style.date.wrapper\">\n        <span [class]=\"style.date.span\" title=\"Created date\">{{\n          data().created_at | date\n        }}</span>\n      </div>\n      @if (isOwnPost) {\n        <div [class]=\"style.actions.wrapper\">\n          <a [routerLink]=\"`/blog/edit/${data().id}`\" title=\"Update post\">\n            <app-edit-icon [class]=\"style.actions.editIcon\" />\n          </a>\n          <button\n            (click)=\"show.set(true)\"\n            title=\"Delete post\"\n            [class]=\"style.actions.deleteButton\"\n          >\n            <app-delete-icon />\n          </button>\n        </div>\n      }\n    </div>\n    <a [routerLink]=\"`/blog/${data().id}`\">\n      <div [class]=\"style.post.wrapper\">\n        <h2 [class]=\"style.post.heading\">\n          {{ data().title }}\n        </h2>\n        <span [class]=\"style.post.author\" title=\"Author\">{{\n          data().author_name\n        }}</span>\n      </div>\n      <div [class]=\"style.post.content\">\n        <p>{{ data().summary }}</p>\n      </div>\n    </a>\n  </app-box>\n</div>\n\n<app-delete-blog-dialog [(show)]=\"show\" (confirmDelete)=\"deleteAction.emit()\" />\n"
+            "templateData": "@let isOwnPost = data() | isAuthor | async;\n<div [class]=\"style.outerWrapper\">\n  <app-box>\n    <div [class]=\"style.innerWrapper(isOwnPost)\">\n      <div [class]=\"style.date.wrapper\">\n        <span [class]=\"style.date.span\" title=\"Created date\">{{\n          data().created_at | date\n        }}</span>\n      </div>\n      @if (isOwnPost) {\n        <div [class]=\"style.actions.wrapper\">\n          <a [routerLink]=\"`/blog/edit/${data().id}`\" title=\"Update post\">\n            <app-edit-icon [class]=\"style.actions.editIcon\" />\n          </a>\n          <button\n            (click)=\"show.set(true)\"\n            title=\"Delete post\"\n            [class]=\"style.actions.deleteButton\"\n          >\n            <app-delete-icon />\n          </button>\n        </div>\n      }\n    </div>\n    <a [routerLink]=\"`/blog/${data().id}`\">\n      <div [class]=\"style.post.wrapper\">\n        <h2 [class]=\"style.post.heading\">\n          {{ data().title }}\n        </h2>\n        <span [class]=\"style.post.author\" title=\"Author\">{{\n          data().author_name\n        }}</span>\n      </div>\n      <div [class]=\"style.post.content\">\n        <p>{{ data().summary }}</p>\n      </div>\n    </a>\n  </app-box>\n</div>\n\n<app-delete-blog-dialog [(show)]=\"show\" (confirmDelete)=\"deleteAction.emit()\" />\n"
         },
         {
             "name": "BlogPreviewTemplate",
-            "id": "component-BlogPreviewTemplate-366c55f5b51aae5eeb438626a45c3fb61fc1f16d78068c52d663a17e200c3c245c6620173cb44a4e907129a936be2eef1f7aa3da8412db804823365cea4c3c96",
+            "id": "component-BlogPreviewTemplate-fc4155e3c378a2a197bdaf7a3e382280e6d475254a7f90fbe162c4ad73b6da67c64013c43fc7ceaf3d99e01f3c8c446a273c8667575cb6a6d41574a15b2bcaa7",
             "file": "src/app/components/Templates/BlogPreviews/blog-previews.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3902,7 +3902,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         124
                     ]
@@ -3916,7 +3916,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         148
                     ]
@@ -3930,7 +3930,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         124,
                         148
@@ -3945,7 +3945,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         124,
                         148
@@ -3960,7 +3960,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Loading more items is only allowed if a request for blogs does not\nreturn an empty array.</p>\n",
-                    "line": 32,
+                    "line": 34,
                     "rawdescription": "\nLoading more items is only allowed if a request for blogs does not\nreturn an empty array.",
                     "modifierKind": [
                         124
@@ -3975,7 +3975,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         124,
                         148
@@ -3990,7 +3990,22 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
                     "modifierKind": [
                         124,
                         148
@@ -4004,7 +4019,7 @@
                     "optional": false,
                     "returnType": "Observable<BlogSummaryDto[]>",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -4024,7 +4039,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4058,7 +4073,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  signal,\n} from \"@angular/core\";\nimport { takeUntilDestroyed } from \"@angular/core/rxjs-interop\";\nimport { concatMap, filter, type Observable, Subject, tap } from \"rxjs\";\nimport { ApiService } from \"../../../services/api.service\";\nimport { BlogPreviewServiceToken } from \"../../../services/blog-preview.service\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { BlogPreviewComponent } from \"../../Organisms/BlogPreview/blog-preview.component\";\nimport { PageWrapperWithLoadingComponent } from \"../PageWrapperWithLoading/page-wrapper-with-loading.component\";\n\n@Component({\n  selector: \"app-blogs-preview-template\",\n  templateUrl: \"./blog-previews.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [BlogPreviewComponent, PageWrapperWithLoadingComponent],\n})\nexport abstract class BlogPreviewTemplate {\n  protected readonly blogPreviewService = inject(BlogPreviewServiceToken);\n  protected readonly limit = 20;\n  readonly authenticated = inject(AuthenticationService).authenticated;\n  protected apiService = inject(ApiService);\n  protected readonly blogs = signal<BlogSummaryDto[]>([]);\n\n  protected readonly loadMore$ = new Subject<void>();\n  /** Loading more items is only allowed if a request for blogs does not\n   * return an empty array. */\n  protected canLoadMore = false;\n\n  constructor() {\n    this.getBlogs().subscribe();\n    this.loadMore$\n      .pipe(\n        filter(() => this.canLoadMore),\n        concatMap(() => this.getBlogs()),\n        takeUntilDestroyed(),\n      )\n      .subscribe();\n  }\n\n  protected getBlogs(): Observable<BlogSummaryDto[]> {\n    return this.blogPreviewService\n      .getBlogs({ offset: this.blogs().length, limit: this.limit })\n      .pipe(\n        tap((data) => {\n          this.canLoadMore = !!data.length;\n          if (!this.canLoadMore) return;\n          this.blogs.update((prev) => [...prev, ...data]);\n        }),\n      );\n  }\n\n  handleDelete(postId: string): void {\n    this.apiService\n      .deleteBlog(postId)\n      .pipe(\n        tap(() => {\n          this.blogs.set(this.blogs().filter((blog) => blog.id !== postId));\n        }),\n      )\n      .subscribe();\n  }\n}\n",
+            "sourceCode": "import type { BlogSummaryDto } from \"@/api/schemas\";\nimport style from \"@/styles/components/Templates/blogPreviews\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  signal,\n} from \"@angular/core\";\nimport { takeUntilDestroyed } from \"@angular/core/rxjs-interop\";\nimport { concatMap, filter, type Observable, Subject, tap } from \"rxjs\";\nimport { ApiService } from \"../../../services/api.service\";\nimport { BlogPreviewServiceToken } from \"../../../services/blog-preview.service\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { BlogPreviewComponent } from \"../../Organisms/BlogPreview/blog-preview.component\";\nimport { PageWrapperWithLoadingComponent } from \"../PageWrapperWithLoading/page-wrapper-with-loading.component\";\n\n@Component({\n  selector: \"app-blogs-preview-template\",\n  templateUrl: \"./blog-previews.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [BlogPreviewComponent, PageWrapperWithLoadingComponent],\n})\nexport abstract class BlogPreviewTemplate {\n  protected readonly style = style;\n  protected readonly blogPreviewService = inject(BlogPreviewServiceToken);\n  protected readonly limit = 20;\n  readonly authenticated = inject(AuthenticationService).authenticated;\n  protected apiService = inject(ApiService);\n  protected readonly blogs = signal<BlogSummaryDto[]>([]);\n\n  protected readonly loadMore$ = new Subject<void>();\n  /** Loading more items is only allowed if a request for blogs does not\n   * return an empty array. */\n  protected canLoadMore = false;\n\n  constructor() {\n    this.getBlogs().subscribe();\n    this.loadMore$\n      .pipe(\n        filter(() => this.canLoadMore),\n        concatMap(() => this.getBlogs()),\n        takeUntilDestroyed(),\n      )\n      .subscribe();\n  }\n\n  protected getBlogs(): Observable<BlogSummaryDto[]> {\n    return this.blogPreviewService\n      .getBlogs({ offset: this.blogs().length, limit: this.limit })\n      .pipe(\n        tap((data) => {\n          this.canLoadMore = !!data.length;\n          if (!this.canLoadMore) return;\n          this.blogs.update((prev) => [...prev, ...data]);\n        }),\n      );\n  }\n\n  handleDelete(postId: string): void {\n    this.apiService\n      .deleteBlog(postId)\n      .pipe(\n        tap(() => {\n          this.blogs.set(this.blogs().filter((blog) => blog.id !== postId));\n        }),\n      )\n      .subscribe();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4068,10 +4083,10 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 32
+                "line": 34
             },
             "extends": [],
-            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div class=\"flex justify-center\">\n    @if (blogs().length) {\n      <ul class=\"flex list-none flex-col gap-5\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
+            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div [class]=\"style.listWrapper\">\n    @if (blogs().length) {\n      <ul [class]=\"style.list\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
         },
         {
             "name": "BoxComponent",
@@ -6272,7 +6287,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         124
                     ],
@@ -6289,7 +6304,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         148
                     ],
@@ -6306,7 +6321,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         124,
                         148
@@ -6324,7 +6339,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         124,
                         148
@@ -6342,7 +6357,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Loading more items is only allowed if a request for blogs does not\nreturn an empty array.</p>\n",
-                    "line": 32,
+                    "line": 34,
                     "rawdescription": "\nLoading more items is only allowed if a request for blogs does not\nreturn an empty array.",
                     "modifierKind": [
                         124
@@ -6360,7 +6375,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         124,
                         148
@@ -6378,7 +6393,25 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
+                    "modifierKind": [
+                        124,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "BlogPreviewTemplate"
+                    }
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
                     "modifierKind": [
                         124,
                         148
@@ -6395,7 +6428,7 @@
                     "optional": false,
                     "returnType": "Observable<BlogSummaryDto[]>",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -6418,7 +6451,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6462,7 +6495,7 @@
             "extends": [
                 "BlogPreviewTemplate"
             ],
-            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div class=\"flex justify-center\">\n    @if (blogs().length) {\n      <ul class=\"flex list-none flex-col gap-5\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
+            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div [class]=\"style.listWrapper\">\n    @if (blogs().length) {\n      <ul [class]=\"style.list\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
         },
         {
             "name": "HomepageComponent",
@@ -6499,7 +6532,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         124
                     ],
@@ -6516,7 +6549,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         148
                     ],
@@ -6533,7 +6566,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 25,
                     "modifierKind": [
                         124,
                         148
@@ -6551,7 +6584,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         124,
                         148
@@ -6569,7 +6602,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Loading more items is only allowed if a request for blogs does not\nreturn an empty array.</p>\n",
-                    "line": 32,
+                    "line": 34,
                     "rawdescription": "\nLoading more items is only allowed if a request for blogs does not\nreturn an empty array.",
                     "modifierKind": [
                         124
@@ -6587,7 +6620,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         124,
                         148
@@ -6605,7 +6638,25 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
+                    "modifierKind": [
+                        124,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "BlogPreviewTemplate"
+                    }
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
                     "modifierKind": [
                         124,
                         148
@@ -6622,7 +6673,7 @@
                     "optional": false,
                     "returnType": "Observable<BlogSummaryDto[]>",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -6645,7 +6696,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 59,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -6692,7 +6743,7 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "HomepageComponent-1",
-            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div class=\"flex justify-center\">\n    @if (blogs().length) {\n      <ul class=\"flex list-none flex-col gap-5\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
+            "templateData": "<app-page-wrapper-with-loading\n  [pageTitle]=\"blogPreviewService.pageTitle\"\n  (intersectionEvent)=\"loadMore$.next()\"\n>\n  <div [class]=\"style.listWrapper\">\n    @if (blogs().length) {\n      <ul [class]=\"style.list\">\n        @for (blog of blogs(); track blog.id) {\n          <li>\n            <app-blog-preview\n              [data]=\"blog\"\n              (deleteAction)=\"handleDelete(blog.id)\"\n            />\n          </li>\n        }\n      </ul>\n    } @else {\n      <p>No blogs published yet</p>\n    }\n  </div>\n</app-page-wrapper-with-loading>\n"
         },
         {
             "name": "InputComponent",
@@ -8675,7 +8726,7 @@
         },
         {
             "name": "NotFoundComponent",
-            "id": "component-NotFoundComponent-78d4fb107c5ea9ac1ec193514c84b1287f0db20b5d8e8472abfef9c9dc74c60bfb2b5b79a339d4da17214f394d7178d6231bea1a62a9751981d9bc4f4eb798ca",
+            "id": "component-NotFoundComponent-5477c045a92d264e2b530159c45b2091f95d588af842a6becc27363f5726f40e0d3f70e9a7c7d08d3dbbf1c69274ce525b510e44e966e399d187b8e6586b9d12",
             "file": "src/app/components/Organisms/NotFound/not-found.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -8686,7 +8737,7 @@
             "selector": "app-not-found",
             "styleUrls": [],
             "styles": [],
-            "template": "<div>\n  <div class=\"wrapper\">\n    <div class=\"flex items-center justify-center\">\n      <h1 class=\"p-2 text-6xl font-light text-cyan-800 uppercase\">404</h1>\n    </div>\n    <div class=\"h-full w-[2px] bg-neutral-400\"></div>\n    <div class=\"flex flex-col gap-2\">\n      <p class=\"text-xl text-cyan-800 uppercase\">\n        This is not the page you are looking for\n      </p>\n      <p>\n        Redirecting to <a routerLink=\"/\" class=\"underline\">Homepage</a> in\n        <span>{{ countdown() }}</span>\n      </p>\n    </div>\n  </div>\n</div>\n",
+            "template": "<div [class]=\"style.wrapper\">\n  <div [class]=\"style.heading.wrapper\">\n    <h1 [class]=\"style.heading.errorCode\">404</h1>\n  </div>\n  <div [class]=\"style.separator\"></div>\n  <div [class]=\"style.info.wrapper\">\n    <p [class]=\"style.info.text\">\n      This is not the page you are looking for\n    </p>\n    <p>\n      Redirecting to\n      <a routerLink=\"/\" [class]=\"style.info.link\">Homepage</a> in\n      <span>{{ countdown() }}</span>\n    </p>\n  </div>\n</div>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -8752,6 +8803,21 @@
                     "required": false
                 },
                 {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 41,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
                     "name": "timeLimit",
                     "defaultValue": "signal(5)",
                     "deprecated": false,
@@ -8781,8 +8847,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  DestroyRef,\n  effect,\n  inject,\n  output,\n  signal,\n} from \"@angular/core\";\nimport { takeUntilDestroyed } from \"@angular/core/rxjs-interop\";\nimport { RouterLink } from \"@angular/router\";\nimport { interval, takeWhile, tap } from \"rxjs\";\n\n@Component({\n  selector: \"app-not-found\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [RouterLink],\n  template: `\n    <div>\n      <div class=\"wrapper\">\n        <div class=\"flex items-center justify-center\">\n          <h1 class=\"p-2 text-6xl font-light text-cyan-800 uppercase\">404</h1>\n        </div>\n        <div class=\"h-full w-[2px] bg-neutral-400\"></div>\n        <div class=\"flex flex-col gap-2\">\n          <p class=\"text-xl text-cyan-800 uppercase\">\n            This is not the page you are looking for\n          </p>\n          <p>\n            Redirecting to <a routerLink=\"/\" class=\"underline\">Homepage</a> in\n            <span>{{ countdown() }}</span>\n          </p>\n        </div>\n      </div>\n    </div>\n  `,\n  styleUrl: \"./not-found.component.css\",\n})\nexport class NotFoundComponent {\n  readonly navigateEvent = output();\n  protected readonly timeLimit = signal(5);\n  protected readonly countdown = computed(() => `${this.timeLimit()}s`);\n\n  protected destroyRef = inject(DestroyRef);\n  constructor() {\n    effect(() => {\n      if (this.timeLimit() === 0) {\n        this.navigateEvent.emit();\n      }\n    });\n    afterNextRender(() => {\n      interval(1e3)\n        .pipe(\n          tap(() => {\n            this.timeLimit.set(this.timeLimit() - 1);\n          }),\n          takeWhile(() => this.timeLimit() > 0),\n          takeUntilDestroyed(this.destroyRef),\n        )\n        .subscribe();\n    });\n  }\n}\n",
-            "styleUrl": "./not-found.component.css",
+            "sourceCode": "import style from \"@/styles/components/Organisms/notFound\";\nimport {\n  afterNextRender,\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  DestroyRef,\n  effect,\n  inject,\n  output,\n  signal,\n} from \"@angular/core\";\nimport { takeUntilDestroyed } from \"@angular/core/rxjs-interop\";\nimport { RouterLink } from \"@angular/router\";\nimport { interval, takeWhile, tap } from \"rxjs\";\n\n@Component({\n  selector: \"app-not-found\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [RouterLink],\n  template: `\n    <div [class]=\"style.wrapper\">\n      <div [class]=\"style.heading.wrapper\">\n        <h1 [class]=\"style.heading.errorCode\">404</h1>\n      </div>\n      <div [class]=\"style.separator\"></div>\n      <div [class]=\"style.info.wrapper\">\n        <p [class]=\"style.info.text\">\n          This is not the page you are looking for\n        </p>\n        <p>\n          Redirecting to\n          <a routerLink=\"/\" [class]=\"style.info.link\">Homepage</a> in\n          <span>{{ countdown() }}</span>\n        </p>\n      </div>\n    </div>\n  `,\n})\nexport class NotFoundComponent {\n  protected readonly style = style;\n  readonly navigateEvent = output();\n  protected readonly timeLimit = signal(5);\n  protected readonly countdown = computed(() => `${this.timeLimit()}s`);\n\n  protected destroyRef = inject(DestroyRef);\n  constructor() {\n    effect(() => {\n      if (this.timeLimit() === 0) {\n        this.navigateEvent.emit();\n      }\n    });\n    afterNextRender(() => {\n      interval(1e3)\n        .pipe(\n          tap(() => {\n            this.timeLimit.set(this.timeLimit() - 1);\n          }),\n          takeWhile(() => this.timeLimit() > 0),\n          takeUntilDestroyed(this.destroyRef),\n        )\n        .subscribe();\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -8798,7 +8863,7 @@
         },
         {
             "name": "NotFoundPage",
-            "id": "component-NotFoundPage-92748de6038fae4db88831c42e97cf539261f94cb2a12c205e947bf4a96a5d0cb6405786eb515dd15fd71b40baf9189f2a4f639b6ed06debd0aa69e95b72a2d1",
+            "id": "component-NotFoundPage-20e1c8642852965f63806bfd371f6cfa06c270e3e8d7fb4b3a80ca5989e163c9402d47b6fac5107c12d6495f4783890122dac1733f0d9ce5525624f6d358b5bd",
             "file": "src/app/components/Pages/404/404-page.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -8809,7 +8874,7 @@
             "selector": "app-404-page",
             "styleUrls": [],
             "styles": [],
-            "template": "<main class=\"flex justify-center\">    <div class=\"mt-52\">\n      <app-not-found (navigateEvent)=\"handleRedirect()\" />\n    </div>\n  </main>",
+            "template": "<main [class]=\"style.main\">    <div [class]=\"style.notFoundWrapper\">\n      <app-not-found (navigateEvent)=\"handleRedirect()\" />\n    </div>\n  </main>",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -8825,9 +8890,24 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 18,
                     "modifierKind": [
                         124
+                    ]
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        124,
+                        148
                     ]
                 }
             ],
@@ -8838,7 +8918,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 20,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -8860,7 +8940,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, inject } from \"@angular/core\";\nimport { NotFoundComponent } from \"../../Organisms/NotFound/not-found.component\";\nimport { Router } from \"@angular/router\";\n\n@Component({\n  selector: \"app-404-page\",\n  imports: [NotFoundComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `<main class=\"flex justify-center\">\n    <div class=\"mt-52\">\n      <app-not-found (navigateEvent)=\"handleRedirect()\" />\n    </div>\n  </main>`,\n})\nexport class NotFoundPage {\n  protected router = inject(Router);\n\n  async handleRedirect() {\n    await this.router.navigateByUrl(\"/\");\n  }\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Pages/404\";\nimport { ChangeDetectionStrategy, Component, inject } from \"@angular/core\";\nimport { Router } from \"@angular/router\";\nimport { NotFoundComponent } from \"../../Organisms/NotFound/not-found.component\";\n\n@Component({\n  selector: \"app-404-page\",\n  imports: [NotFoundComponent],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `<main [class]=\"style.main\">\n    <div [class]=\"style.notFoundWrapper\">\n      <app-not-found (navigateEvent)=\"handleRedirect()\" />\n    </div>\n  </main>`,\n})\nexport class NotFoundPage {\n  protected readonly style = style;\n  protected router = inject(Router);\n\n  async handleRedirect() {\n    await this.router.navigateByUrl(\"/\");\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -8991,7 +9071,7 @@
         },
         {
             "name": "PageWrapperComponent",
-            "id": "component-PageWrapperComponent-c54679bd1e173ad4d0cd9cb48442377195998c53b507bbd9450590d1cafeb2b190304e98618081578603b02cdca49d7af96a13e8717a75807043645148af7f38",
+            "id": "component-PageWrapperComponent-d263956ede674f881fc0c247a525afd4e4de9b0cbb0d56c3da7607445963dbda7a49def00e4fa81138831891c6e65a30cee8d01a6de69ddd81df6d776a672615",
             "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -9016,7 +9096,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -9030,7 +9110,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -9044,7 +9124,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -9062,7 +9142,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         148
                     ]
@@ -9076,7 +9156,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         124,
                         148
@@ -9090,7 +9170,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -9105,7 +9185,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
                     "modifierKind": [
                         124
                     ]
@@ -9118,11 +9198,26 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
                     "required": true
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
                 },
                 {
                     "name": "subtitle",
@@ -9132,7 +9227,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -9146,7 +9241,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -9173,12 +9268,12 @@
             "description": "<p>Requires a <code>title</code> input. Optionally accepts a <code>subtitle</code> and <code>backLink</code> inputs.</p>\n",
             "rawdescription": "\nRequires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs.",
             "type": "component",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport { take } from \"rxjs\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { LocationService } from \"../../../services/location.service\";\nimport { PageTitleComponent } from \"../../Atoms/PageTitle/page-title.component\";\nimport {\n  BackLinkComponent,\n  type BackLinkInput,\n} from \"../../Molecules/BackLink/back-link.component\";\nimport { NavbarComponent } from \"../../Organisms/NavBar/navbar.component\";\n\n/** Requires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs. */\n@Component({\n  selector: \"app-page-wrapper\",\n  imports: [PageTitleComponent, BackLinkComponent, NavbarComponent],\n  templateUrl: \"./page-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageWrapperComponent {\n  protected readonly authService = inject(AuthenticationService);\n  readonly authenticated = this.authService.authenticated;\n  readonly pageTitle = input.required<string>();\n  readonly subtitle = input<string>();\n  readonly backLink = input<BackLinkInput>();\n\n  protected locationService = inject(LocationService);\n\n  handleLogout() {\n    this.authService.logout().pipe(take(1)).subscribe();\n  }\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Templates/pageWrapper\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport { take } from \"rxjs\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { LocationService } from \"../../../services/location.service\";\nimport { PageTitleComponent } from \"../../Atoms/PageTitle/page-title.component\";\nimport {\n  BackLinkComponent,\n  type BackLinkInput,\n} from \"../../Molecules/BackLink/back-link.component\";\nimport { NavbarComponent } from \"../../Organisms/NavBar/navbar.component\";\n\n/** Requires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs. */\n@Component({\n  selector: \"app-page-wrapper\",\n  imports: [PageTitleComponent, BackLinkComponent, NavbarComponent],\n  templateUrl: \"./page-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageWrapperComponent {\n  protected readonly style = style;\n  protected readonly authService = inject(AuthenticationService);\n  readonly authenticated = this.authService.authenticated;\n  readonly pageTitle = input.required<string>();\n  readonly subtitle = input<string>();\n  readonly backLink = input<BackLinkInput>();\n\n  protected locationService = inject(LocationService);\n\n  handleLogout() {\n    this.authService.logout().pipe(take(1)).subscribe();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<main class=\"pb-5\">\n  <app-navbar\n    [currentUrl]=\"locationService.url\"\n    [authenticated]=\"authenticated()\"\n    (logout)=\"handleLogout()\"\n    class=\"mb-3 block\"\n  />\n  <div\n    class=\"mx-auto flex max-w-[1200px] flex-col items-center overflow-x-auto px-3\"\n  >\n    <div class=\"mb-8 w-full max-w-prose\">\n      <app-page-title class=\"justify-self-center\">\n        {{ pageTitle() }}\n      </app-page-title>\n      @if (subtitle(); as sub) {\n        <div class=\"mt-2 text-center text-sm text-neutral-500\">\n          <span>{{ sub }}</span>\n        </div>\n      }\n    </div>\n    <div class=\"relative\">\n      <ng-content />\n      @if (backLink(); as link) {\n        <div class=\"mt-3 flex justify-end\">\n          <div [style]=\"{ width: '32px', aspectRatio: 1 }\">\n            <app-back-link [backLink]=\"link\" />\n          </div>\n        </div>\n      }\n    </div>\n  </div>\n</main>\n"
+            "templateData": "<main [class]=\"style.main\">\n  <app-navbar\n    [currentUrl]=\"locationService.url\"\n    [authenticated]=\"authenticated()\"\n    (logout)=\"handleLogout()\"\n    [class]=\"style.navbarWrapper\"\n  />\n  <div [class]=\"style.page.wrapper\">\n    <div [class]=\"style.page.title.wrapper\">\n      <app-page-title [class]=\"style.page.title.titleWrapper\">\n        {{ pageTitle() }}\n      </app-page-title>\n      @if (subtitle(); as sub) {\n        <div [class]=\"style.page.title.subtitleWrapper\">\n          <span>{{ sub }}</span>\n        </div>\n      }\n    </div>\n    <div [class]=\"style.page.contentWrapper\">\n      <ng-content />\n      @if (backLink(); as link) {\n        <div [class]=\"style.page.backLink.outerWrapper\">\n          <div [class]=\"style.page.backLink.innerWrapper\">\n            <app-back-link [backLink]=\"link\" />\n          </div>\n        </div>\n      }\n    </div>\n  </div>\n</main>\n"
         },
         {
             "name": "PageWrapperWithLoadingComponent",
@@ -9206,7 +9301,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -9223,7 +9318,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
@@ -9240,7 +9335,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -9290,7 +9385,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         148
                     ],
@@ -9307,7 +9402,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
+                    "line": 27,
                     "modifierKind": [
                         124,
                         148
@@ -9324,7 +9419,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "modifierKind": [
                         148
                     ],
@@ -9342,7 +9437,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
                     "modifierKind": [
                         124
                     ],
@@ -9358,11 +9453,29 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 29,
                     "modifierKind": [
                         148
                     ],
                     "required": true,
+                    "inheritance": {
+                        "file": "PageWrapperComponent"
+                    }
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "style",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
+                    "modifierKind": [
+                        124,
+                        148
+                    ],
                     "inheritance": {
                         "file": "PageWrapperComponent"
                     }
@@ -9375,7 +9488,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         148
                     ],
@@ -9392,7 +9505,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -10299,6 +10412,16 @@
                 "name": "config",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<LoginFormComponent>",
+                "defaultValue": "{\n  title: \"Organisms/LoginForm\",\n  component: LoginFormComponent,\n  argTypes: { goBack: { action: \"goBack\" } },\n}"
+            },
+            {
+                "name": "config",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/Molecules/DeleteBlogConfirm/delete-blog.dialog.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -10334,16 +10457,6 @@
                 "deprecationMessage": "",
                 "type": "Meta<InputWrapperStoryComponent>",
                 "defaultValue": "{\n  component: InputWrapperStoryComponent,\n  argTypes: { label: { control: \"text\" } },\n  args: { label: \"Control label\" },\n  title: \"Molecules/InputWrapper\",\n}"
-            },
-            {
-                "name": "config",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<LoginFormComponent>",
-                "defaultValue": "{\n  title: \"Organisms/LoginForm\",\n  component: LoginFormComponent,\n  argTypes: { goBack: { action: \"goBack\" } },\n}"
             },
             {
                 "name": "content",
@@ -10599,16 +10712,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/IntersectionEventComponent/intersection-event.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Atoms/IntersectionEvent\",\n  component: IntersectionTriggerWrapperComponent,\n  argTypes: { trigger: { action: \"In viewport\" } },\n} satisfies Meta<IntersectionTriggerWrapperComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/Atoms/PageTitle/page-title.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -10619,31 +10722,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/Atoms/IntersectionEventComponent/intersection-event.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Atoms/IntersectionEvent\",\n  component: IntersectionTriggerWrapperComponent,\n  argTypes: { trigger: { action: \"In viewport\" } },\n} satisfies Meta<IntersectionTriggerWrapperComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/Atoms/Spinner/spinner.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SpinnerComponent>",
                 "defaultValue": "{\n  title: \"Atoms/Spinner\",\n  component: SpinnerComponent,\n  argTypes: { duration: { control: \"text\" }, color: { control: \"color\" } },\n  args: { duration: \"1.5s\", color: \"currentColor\" },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SubmitButtonComponent>",
-                "defaultValue": "{\n  title: \"Molecules/SubmitButton\",\n  component: SubmitButtonComponent,\n  argTypes: {\n    ...buttonMeta.argTypes,\n    isSubmitting: { control: \"boolean\" },\n    label: { control: \"text\" },\n  },\n  args: {\n    ...buttonMeta.args,\n    type: \"submit\",\n    isSubmitting: false,\n    label: \"Submit\",\n  },\n}"
             },
             {
                 "name": "meta",
@@ -10699,6 +10792,36 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SubmitButtonComponent>",
+                "defaultValue": "{\n  title: \"Molecules/SubmitButton\",\n  component: SubmitButtonComponent,\n  argTypes: {\n    ...buttonMeta.argTypes,\n    isSubmitting: { control: \"boolean\" },\n    label: { control: \"text\" },\n  },\n  args: {\n    ...buttonMeta.args,\n    type: \"submit\",\n    isSubmitting: false,\n    label: \"Submit\",\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/Pages/Blog/blog-page.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -10714,16 +10837,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "{\n  title: \"Pages/LoginPage\",\n  component: LoginPageComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        {\n          provide: AuthenticationService,\n          useClass: MockAuthenticationService,\n        },\n        provideRouter([]),\n      ],\n    }),\n  ],\n} satisfies Meta<LoginPageComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
             },
             {
                 "name": "mockApiService",
@@ -11506,6 +11619,48 @@
                     "defaultValue": "{ name: \"Error\" }"
                 }
             ],
+            "src/app/components/Organisms/LoginForm/login-form.component.stories.ts": [
+                {
+                    "name": "config",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LoginFormComponent>",
+                    "defaultValue": "{\n  title: \"Organisms/LoginForm\",\n  component: LoginFormComponent,\n  argTypes: { goBack: { action: \"goBack\" } },\n}"
+                },
+                {
+                    "name": "LoginWithFailure",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<LoginFormComponent>",
+                    "defaultValue": "{\n  decorators: mockLoginResult(false),\n}"
+                },
+                {
+                    "name": "LoginWithSuccess",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<LoginFormComponent>",
+                    "defaultValue": "{\n  decorators: mockLoginResult(),\n}"
+                },
+                {
+                    "name": "mockLoginResult",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(\n  shouldSucceed = true,\n): ReturnType<typeof applicationConfig>[] => [\n  applicationConfig({\n    providers: [\n      LoginFormService,\n      { provide: ApiService, useValue: mockLogin(shouldSucceed) },\n    ],\n  }),\n]"
+                }
+            ],
             "src/app/components/Molecules/DeleteBlogConfirm/delete-blog.dialog.component.stories.ts": [
                 {
                     "name": "config",
@@ -11592,48 +11747,6 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<InputWrapperStoryComponent>",
                     "defaultValue": "{\n  name: \"InputWrapper\",\n}"
-                }
-            ],
-            "src/app/components/Organisms/LoginForm/login-form.component.stories.ts": [
-                {
-                    "name": "config",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<LoginFormComponent>",
-                    "defaultValue": "{\n  title: \"Organisms/LoginForm\",\n  component: LoginFormComponent,\n  argTypes: { goBack: { action: \"goBack\" } },\n}"
-                },
-                {
-                    "name": "LoginWithFailure",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<LoginFormComponent>",
-                    "defaultValue": "{\n  decorators: mockLoginResult(false),\n}"
-                },
-                {
-                    "name": "LoginWithSuccess",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<LoginFormComponent>",
-                    "defaultValue": "{\n  decorators: mockLoginResult(),\n}"
-                },
-                {
-                    "name": "mockLoginResult",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Organisms/LoginForm/login-form.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "(\n  shouldSucceed = true,\n): ReturnType<typeof applicationConfig>[] => [\n  applicationConfig({\n    providers: [\n      LoginFormService,\n      { provide: ApiService, useValue: mockLogin(shouldSucceed) },\n    ],\n  }),\n]"
                 }
             ],
             "src/app/components/Organisms/FormInput/form-input.component.stories.ts": [
@@ -11844,28 +11957,6 @@
                     "defaultValue": "{ name: \"Spinner\" }"
                 }
             ],
-            "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<SubmitButtonComponent>",
-                    "defaultValue": "{\n  title: \"Molecules/SubmitButton\",\n  component: SubmitButtonComponent,\n  argTypes: {\n    ...buttonMeta.argTypes,\n    isSubmitting: { control: \"boolean\" },\n    label: { control: \"text\" },\n  },\n  args: {\n    ...buttonMeta.args,\n    type: \"submit\",\n    isSubmitting: false,\n    label: \"Submit\",\n  },\n}"
-                },
-                {
-                    "name": "SubmitButtonComponentStory",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<SubmitButtonComponent>",
-                    "defaultValue": "{\n  name: \"SubmitButton\",\n}"
-                }
-            ],
             "src/app/components/Organisms/NavBar/navbar.component.stories.ts": [
                 {
                     "name": "meta",
@@ -11908,6 +11999,28 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<NotFoundComponent>",
                     "defaultValue": "{}"
+                }
+            ],
+            "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SubmitButtonComponent>",
+                    "defaultValue": "{\n  title: \"Molecules/SubmitButton\",\n  component: SubmitButtonComponent,\n  argTypes: {\n    ...buttonMeta.argTypes,\n    isSubmitting: { control: \"boolean\" },\n    label: { control: \"text\" },\n  },\n  args: {\n    ...buttonMeta.args,\n    type: \"submit\",\n    isSubmitting: false,\n    label: \"Submit\",\n  },\n}"
+                },
+                {
+                    "name": "SubmitButtonComponentStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Molecules/SubmitButton/submit-button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SubmitButtonComponent>",
+                    "defaultValue": "{\n  name: \"SubmitButton\",\n}"
                 }
             ],
             "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts": [
@@ -13248,7 +13361,7 @@
                 "linktype": "component",
                 "name": "NotFoundComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -13257,7 +13370,7 @@
                 "linktype": "component",
                 "name": "NotFoundPage",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -13350,8 +13463,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "HomepageComponent",
-                "coveragePercent": 10,
-                "coverageCount": "1/10",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
                 "status": "low"
             },
             {
@@ -13408,8 +13521,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "HomepageComponent",
-                "coveragePercent": 10,
-                "coverageCount": "1/10",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
                 "status": "low"
             },
             {
@@ -13426,8 +13539,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "BlogPreviewTemplate",
-                "coveragePercent": 9,
-                "coverageCount": "1/11",
+                "coveragePercent": 8,
+                "coverageCount": "1/12",
                 "status": "low"
             },
             {
@@ -13464,8 +13577,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PageWrapperComponent",
-                "coveragePercent": 9,
-                "coverageCount": "1/11",
+                "coveragePercent": 8,
+                "coverageCount": "1/12",
                 "status": "low"
             },
             {
@@ -13474,7 +13587,7 @@
                 "linktype": "component",
                 "name": "PageWrapperWithLoadingComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {

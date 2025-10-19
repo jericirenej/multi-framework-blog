@@ -1,8 +1,8 @@
 import tw from "../../private";
 
 const outerWrapper = tw`max-w-prose min-w-[50ch] text-neutral-700`;
-const innerWrapper = tw`flex h-[22px] items-center`;
-const innerWrapperOwnPost = tw`${innerWrapper} justify-between`;
+const innerWrapper = (ownPost: boolean | null) =>
+  tw`flex h-[22px] items-center ${ownPost ? "justify-between" : ""}`.trim();
 
 const date = { wrapper: tw`flex justify-end`, span: tw`text-xs` };
 const actions = {
@@ -20,7 +20,6 @@ const post = {
 export default {
   outerWrapper,
   innerWrapper,
-  innerWrapperOwnPost,
   date,
   actions,
   post,
