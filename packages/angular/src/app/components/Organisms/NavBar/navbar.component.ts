@@ -1,3 +1,4 @@
+import style from "@/styles/components/Organisms/navbar";
 import { KeyValuePipe } from "@angular/common";
 import {
   ChangeDetectionStrategy,
@@ -24,6 +25,7 @@ export const AUTHENTICATED_ROUTES = { Create: "/blog/create" } satisfies Record<
   templateUrl: "./navbar.component.html",
 })
 export class NavbarComponent {
+  protected readonly style = style;
   readonly authenticated = input.required<boolean>();
   readonly currentUrl = input.required<string>();
   readonly logout = output();

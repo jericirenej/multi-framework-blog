@@ -1,7 +1,7 @@
-<div class="relative mt-2 bg-inherit">
+<div [class]="styles.wrapper">
   @if (type() !== "textarea") {
     <input
-      [class]="controlClass"
+      [class]="styles.input"
       [id]="inputId"
       [attr.name]="name() ?? null"
       [disabled]="disabled()"
@@ -14,7 +14,7 @@
     />
   } @else {
     <textarea
-      [class]="controlClass"
+      [class]="styles.input"
       [id]="inputId"
       [attr.name]="name() ?? null"
       rows="10"
@@ -29,7 +29,7 @@
   }
   <label
     [class.transition-all]="canLabelTransition()"
-    class="absolute -top-2 left-2.5 z-10 inline-block cursor-text bg-white text-xs text-neutral-700 peer-placeholder-shown:top-[8.5px] peer-placeholder-shown:text-sm peer-focus-visible:-top-2 peer-focus-visible:text-xs peer-disabled:select-none"
+    [class]="styles.label"
     [for]="inputId"
     [id]="`${inputId}-label`"
     >{{ label() }}

@@ -24,6 +24,9 @@ catalogs:
     argon2:
       specifier: ^0.43.0
       version: 0.43.1
+    clsx:
+      specifier: ^2.1.1
+      version: 2.1.1
     date-fns:
       specifier: ^4.1.0
       version: 4.1.0
@@ -51,6 +54,9 @@ catalogs:
     prettier-plugin-tailwindcss:
       specifier: ^0.6.14
       version: 0.6.14
+    tailwind-merge:
+      specifier: ^3.3.1
+      version: 3.3.1
     tailwindcss:
       specifier: ^4.1.11
       version: 4.1.11
@@ -123,6 +129,9 @@ importers:
 
   packages/angular:
     dependencies:
+      '@/styles':
+        specifier: workspace:*
+        version: link:../styles
       '@angular/common':
         specifier: ^20.2.2
         version: 20.2.2(@angular/core@20.2.2(@angular/compiler@20.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -354,6 +363,34 @@ importers:
       dotenv:
         specifier: 'catalog:'
         version: 17.2.1
+
+  packages/styles:
+    dependencies:
+      '@tailwindcss/postcss':
+        specifier: 'catalog:'
+        version: 4.1.11
+      clsx:
+        specifier: 'catalog:'
+        version: 2.1.1
+      tailwind-merge:
+        specifier: 'catalog:'
+        version: 3.3.1
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.1.11
+    devDependencies:
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.34.0
+      eslint:
+        specifier: 'catalog:'
+        version: 9.34.0(jiti@2.5.1)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.3
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.41.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.8.3)
 
 packages:
 
@@ -6443,6 +6480,9 @@ packages:
   tablesort@5.6.0:
     resolution: {integrity: sha512-cZZXK3G089PbpxH8N7vN7Z21SEKqXAaCiSVOmZdR/v7z8TFCsF/OFr0rzjhQuFlQQHy9uQtW9P2oQFJzJFGVrg==}
     engines: {node: '>= 16', npm: '>= 8'}
+
+  tailwind-merge@3.3.1:
+    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
   tailwindcss@4.1.11:
     resolution: {integrity: sha512-2E9TBm6MDD/xKYe+dvJZAmg3yxIEDNRc0jwlNyDg/4Fil2QcSLjFKGVff0lAf1jjeaArlG/M75Ey/EYr/OJtBA==}
@@ -14007,6 +14047,8 @@ snapshots:
   svg-pan-zoom@3.6.2: {}
 
   tablesort@5.6.0: {}
+
+  tailwind-merge@3.3.1: {}
 
   tailwindcss@4.1.11: {}
 

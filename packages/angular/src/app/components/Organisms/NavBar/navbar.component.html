@@ -1,11 +1,11 @@
-<nav class="sticky top-0 z-10 bg-white p-2 text-sm text-cyan-800">
-  <ul class="flex list-none justify-end gap-2.5">
+<nav [class]="style.nav">
+  <ul [class]="style.list">
     @for (route of routes | keyvalue: preserverOrder; track route.key) {
       @let href = route.value.href;
       @let protected = route.value.protected;
       @let label = route.key;
       @if (!protected || authenticated()) {
-        <li class="px-2">
+        <li [class]="style.listItem">
           @if (label !== "Login") {
             <app-navbar-link
               [currentUrl]="currentUrl()"

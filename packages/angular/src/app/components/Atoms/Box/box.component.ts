@@ -1,11 +1,12 @@
+import style from "@/styles/components/Atoms/box";
 import { Component } from "@angular/core";
 
 @Component({
   selector: "app-box",
-  template: ` <div
-    class="border-1 shadow-xs rounded-xl border-neutral-400 p-3 shadow-neutral-400"
-  >
+  template: ` <div [class]="style">
     <ng-content />
   </div>`,
 })
-export class BoxComponent {}
+export class BoxComponent {
+  protected readonly style = style;
+}

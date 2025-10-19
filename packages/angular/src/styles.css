@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../styles";
 body:has(dialog[open]) {
   overflow: hidden;
 }

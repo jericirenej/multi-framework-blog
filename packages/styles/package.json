@@ -1,0 +1,22 @@
+{
+  "name": "@/styles",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint",
+    "tsc": "tsgo --noEmit --project tsconfig.json",
+    "check": "pnpm tsc && pnpm lint"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "catalog:",
+    "clsx": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "@eslint/js": "catalog:",
+    "eslint": "catalog:"
+  }
+}

@@ -16,6 +16,7 @@
   },
   "private": true,
   "dependencies": {
+    "@/styles": "workspace:*",
     "@angular/common": "^20.2.2",
     "@angular/compiler": "^20.2.2",
     "@angular/core": "^20.2.2",

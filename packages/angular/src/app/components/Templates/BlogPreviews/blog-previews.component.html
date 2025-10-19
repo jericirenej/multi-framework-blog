@@ -2,9 +2,9 @@
   [pageTitle]="blogPreviewService.pageTitle"
   (intersectionEvent)="loadMore$.next()"
 >
-  <div class="flex justify-center">
+  <div [class]="style.listWrapper">
     @if (blogs().length) {
-      <ul class="flex list-none flex-col gap-5">
+      <ul [class]="style.list">
         @for (blog of blogs(); track blog.id) {
           <li>
             <app-blog-preview

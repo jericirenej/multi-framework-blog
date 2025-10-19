@@ -1,5 +1,6 @@
 import type { BlogSummaryDto } from "@/api/schemas/blog";
-import { AsyncPipe, DatePipe, NgClass } from "@angular/common";
+import style from "@/styles/components/Organisms/blogPreview";
+import { AsyncPipe, DatePipe } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +20,6 @@ import { DeleteBlogDialogComponent } from "../../Molecules/DeleteBlogConfirm/del
 @Component({
   selector: "app-blog-preview",
   imports: [
-    NgClass,
     BoxComponent,
     DatePipe,
     IsAuthorPipe,
@@ -33,6 +33,7 @@ import { DeleteBlogDialogComponent } from "../../Molecules/DeleteBlogConfirm/del
   templateUrl: "./blog-preview.component.html",
 })
 export class BlogPreviewComponent {
+  protected readonly style = style;
   readonly data = input.required<BlogSummaryDto>();
   protected elementRef = inject(ElementRef) as ElementRef<HTMLElement>;
 

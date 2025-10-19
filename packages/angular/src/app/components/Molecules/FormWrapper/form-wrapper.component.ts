@@ -1,3 +1,4 @@
+import styles from "@/styles/components/Molecules/formWrapper";
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -28,6 +29,7 @@ import { ResultStatusComponent } from "./ResultStatus/result-status.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormWrapperComponent implements OnDestroy {
+  protected readonly styles = styles;
   readonly submitLabel = input.required<string>();
   readonly formGroup = input.required<FormGroup>();
   readonly resultStatus = input.required<ResultStatus>();

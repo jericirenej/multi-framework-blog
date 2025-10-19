@@ -18,10 +18,6 @@ import { AbstractBlogFormService, type BlogValues } from "./blog-form.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./blog-form.component.html",
   styles: `
-    .title {
-      display: block;
-      width: 100%;
-    }
     ::ng-deep .title app-input {
       display: block;
     }

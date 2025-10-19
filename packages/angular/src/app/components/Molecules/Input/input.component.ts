@@ -1,3 +1,4 @@
+import styles from "@/styles/components/Molecules/input";
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -10,7 +11,6 @@ import {
   signal,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import clsx from "clsx";
 import { asapScheduler } from "rxjs";
 import { v4 } from "uuid";
 import { IdService } from "../../../services/id.service";
@@ -45,12 +45,10 @@ export type SimpleInputType =
     :host {
       display: inline-block;
     }
-    [aria-invalid="true"] {
-      outline: 2px solid red;
-    }
   `,
 })
 export class InputComponent {
+  protected readonly styles = styles;
   readonly label = input.required<string>();
   readonly type = input<SimpleInputType>("text");
   /** Optional errId identifier. If input is empty, the component will check if `IdService`
@@ -81,11 +79,7 @@ export class InputComponent {
     () => this.errId() ?? this.idService?.id,
   );
   protected disabled = signal(false);
-  protected readonly inputClass = "input-element";
-  protected readonly controlClass = clsx(
-    this.inputClass,
-    "input-element border-1 peer inline-block rounded border-neutral-400 p-1.5 placeholder-transparent transition-colors disabled:cursor-not-allowed disabled:opacity-75",
-  );
+
   protected inputId = v4();
   protected canLabelTransition = signal(false);
 
@@ -100,7 +94,7 @@ export class InputComponent {
   get inputEl() {
     return this.elementRef.nativeElement.querySelector<
       HTMLInputElement | HTMLTextAreaElement
-    >(`.${this.inputClass}`);
+    >(`.${this.styles.inputElementClass}`);
   }
 
   focus() {

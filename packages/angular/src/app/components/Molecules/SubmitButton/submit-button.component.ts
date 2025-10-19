@@ -1,3 +1,4 @@
+import styles from "@/styles/components/Molecules/submitButton";
 import { Component, computed, input } from "@angular/core";
 import {
   AbstractButtonComponent,
@@ -8,20 +9,6 @@ import { SpinnerComponent } from "../../Atoms/Spinner/spinner.component";
 @Component({
   selector: "app-submit-button",
   imports: [ButtonComponent, SpinnerComponent],
-  styles: `
-    app-spinner {
-      opacity: 1;
-      width: auto;
-      padding-left: 1rem;
-      transform: scaleX(1);
-      transition: all 0.3s ease;
-      @starting-style {
-        opacity: 0;
-        transform: scaleX(0);
-        padding-left: 0;
-      }
-    }
-  `,
   template: `
     <app-button
       [type]="type()"
@@ -34,11 +21,11 @@ import { SpinnerComponent } from "../../Atoms/Spinner/spinner.component";
           : null
       "
     >
-      <div class="flex">
+      <div [class]="style.contentWrapper">
         <span>{{ label() }}</span>
         @if (isSubmitting()) {
           @defer (on timer(400ms)) {
-            <app-spinner />
+            <app-spinner [class]="style.spinnerTransition" />
           }
         }
       </div>
@@ -46,6 +33,7 @@ import { SpinnerComponent } from "../../Atoms/Spinner/spinner.component";
   `,
 })
 export class SubmitButtonComponent extends AbstractButtonComponent {
+  protected readonly style = styles;
   readonly label = input.required<string>();
   readonly isSubmitting = input.required<boolean>();
   override readonly type = input<"button" | "submit" | "reset">("submit");
