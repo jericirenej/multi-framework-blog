@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "composite": true, "outDir": "dist-node" },
+  "exclude": ["dist-node"],
+  "files": ["postcss.config.mjs"]
+}

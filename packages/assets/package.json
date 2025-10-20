@@ -1,0 +1,19 @@
+{
+  "name": "@/assets",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "tsc": "tsgo --noEmit --project tsconfig.json",
+    "check": "pnpm tsc && pnpm lint"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "@eslint/js": "catalog:",
+    "eslint": "catalog:"
+  }
+}
