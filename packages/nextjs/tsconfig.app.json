@@ -1,10 +1,17 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "composite": true },
+  "compilerOptions": {
+    "composite": true
+  },
   "include": [
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     ".next/types/**/*.ts"
+  ],
+  "exclude": ["src/**/*.stories.tsx"],
+  "references": [
+    { "path": "../api/tsconfig.json" },
+    { "path": "../styles/tsconfig.json" }
   ]
 }

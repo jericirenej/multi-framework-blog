@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "composite": true
+  },
+  "exclude": [
+    "../src/**/*.spec.ts",
+    "../src/*.ts",
+    "../src/app/*.ts",
+    "../src/environments"
+  ],
+  "include": ["../src/**/*.tsx"],
+  "files": ["./preview.ts", "./main.ts"]
+}
