@@ -18,13 +18,6 @@
     </div>
     <div [class]="style.page.contentWrapper">
       <ng-content />
-      @if (backLink(); as link) {
-        <div [class]="style.page.backLink.outerWrapper">
-          <div [class]="style.page.backLink.innerWrapper">
-            <app-back-link [backLink]="link" />
-          </div>
-        </div>
-      }
     </div>
   </div>
 </main>
