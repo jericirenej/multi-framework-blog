@@ -51,7 +51,7 @@ export class ButtonComponent extends AbstractButtonComponent {
   protected readonly cdr = inject(ChangeDetectorRef);
 
   protected handleKeyPress(ev: KeyboardEvent) {
-    if (ev.key !== "Enter") {
+    if (!["Enter", " "].includes(ev.key)) {
       this.isActive.set(false);
       return;
     }
