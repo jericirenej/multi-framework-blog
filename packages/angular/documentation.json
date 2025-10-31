@@ -2837,7 +2837,7 @@
     "components": [
         {
             "name": "AbstractButtonComponent",
-            "id": "component-AbstractButtonComponent-17973c88d28fe4aef33e2ee8c4d6bab306aff6feb0ca2308da6ca491caf2933d389c5aaf98c0967653be5206ba5d35bb83e41734d547c162778e2827a834fdbd",
+            "id": "component-AbstractButtonComponent-96c2b5f6416a4eff53408f2fed57c27a13c2fbd20efbf0bb231ed3229b2f0127fc5aa3dfe7c5c9449f997f905493663f0dcb7158b8e9293c0b609e71203dda54",
             "file": "src/app/components/Atoms/Button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2967,146 +2967,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "extends": []
-        },
-        {
-            "name": "ArrowIconComponent",
-            "id": "component-ArrowIconComponent-3f1875705f2549939684f8f5d1f46abbb53c6d18eff78ef631a9402ef2abbafed33e774fa5edf4a6ab633565aa01c8fe77b588af35194f7cc6e40bf22ea689e0",
-            "file": "src/app/components/Atoms/Arrow/arrow.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-arrow",
-            "styleUrls": [],
-            "styles": [],
-            "template": "<!-- Stash Iconsby Pingback LLC -->\n@if (direction() === \"right\") {\n  <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n    <path\n      fill=\"currentColor\"\n      d=\"M14.989 4.638a.5.5 0 0 1 .706.017l6.667 7a.5.5 0 0 1 0 .69l-6.667 7a.5.5 0 1 1-.724-.69l5.862-6.155H2a.5.5 0 0 1 0-1h18.833l-5.862-6.155a.5.5 0 0 1 .018-.707\"\n    />\n  </svg>\n} @else {\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"24\"\n    height=\"24\"\n    viewBox=\"0 0 24 24\"\n  >\n    <path\n      fill=\"currentColor\"\n      d=\"M9.011 4.638a.5.5 0 0 1 .018.707L3.167 11.5H22a.5.5 0 0 1 0 1H3.167l5.862 6.155a.5.5 0 1 1-.724.69l-6.667-7a.5.5 0 0 1 0-.69l6.667-7a.5.5 0 0 1 .706-.017\"\n    />\n  </svg>\n}\n",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "direction",
-                    "defaultValue": "input.required<\"left\" | \"right\">()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        148
-                    ]
-                }
-            ],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, input } from \"@angular/core\";\n\n@Component({\n  selector: \"app-arrow\",\n  template: `\n    <!-- Stash Iconsby Pingback LLC -->\n    @if (direction() === \"right\") {\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n        <path\n          fill=\"currentColor\"\n          d=\"M14.989 4.638a.5.5 0 0 1 .706.017l6.667 7a.5.5 0 0 1 0 .69l-6.667 7a.5.5 0 1 1-.724-.69l5.862-6.155H2a.5.5 0 0 1 0-1h18.833l-5.862-6.155a.5.5 0 0 1 .018-.707\"\n        />\n      </svg>\n    } @else {\n      <svg\n        xmlns=\"http://www.w3.org/2000/svg\"\n        width=\"24\"\n        height=\"24\"\n        viewBox=\"0 0 24 24\"\n      >\n        <path\n          fill=\"currentColor\"\n          d=\"M9.011 4.638a.5.5 0 0 1 .018.707L3.167 11.5H22a.5.5 0 0 1 0 1H3.167l5.862 6.155a.5.5 0 1 1-.724.69l-6.667-7a.5.5 0 0 1 0-.69l6.667-7a.5.5 0 0 1 .706-.017\"\n        />\n      </svg>\n    }\n  `,\n  styleUrl: \"../AbstractIconStyles/styles.css\",\n})\nexport class ArrowIconComponent {\n  readonly direction = input.required<\"left\" | \"right\">();\n}\n",
-            "styleUrl": "../AbstractIconStyles/styles.css",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "extends": []
-        },
-        {
-            "name": "BackLinkComponent",
-            "id": "component-BackLinkComponent-021b1a1656fe66609ca97a29a302a9547c8a66061bde34bc3c98b98b24dc2ed98663f97d691fd105372ba292fbf4340f91896b039c29be04b6ccb9f1e19f5545",
-            "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-back-link",
-            "styleUrls": [],
-            "styles": [],
-            "template": "<a [class]=\"style\" [routerLink]=\"backLink().href\" [title]=\"backLink().label\"\n  ><app-arrow direction=\"left\"\n/></a>\n",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 23,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": true
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 23,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": true
-                },
-                {
-                    "name": "style",
-                    "defaultValue": "style",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 22,
-                    "modifierKind": [
-                        124,
-                        148
-                    ]
-                }
-            ],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [
-                {
-                    "name": "ArrowIconComponent",
-                    "type": "component"
-                },
-                {
-                    "name": "RouterLink"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import style from \"@/styles/components/Molecules/backLink\";\nimport { Component, input } from \"@angular/core\";\nimport { RouterLink } from \"@angular/router\";\nimport { ArrowIconComponent } from \"../../Atoms/Arrow/arrow.component\";\n\nexport type BackLinkInput = Record<\"href\" | \"label\", string>;\nexport const TO_HOMEPAGE: BackLinkInput = {\n  href: \"/\",\n  label: \"Back to homepage\",\n};\n\n@Component({\n  selector: \"app-back-link\",\n  imports: [ArrowIconComponent, RouterLink],\n  template: `\n    <a [class]=\"style\" [routerLink]=\"backLink().href\" [title]=\"backLink().label\"\n      ><app-arrow direction=\"left\"\n    /></a>\n  `,\n})\nexport class BackLinkComponent {\n  protected readonly style = style;\n  readonly backLink = input.required<BackLinkInput>();\n}\n",
+            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (![\"Enter\", \" \"].includes(ev.key)) {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -4141,7 +4002,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-17973c88d28fe4aef33e2ee8c4d6bab306aff6feb0ca2308da6ca491caf2933d389c5aaf98c0967653be5206ba5d35bb83e41734d547c162778e2827a834fdbd",
+            "id": "component-ButtonComponent-96c2b5f6416a4eff53408f2fed57c27a13c2fbd20efbf0bb231ed3229b2f0127fc5aa3dfe7c5c9449f997f905493663f0dcb7158b8e9293c0b609e71203dda54",
             "file": "src/app/components/Atoms/Button/button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4398,7 +4259,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (ev.key !== \"Enter\") {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
+            "sourceCode": "import button from \"@/styles/components/Atoms/button\";\nimport { NgClass } from \"@angular/common\";\nimport {\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  Component,\n  computed,\n  type ElementRef,\n  inject,\n  input,\n  output,\n  signal,\n  viewChild,\n} from \"@angular/core\";\nimport { clsx } from \"clsx\";\n\n@Component({ selector: \"app-abstract-button\", template: \"\" })\nexport abstract class AbstractButtonComponent {\n  readonly type = input<\"button\" | \"submit\" | \"reset\">(\"button\");\n  readonly variant = input<\"confirm\" | \"cancel\" | \"warning\" | \"info\">(\n    \"confirm\",\n  );\n  readonly size = input<\"sm\" | \"md\" | \"lg\">(\"md\");\n  readonly disabled = input(false);\n  readonly clicked = output();\n}\n@Component({\n  selector: \"app-button\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  imports: [NgClass],\n  template: `\n    <button\n      #ref\n      [ngClass]=\"[styles(), isActive() ? 'active' : '']\"\n      [disabled]=\"disabled()\"\n      [type]=\"type()\"\n      (click)=\"clicked.emit()\"\n      (keydown)=\"handleKeyPress($event)\"\n      (keyup)=\"handleKeyPress($event)\"\n    >\n      <ng-content />\n    </button>\n  `,\n})\nexport class ButtonComponent extends AbstractButtonComponent {\n  protected isActive = signal(false);\n\n  protected readonly ref =\n    viewChild.required<ElementRef<HTMLButtonElement>>(\"ref\");\n\n  protected readonly cdr = inject(ChangeDetectorRef);\n\n  protected handleKeyPress(ev: KeyboardEvent) {\n    if (![\"Enter\", \" \"].includes(ev.key)) {\n      this.isActive.set(false);\n      return;\n    }\n    this.isActive.set(ev.type === \"keydown\" ? true : false);\n  }\n\n  focus() {\n    this.ref().nativeElement.focus();\n    this.cdr.detectChanges();\n  }\n\n  protected readonly styles = computed(() => {\n    return clsx(\n      button.baseClass,\n      button.activeClasses,\n      button.variantClasses[this.variant()],\n      button.sizeClasses[this.size()],\n    );\n  });\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -9071,7 +8932,7 @@
         },
         {
             "name": "PageWrapperComponent",
-            "id": "component-PageWrapperComponent-d263956ede674f881fc0c247a525afd4e4de9b0cbb0d56c3da7607445963dbda7a49def00e4fa81138831891c6e65a30cee8d01a6de69ddd81df6d776a672615",
+            "id": "component-PageWrapperComponent-50af33069112a53659eb421e046a08533bbf8aebd5f0363631d97b29f8ec2a0c8dd06c55fd6d3cb8ab832549f1d6b5a76129314adaeb8222f96c5077a25c366a",
             "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -9089,20 +8950,6 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": false
-                },
-                {
                     "name": "pageTitle",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -9110,7 +8957,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9124,7 +8971,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
@@ -9142,7 +8989,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ]
@@ -9156,25 +9003,11 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 23,
                     "modifierKind": [
                         124,
                         148
                     ]
-                },
-                {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": false
                 },
                 {
                     "name": "locationService",
@@ -9185,7 +9018,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 28,
                     "modifierKind": [
                         124
                     ]
@@ -9198,7 +9031,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9213,7 +9046,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 22,
                     "modifierKind": [
                         124,
                         148
@@ -9227,7 +9060,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
@@ -9241,7 +9074,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -9257,10 +9090,6 @@
                     "type": "component"
                 },
                 {
-                    "name": "BackLinkComponent",
-                    "type": "component"
-                },
-                {
                     "name": "NavbarComponent",
                     "type": "component"
                 }
@@ -9268,12 +9097,12 @@
             "description": "<p>Requires a <code>title</code> input. Optionally accepts a <code>subtitle</code> and <code>backLink</code> inputs.</p>\n",
             "rawdescription": "\nRequires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs.",
             "type": "component",
-            "sourceCode": "import style from \"@/styles/components/Templates/pageWrapper\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport { take } from \"rxjs\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { LocationService } from \"../../../services/location.service\";\nimport { PageTitleComponent } from \"../../Atoms/PageTitle/page-title.component\";\nimport {\n  BackLinkComponent,\n  type BackLinkInput,\n} from \"../../Molecules/BackLink/back-link.component\";\nimport { NavbarComponent } from \"../../Organisms/NavBar/navbar.component\";\n\n/** Requires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs. */\n@Component({\n  selector: \"app-page-wrapper\",\n  imports: [PageTitleComponent, BackLinkComponent, NavbarComponent],\n  templateUrl: \"./page-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageWrapperComponent {\n  protected readonly style = style;\n  protected readonly authService = inject(AuthenticationService);\n  readonly authenticated = this.authService.authenticated;\n  readonly pageTitle = input.required<string>();\n  readonly subtitle = input<string>();\n  readonly backLink = input<BackLinkInput>();\n\n  protected locationService = inject(LocationService);\n\n  handleLogout() {\n    this.authService.logout().pipe(take(1)).subscribe();\n  }\n}\n",
+            "sourceCode": "import style from \"@/styles/components/Templates/pageWrapper\";\nimport {\n  ChangeDetectionStrategy,\n  Component,\n  inject,\n  input,\n} from \"@angular/core\";\nimport { take } from \"rxjs\";\nimport { AuthenticationService } from \"../../../services/is-authenticated.service\";\nimport { LocationService } from \"../../../services/location.service\";\nimport { PageTitleComponent } from \"../../Atoms/PageTitle/page-title.component\";\nimport { NavbarComponent } from \"../../Organisms/NavBar/navbar.component\";\n\n/** Requires a `title` input. Optionally accepts a `subtitle` and `backLink` inputs. */\n@Component({\n  selector: \"app-page-wrapper\",\n  imports: [PageTitleComponent, NavbarComponent],\n  templateUrl: \"./page-wrapper.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageWrapperComponent {\n  protected readonly style = style;\n  protected readonly authService = inject(AuthenticationService);\n  readonly authenticated = this.authService.authenticated;\n  readonly pageTitle = input.required<string>();\n  readonly subtitle = input<string>();\n\n  protected locationService = inject(LocationService);\n\n  handleLogout() {\n    this.authService.logout().pipe(take(1)).subscribe();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<main [class]=\"style.main\">\n  <app-navbar\n    [currentUrl]=\"locationService.url\"\n    [authenticated]=\"authenticated()\"\n    (logout)=\"handleLogout()\"\n    [class]=\"style.navbarWrapper\"\n  />\n  <div [class]=\"style.page.wrapper\">\n    <div [class]=\"style.page.title.wrapper\">\n      <app-page-title [class]=\"style.page.title.titleWrapper\">\n        {{ pageTitle() }}\n      </app-page-title>\n      @if (subtitle(); as sub) {\n        <div [class]=\"style.page.title.subtitleWrapper\">\n          <span>{{ sub }}</span>\n        </div>\n      }\n    </div>\n    <div [class]=\"style.page.contentWrapper\">\n      <ng-content />\n      @if (backLink(); as link) {\n        <div [class]=\"style.page.backLink.outerWrapper\">\n          <div [class]=\"style.page.backLink.innerWrapper\">\n            <app-back-link [backLink]=\"link\" />\n          </div>\n        </div>\n      }\n    </div>\n  </div>\n</main>\n"
+            "templateData": "<main [class]=\"style.main\">\n  <app-navbar\n    [currentUrl]=\"locationService.url\"\n    [authenticated]=\"authenticated()\"\n    (logout)=\"handleLogout()\"\n    [class]=\"style.navbarWrapper\"\n  />\n  <div [class]=\"style.page.wrapper\">\n    <div [class]=\"style.page.title.wrapper\">\n      <app-page-title [class]=\"style.page.title.titleWrapper\">\n        {{ pageTitle() }}\n      </app-page-title>\n      @if (subtitle(); as sub) {\n        <div [class]=\"style.page.title.subtitleWrapper\">\n          <span>{{ sub }}</span>\n        </div>\n      }\n    </div>\n    <div [class]=\"style.page.contentWrapper\">\n      <ng-content />\n    </div>\n  </div>\n</main>\n"
         },
         {
             "name": "PageWrapperWithLoadingComponent",
@@ -9294,23 +9123,6 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": false,
-                    "inheritance": {
-                        "file": "PageWrapperComponent"
-                    }
-                },
-                {
                     "name": "pageTitle",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -9318,7 +9130,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9335,7 +9147,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
@@ -9385,7 +9197,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 24,
                     "modifierKind": [
                         148
                     ],
@@ -9402,28 +9214,11 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 23,
                     "modifierKind": [
                         124,
                         148
                     ],
-                    "inheritance": {
-                        "file": "PageWrapperComponent"
-                    }
-                },
-                {
-                    "name": "backLink",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        148
-                    ],
-                    "required": false,
                     "inheritance": {
                         "file": "PageWrapperComponent"
                     }
@@ -9437,7 +9232,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 28,
                     "modifierKind": [
                         124
                     ],
@@ -9453,7 +9248,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 25,
                     "modifierKind": [
                         148
                     ],
@@ -9471,7 +9266,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 22,
                     "modifierKind": [
                         124,
                         148
@@ -9488,7 +9283,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 26,
                     "modifierKind": [
                         148
                     ],
@@ -9505,7 +9300,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -9964,7 +9759,7 @@
             "styleUrlsData": "",
             "stylesData": "\n    :host {\n      display: inline-block;\n    }\n  \n",
             "extends": [],
-            "templateData": "<svg\n  xmlns=\"http://www.w3.org/2000/svg\"\n  width=\"24\"\n  height=\"24\"\n  viewBox=\"0 0 24 24\"\n>\n  <g [attr.stroke]=\"color()\" stroke-width=\"1\">\n    <circle\n      cx=\"12\"\n      cy=\"12\"\n      r=\"9.5\"\n      fill=\"none\"\n      stroke-linecap=\"round\"\n      stroke-width=\"3\"\n    >\n      <animate\n        attributeName=\"stroke-dasharray\"\n        calcMode=\"spline\"\n        [attr.dur]=\"duration()\"\n        keySplines=\"0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1\"\n        keyTimes=\"0;0.475;0.95;1\"\n        repeatCount=\"indefinite\"\n        values=\"0 150;42 150;42 150;42 150\"\n      />\n      <animate\n        attributeName=\"stroke-dashoffset\"\n        calcMode=\"spline\"\n        [attr.dur]=\"duration()\"\n        keySplines=\"0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1\"\n        keyTimes=\"0;0.475;0.95;1\"\n        repeatCount=\"indefinite\"\n        values=\"0;-16;-59;-59\"\n      />\n    </circle>\n    <animateTransform\n      attributeName=\"transform\"\n      dur=\"2s\"\n      repeatCount=\"indefinite\"\n      type=\"rotate\"\n      values=\"0 12 12;360 12 12\"\n    />\n  </g>\n</svg>\n"
+            "templateData": "<svg\n  xmlns=\"http://www.w3.org/2000/svg\"\n  width=\"24\"\n  height=\"24\"\n  viewBox=\"0 0 24 24\"\n>\n  @let dur = `${duration()}s`;\n  @let transformDur = `${duration() * (4 / 3)}s`;\n  <g [attr.stroke]=\"color()\" stroke-width=\"1\">\n    <circle\n      cx=\"12\"\n      cy=\"12\"\n      r=\"9.5\"\n      fill=\"none\"\n      stroke-linecap=\"round\"\n      stroke-width=\"3\"\n    >\n      <animate\n        attributeName=\"stroke-dasharray\"\n        calcMode=\"spline\"\n        [attr.dur]=\"dur\"\n        keySplines=\"0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1\"\n        keyTimes=\"0;0.475;0.95;1\"\n        repeatCount=\"indefinite\"\n        values=\"0 150;42 150;42 150;42 150\"\n      />\n      <animate\n        attributeName=\"stroke-dashoffset\"\n        calcMode=\"spline\"\n        [attr.dur]=\"dur\"\n        keySplines=\"0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1\"\n        keyTimes=\"0;0.475;0.95;1\"\n        repeatCount=\"indefinite\"\n        values=\"0;-16;-59;-59\"\n      />\n    </circle>\n    <animateTransform\n      attributeName=\"transform\"\n      [attr.dur]=\"transformDur\"\n      repeatCount=\"indefinite\"\n      type=\"rotate\"\n      values=\"0 12 12;360 12 12\"\n    />\n  </g>\n</svg>\n"
         },
         {
             "name": "SubmitButtonComponent",
@@ -10230,11 +10025,11 @@
                 "name": "ArrowIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
+                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "StoryObj<ArrowIconComponent>",
-                "defaultValue": "{}"
+                "type": "StoryObj<EditIconComponent>",
+                "defaultValue": "{ name: \"EditIcon\" }"
             },
             {
                 "name": "ArrowIcon",
@@ -10245,16 +10040,6 @@
                 "deprecationMessage": "",
                 "type": "StoryObj<DeleteIconComponent>",
                 "defaultValue": "{ name: \"DeleteIcon\" }"
-            },
-            {
-                "name": "ArrowIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<EditIconComponent>",
-                "defaultValue": "{ name: \"EditIcon\" }"
             },
             {
                 "name": "AUTHENTICATED_ROUTES",
@@ -10672,31 +10457,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Atoms/ArrowIcon\",\n  component: ArrowIconComponent,\n  argTypes: {\n    direction: { control: \"inline-radio\", options: [\"left\", \"right\"] },\n  },\n  args: { direction: \"right\" },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<ArrowIconComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/Atoms/Box/box.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "{\n  title: \"Atoms/Box\",\n  component: BoxComponent,\n  render: (props) => {\n    return {\n      props,\n      template: `<app-box>\n      <h1 class=\"text-xl font-semibold py-3\">Title of projected content</h1>\n      <p>And then some text that we are displaying in</p>\n      <p>Separate lines that should talk about something</p>\n      <p>more or less important</p>\n      </app-box>`,\n    };\n  },\n} satisfies Meta<BoxComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Atoms/DeleteIcon\",\n  component: DeleteIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<DeleteIconComponent>"
             },
             {
                 "name": "meta",
@@ -10712,11 +10477,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/IntersectionEventComponent/intersection-event.component.stories.ts",
+                "file": "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  title: \"Atoms/IntersectionEvent\",\n  component: IntersectionTriggerWrapperComponent,\n  argTypes: { trigger: { action: \"In viewport\" } },\n} satisfies Meta<IntersectionTriggerWrapperComponent>"
+                "defaultValue": "{\n  title: \"Atoms/DeleteIcon\",\n  component: DeleteIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<DeleteIconComponent>"
             },
             {
                 "name": "meta",
@@ -10727,6 +10492,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "{\n  title: \"Atoms/PageTitle\",\n  component: PageTitleWrapperComponent,\n  args: { title: \"Page title\" },\n} satisfies Meta<PageTitleWrapperComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Atoms/IntersectionEventComponent/intersection-event.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Atoms/IntersectionEvent\",\n  component: IntersectionTriggerWrapperComponent,\n  argTypes: { trigger: { action: \"In viewport\" } },\n} satisfies Meta<IntersectionTriggerWrapperComponent>"
             },
             {
                 "name": "meta",
@@ -10812,16 +10587,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/Pages/Blog/blog-page.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -10837,6 +10602,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "{\n  title: \"Pages/LoginPage\",\n  component: LoginPageComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        {\n          provide: AuthenticationService,\n          useClass: MockAuthenticationService,\n        },\n        provideRouter([]),\n      ],\n    }),\n  ],\n} satisfies Meta<LoginPageComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Templates/PageWrapper/page-wrapper.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Templates/PageWrapper\",\n  component: PageWrapperWrapperComponent,\n  argTypes: {\n    pageTitle: { control: \"text\" },\n    contentWidth: { control: { type: \"range\", min: 100, max: 1500, step: 50 } },\n    authenticated: { control: \"boolean\" },\n    currentUrl: { control: \"inline-radio\", options: [\"/\", \"/login\"] },\n    subtitle: { control: \"text\" },\n  },\n  args: {\n    pageTitle: \"Page title\",\n    subtitle: \"\",\n    contentWidth: 600,\n    authenticated: false,\n    currentUrl: \"/\",\n  },\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter(routes),\n        { provide: AuthenticationService, useClass: MockAuthenticationService },\n        { provide: LocationService, useValue: MockLocationService },\n        { provide: ApiService, useValue: { logout: () => of(\"logged out\") } },\n      ],\n    }),\n  ],\n} satisfies Meta<PageWrapperWrapperComponent>"
             },
             {
                 "name": "mockApiService",
@@ -11017,16 +10792,6 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  provide: ApiService,\n  useValue: mockApiService(true, exampleBlog),\n}"
-            },
-            {
-                "name": "TO_HOMEPAGE",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "BackLinkInput",
-                "defaultValue": "{\n  href: \"/\",\n  label: \"Back to homepage\",\n}"
             }
         ],
         "functions": [
@@ -11105,17 +10870,6 @@
             }
         ],
         "typealiases": [
-            {
-                "name": "BackLinkInput",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "Record<\"href\" | \"label\" | string>",
-                "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
             {
                 "name": "BlogForm",
                 "ctype": "miscellaneous",
@@ -11229,26 +10983,26 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/Atoms/Arrow/arrow.component.stories.ts": [
+            "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts": [
                 {
                     "name": "ArrowIcon",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
+                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "StoryObj<ArrowIconComponent>",
-                    "defaultValue": "{}"
+                    "type": "StoryObj<EditIconComponent>",
+                    "defaultValue": "{ name: \"EditIcon\" }"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
+                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "{\n  title: \"Atoms/ArrowIcon\",\n  component: ArrowIconComponent,\n  argTypes: {\n    direction: { control: \"inline-radio\", options: [\"left\", \"right\"] },\n  },\n  args: { direction: \"right\" },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<ArrowIconComponent>"
+                    "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
                 }
             ],
             "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts": [
@@ -11271,28 +11025,6 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "{\n  title: \"Atoms/DeleteIcon\",\n  component: DeleteIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<DeleteIconComponent>"
-                }
-            ],
-            "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts": [
-                {
-                    "name": "ArrowIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<EditIconComponent>",
-                    "defaultValue": "{ name: \"EditIcon\" }"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
                 }
             ],
             "src/app/components/Organisms/NavBar/navbar.component.ts": [
@@ -12092,18 +11824,6 @@
                     "type": "",
                     "defaultValue": "<Validator extends ZodType, Result>(value: Observable<Result>, validator: Validator):Observable<ParsedResult<Validator, Result>> => {\n    return value.pipe(map(result => {\n        if(!Array.isArray(result)) {\n            return validator.parse(result) as ParsedResult<Validator, Result>\n        }\n        return result.map(value => validator.parse(value)) as ParsedResult<Validator, Result>\n    }))\n}"
                 }
-            ],
-            "src/app/components/Molecules/BackLink/back-link.component.ts": [
-                {
-                    "name": "TO_HOMEPAGE",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "BackLinkInput",
-                    "defaultValue": "{\n  href: \"/\",\n  label: \"Back to homepage\",\n}"
-                }
             ]
         },
         "groupedFunctions": {
@@ -12187,19 +11907,6 @@
         },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "src/app/components/Molecules/BackLink/back-link.component.ts": [
-                {
-                    "name": "BackLinkInput",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "Record<\"href\" | \"label\" | string>",
-                    "file": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "src/app/components/Organisms/BlogForm/blog-form.service.ts": [
                 {
                     "name": "BlogForm",
@@ -12351,35 +12058,6 @@
                 "name": "preview",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ArrowIcon",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Arrow/arrow.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Atoms/Arrow/arrow.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ArrowIconComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -12667,35 +12345,6 @@
                 "name": "SpinnerComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "BackLinkComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "TO_HOMEPAGE",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Molecules/BackLink/back-link.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "BackLinkInput",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -13577,8 +13226,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PageWrapperComponent",
-                "coveragePercent": 8,
-                "coverageCount": "1/12",
+                "coveragePercent": 10,
+                "coverageCount": "1/10",
                 "status": "low"
             },
             {
@@ -13587,7 +13236,7 @@
                 "linktype": "component",
                 "name": "PageWrapperWithLoadingComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {

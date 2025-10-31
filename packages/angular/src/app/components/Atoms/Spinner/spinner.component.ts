@@ -11,8 +11,7 @@ import { ChangeDetectionStrategy, Component, input } from "@angular/core";
   `,
 })
 export class SpinnerComponent {
-  readonly duration = input<string, string | number>("1.5s", {
-    transform: (val) => (typeof val === "number" ? `${val}ms` : val),
-  });
+  /** Duration in seconds */
+  readonly duration = input<number>(1.5);
   readonly color = input("currentColor");
 }
