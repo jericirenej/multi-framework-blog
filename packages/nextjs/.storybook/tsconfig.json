@@ -11,5 +11,6 @@
     "../src/environments"
   ],
   "include": ["../src/**/*.tsx"],
-  "files": ["./preview.ts", "./main.ts"]
+  "references": [{ "path": "../../api/tsconfig.json" }],
+  "files": ["./preview.ts", "./main.ts", "../src/svgr.config.ts"]
 }

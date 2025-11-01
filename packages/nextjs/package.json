@@ -9,15 +9,18 @@
     "lint": "eslint",
     "tsc": "tsgo --noEmit --project tsconfig.json",
     "check": "pnpm tsc && pnpm lint",
-    "storybook": "storybook dev",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@/assets": "workspace:*",
     "@/styles": "workspace:*",
     "@tailwindcss/postcss": "catalog:",
+    "clsx": "catalog:",
     "next": "^15.5.6",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
@@ -25,6 +28,7 @@
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "catalog:",
     "@storybook/nextjs": "^9.0.18",
+    "@svgr/webpack": "^8.1.0",
     "@typescript/native-preview": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.5",
@@ -37,6 +41,7 @@
     "prettier-plugin-tailwindcss": "catalog:",
     "storybook": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:"
+    "typescript-eslint": "catalog:",
+    "webpack": "5.101.0"
   }
 }

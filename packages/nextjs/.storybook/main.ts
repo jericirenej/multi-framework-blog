@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import { modifyConfigurationForSvgr } from "../src/svgr.config";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],
@@ -7,5 +8,6 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  webpackFinal: (config) => modifyConfigurationForSvgr(config),
 };
 export default config;
