@@ -11,6 +11,7 @@
     "../src/app/*.ts",
     "../src/environments"
   ],
+  "references": [{ "path": "../../api/tsconfig.json" }],
   "files": ["../src/app/app.routes.ts"],
   "include": ["../src/**/*.ts", "./preview.ts", "./main.ts"]
 }

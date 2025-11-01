@@ -9694,7 +9694,7 @@
         },
         {
             "name": "SpinnerComponent",
-            "id": "component-SpinnerComponent-688b263a198872ee397530c159d32cabf1272bd8cf657304db6c22a49bdf758d9a64eeeb2535b4f8833d83e5a6e4b43806578a47b58492b790cba07562bd2751",
+            "id": "component-SpinnerComponent-6b586badf279786e55d8eec6473a6193c667f857ca52274d4a9fa5997897fbed1899e494341f1d7f81e5b7f4e4318c72b3a2a011f35c9126dc407a1c14014ede",
             "file": "src/app/components/Atoms/Spinner/spinner.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -9724,21 +9724,22 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 16,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
                     "name": "duration",
-                    "defaultValue": "input<string, string | number>(\"1.5s\", {\n    transform: (val) => (typeof val === \"number\" ? `${val}ms` : val),\n  })",
+                    "defaultValue": "input<number>(1.5)",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "indexKey": "",
                     "optional": false,
-                    "description": "",
-                    "line": 14,
+                    "description": "<p>Duration in seconds</p>\n",
+                    "line": 15,
+                    "rawdescription": "\nDuration in seconds",
                     "modifierKind": [
                         148
                     ]
@@ -9754,7 +9755,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\n\n@Component({\n  selector: \"app-spinner\",\n  templateUrl: \"./spinner.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  styles: `\n    :host {\n      display: inline-block;\n    }\n  `,\n})\nexport class SpinnerComponent {\n  readonly duration = input<string, string | number>(\"1.5s\", {\n    transform: (val) => (typeof val === \"number\" ? `${val}ms` : val),\n  });\n  readonly color = input(\"currentColor\");\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input } from \"@angular/core\";\n\n@Component({\n  selector: \"app-spinner\",\n  templateUrl: \"./spinner.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  styles: `\n    :host {\n      display: inline-block;\n    }\n  `,\n})\nexport class SpinnerComponent {\n  /** Duration in seconds */\n  readonly duration = input<number>(1.5);\n  readonly color = input(\"currentColor\");\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "\n    :host {\n      display: inline-block;\n    }\n  \n",
@@ -10025,21 +10026,21 @@
                 "name": "ArrowIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<EditIconComponent>",
-                "defaultValue": "{ name: \"EditIcon\" }"
-            },
-            {
-                "name": "ArrowIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<DeleteIconComponent>",
                 "defaultValue": "{ name: \"DeleteIcon\" }"
+            },
+            {
+                "name": "ArrowIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<EditIconComponent>",
+                "defaultValue": "{ name: \"EditIcon\" }"
             },
             {
                 "name": "AUTHENTICATED_ROUTES",
@@ -10244,16 +10245,6 @@
                 "defaultValue": "{\n  title: \"Organisms/LoginForm\",\n  component: LoginFormComponent,\n  argTypes: { goBack: { action: \"goBack\" } },\n}"
             },
             {
-                "name": "content",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "\"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente veniam ut quam ducimus repellendus. Vitae quas maxime quibusdam atque magnam suscipit eligendi mollitia quisquam? Quia minima reiciendis provident dignissimos pariatur!\\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla perspiciatis ab sit? Voluptates suscipit placeat eligendi minus corporis, est reiciendis aliquid iste dolorem quae, a, temporibus maiores unde ut aut?\\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, eum sit minima unde ullam, magnam aspernatur perspiciatis, velit voluptatem corporis mollitia. Animi natus nisi culpa rem. Tempore dolores magni cumque!\""
-            },
-            {
                 "name": "control",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -10282,16 +10273,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "new Date(\"2025-06-01T12:00\").getTime()"
-            },
-            {
-                "name": "date",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "new Date(\"2025-06-01T12:00:00\")"
             },
             {
                 "name": "DeleteBlogDialogStory",
@@ -10467,16 +10448,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -10487,11 +10458,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/Atoms/PageTitle/page-title.component.stories.ts",
+                "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  title: \"Atoms/PageTitle\",\n  component: PageTitleWrapperComponent,\n  args: { title: \"Page title\" },\n} satisfies Meta<PageTitleWrapperComponent>"
+                "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
             },
             {
                 "name": "meta",
@@ -10507,11 +10478,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/Atoms/PageTitle/page-title.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  title: \"Atoms/PageTitle\",\n  component: PageTitleWrapperComponent,\n  args: { title: \"Page title\" },\n} satisfies Meta<PageTitleWrapperComponent>"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/Atoms/Spinner/spinner.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SpinnerComponent>",
-                "defaultValue": "{\n  title: \"Atoms/Spinner\",\n  component: SpinnerComponent,\n  argTypes: { duration: { control: \"text\" }, color: { control: \"color\" } },\n  args: { duration: \"1.5s\", color: \"currentColor\" },\n}"
+                "defaultValue": "{\n  title: \"Atoms/Spinner\",\n  component: SpinnerComponent,\n  argTypes: { duration: { control: \"number\" }, color: { control: \"color\" } },\n  args: { duration: 1.5, color: \"currentColor\" },\n}"
             },
             {
                 "name": "meta",
@@ -10521,7 +10502,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
+                "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: exampleBlog,\n  },\n} satisfies Meta<BlogComponent>"
             },
             {
                 "name": "meta",
@@ -10983,28 +10964,6 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts": [
-                {
-                    "name": "ArrowIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<EditIconComponent>",
-                    "defaultValue": "{ name: \"EditIcon\" }"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
-                }
-            ],
             "src/app/components/Atoms/DeleteIcon/delete-icon.component.stories.ts": [
                 {
                     "name": "ArrowIcon",
@@ -11025,6 +10984,28 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "{\n  title: \"Atoms/DeleteIcon\",\n  component: DeleteIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<DeleteIconComponent>"
+                }
+            ],
+            "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts": [
+                {
+                    "name": "ArrowIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<EditIconComponent>",
+                    "defaultValue": "{ name: \"EditIcon\" }"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/Atoms/EditIcon/edit-icon.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "{\n  title: \"Atoms/EditIcon\",\n  component: EditIconComponent,\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `<div style=\"height: 40px;\">${story}</div>`,\n    ),\n  ],\n} satisfies Meta<EditIconComponent>"
                 }
             ],
             "src/app/components/Organisms/NavBar/navbar.component.ts": [
@@ -11095,26 +11076,6 @@
                     "defaultValue": "{}"
                 },
                 {
-                    "name": "content",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "\"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente veniam ut quam ducimus repellendus. Vitae quas maxime quibusdam atque magnam suscipit eligendi mollitia quisquam? Quia minima reiciendis provident dignissimos pariatur!\\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla perspiciatis ab sit? Voluptates suscipit placeat eligendi minus corporis, est reiciendis aliquid iste dolorem quae, a, temporibus maiores unde ut aut?\\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, eum sit minima unde ullam, magnam aspernatur perspiciatis, velit voluptatem corporis mollitia. Animi natus nisi culpa rem. Tempore dolores magni cumque!\""
-                },
-                {
-                    "name": "date",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new Date(\"2025-06-01T12:00:00\")"
-                },
-                {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -11122,7 +11083,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: {\n      author_id: \"johnDoe\",\n      author_name: \"John Doe\",\n      content,\n      summary: [\n        content\n          .replaceAll(/\\n+/g, \" \")\n          .trim()\n          .slice(0, SUMMARY_LENGTH_LIMIT - 3),\n        \"...\",\n      ].join(\"\"),\n      created_at: date.getTime(),\n      updated_at: date.getTime(),\n      id: \"blog-id\",\n      image: null,\n      title: \"Example title\",\n    },\n  },\n} satisfies Meta<BlogComponent>"
+                    "defaultValue": "{\n  title: \"Molecules/Blog\",\n  component: BlogComponent,\n  argTypes: { blog: { control: \"object\" } },\n\n  args: {\n    blog: exampleBlog,\n  },\n} satisfies Meta<BlogComponent>"
                 }
             ],
             "src/app/components/Organisms/BlogForm/blog-form.component.stories.ts": [
@@ -11676,7 +11637,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SpinnerComponent>",
-                    "defaultValue": "{\n  title: \"Atoms/Spinner\",\n  component: SpinnerComponent,\n  argTypes: { duration: { control: \"text\" }, color: { control: \"color\" } },\n  args: { duration: \"1.5s\", color: \"currentColor\" },\n}"
+                    "defaultValue": "{\n  title: \"Atoms/Spinner\",\n  component: SpinnerComponent,\n  argTypes: { duration: { control: \"number\" }, color: { control: \"color\" } },\n  args: { duration: 1.5, color: \"currentColor\" },\n}"
                 },
                 {
                     "name": "SpinnerStory",
@@ -12343,9 +12304,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SpinnerComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
+                "coveragePercent": 33,
+                "coverageCount": "1/3",
+                "status": "medium"
             },
             {
                 "filePath": "src/app/components/Molecules/Blog/blog.component.stories.ts",
@@ -12353,26 +12314,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Blog",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "content",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/Molecules/Blog/blog.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "date",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
